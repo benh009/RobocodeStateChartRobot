@@ -1,0 +1,6 @@
+<scxml initial="new_node30" version="0.9" xmlns="http://www.w3.org/2005/07/scxml"><!--   node-size-and-position x=0 y=0 w=115 h=263  -->
+ <final id="new_node28"><!--   node-size-and-position x=20 y=168 w=75 h=75  --></final>
+ <state id="new_node30"><!--   node-size-and-position x=20 y=43 w=75 h=75  -->
+  <transition target="new_node28"></transition>
+ </state>
+</scxml>
