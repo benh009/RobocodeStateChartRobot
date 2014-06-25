@@ -1,4 +1,4 @@
-package projet;
+package com.hofbauer.robocode.simulateur;
 
 import robocode.control.*;
 import robocode.control.events.*;
