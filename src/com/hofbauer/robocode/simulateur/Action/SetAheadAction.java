@@ -53,7 +53,6 @@ public class SetAheadAction extends Action {
     public void execute(EventDispatcher evtDispatcher, ErrorReporter errRep,
             SCInstance scInstance, Log appLog, Collection derivedEvents)
             throws ModelException, SCXMLExpressionException {
-        RobotStateMachine.r.ahead(200);
         
         System.out.println("Mon Action est executée");
 

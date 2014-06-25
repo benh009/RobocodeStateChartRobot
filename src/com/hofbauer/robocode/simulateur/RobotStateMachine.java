@@ -1,6 +1,8 @@
 package com.hofbauer.robocode.simulateur;
 
 import com.hofbauer.robocode.simulateur.Action.TestAction;
+import com.hofbauer.robocode.simulateur.Action.myListener;
+
 import java.awt.List;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -26,32 +28,34 @@ public class RobotStateMachine extends MyAbstractStateMachine {
                 next()).getId();
     }
 
-    public static ArrayList<CustomAction> getActionArrayList() {
-        ArrayList<CustomAction> customActions = new ArrayList<CustomAction>();
-        CustomAction ca
-                = new CustomAction("http://my.custom-actions.domain/CUSTOM",
-                        "testAction", TestAction.class);
-        customActions.add(ca);
-        return customActions;
-    }
+
 
     public RobotStateMachine() {
 
-        super(RobotStateMachine.class.getClass().getResource("/com/hofbauer/robocode/resources/simulation/scxml/testTresSimple.scxml"), getActionArrayList());
+        super(RobotStateMachine.class.getClass().getResource("/com/hofbauer/robocode/resources/simulation/scxml/testTresSimple.scxml"));
          
         //RobotToGuiListener myListerner = new RobotToGuiListener(null, 9999);
         //this.getEngine().addListener(this.getEngine().getStateMachine(), myListerner);
     }
-    public static AdvancedRobot r;
+    public  AdvancedRobot r=null;
     RobotToGuiListener myListerner;
+    public RobotStateMachine(AdvancedRobot r ) {
+        super(RobotStateMachine.class.getClass().getResource("/com/hofbauer/robocode/resources/simulation/scxml/testTresSimple.scxml"));
 
-    public RobotStateMachine(AdvancedRobot r) {
+    }
 
-        super(RobotStateMachine.class.getClass().getResource("/com/hofbauer/robocode/resources/simulation/scxml/testTresSimple.scxml"), getActionArrayList());
+    public RobotStateMachine(AdvancedRobot r,ArrayList<CustomAction> customActions ) {
+    
+        super(RobotStateMachine.class.getClass().getResource("/com/hofbauer/robocode/resources/simulation/scxml/testTresSimple.scxml"), customActions);
+        
+   
         //super(RobotStateMachine.class.getClass().getResource("/com/hofbauer/robocode/simulation/scxml/testTresSimple.scxml"));
 
         //a garder car sinon n'accepte pas le robot
-        this.r = r;
+        
+        myListener listener = new myListener();
+        this.getEngine().addListener(this.getEngine().getStateMachine(), listener);
+
 
         //SimpleSCXMLListener sListerner = new SimpleSCXMLListener();
         //testsimu.getEngine().addListener(testsimu.getEngine().getStateMachine(), sListerner);

@@ -7,12 +7,14 @@ import org.apache.commons.scxml.ErrorReporter;
 import org.apache.commons.scxml.EventDispatcher;
 import org.apache.commons.scxml.SCInstance;
 import org.apache.commons.scxml.SCXMLExpressionException;
-import org.apache.commons.scxml.TriggerEvent;
 import org.apache.commons.scxml.model.Action;
 import org.apache.commons.scxml.model.ModelException;
 
-public class TestAction extends Action {
+import robocode.AdvancedRobot;
 
+
+public class TestAction extends FilsAction{
+	
     private String x;
     private String y;
     /**
@@ -21,6 +23,8 @@ public class TestAction extends Action {
     private static final long serialVersionUID = 1L;
 
     public String getX() {
+        System.out.println("X");
+
         return x;
     }
 
@@ -29,6 +33,8 @@ public class TestAction extends Action {
     }
 
     public String getY() {
+        System.out.println("Y");
+
         return y;
     }
 
@@ -36,16 +42,30 @@ public class TestAction extends Action {
         this.y = y;
     }
 
+ 
+    
     public TestAction() {
         super();
+        
     }
+    static AdvancedRobot robot;
+    public static void addRobot(AdvancedRobot r)
+    {
+    robot=r;	
+    }
+
 
     @Override
     public void execute(EventDispatcher evtDispatcher, ErrorReporter errRep,
             SCInstance scInstance, Log appLog, Collection derivedEvents)
             throws ModelException, SCXMLExpressionException {
+    	
+   
         System.out.println("Mon Action est executée");
-
+        if(robot!=null)
+        {
+        	robot.back(100);
+        }
         System.out.println(x);
         System.out.println(y);
 

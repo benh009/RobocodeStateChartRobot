@@ -19,7 +19,7 @@ import robocode.TurnCompleteCondition;
 
 public class RobotSimBasic extends AdvancedRobot {
 
-    static RobotStateMachine robotModel = null;
+    public static RobotStateMachine robotModel = null;
 
     Set currentLeafstates = null;
 
