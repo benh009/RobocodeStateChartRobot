@@ -1,4 +1,4 @@
-package com.hofbauer.robocode.simulateur.Action;
+package com.hofbauer.robocode.simulateur.action.customaction;
 
 import java.util.Collection;
 
@@ -10,7 +10,26 @@ import org.apache.commons.scxml.SCXMLExpressionException;
 import org.apache.commons.scxml.model.Action;
 import org.apache.commons.scxml.model.ModelException;
 
-public class FilsAction extends Action {
+public class SetBackAction extends Action {
+	
+    private String distance;
+
+    /**
+     * Serial version UID.
+     */
+    private static final long serialVersionUID = 1L;
+
+    public String getDistance() {
+        return distance;
+    }
+    
+    public Double getDistanceDouble() {
+        return Double.parseDouble(distance);
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance ;
+    }
 
 	@Override
 	public void execute(EventDispatcher evtDispatcher, ErrorReporter errRep,

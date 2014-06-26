@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.hofbauer.robocode.simulateur.Action;
+package com.hofbauer.robocode.simulateur.action;
 
 import static com.hofbauer.robocode.simulateur.RobotSimBasic.robotModel;
 
@@ -19,6 +19,9 @@ import org.apache.commons.scxml.model.CustomAction;
 import org.apache.commons.scxml.model.State;
 
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
+import com.hofbauer.robocode.simulateur.action.customaction.SetAheadAction;
+import com.hofbauer.robocode.simulateur.action.customaction.SetBackAction;
+import com.hofbauer.robocode.simulateur.action.customaction.TestAction;
 
 import robocode.AdvancedRobot;
 import robocode.BattleEndedEvent;
@@ -75,13 +78,16 @@ public class RobotSimWithAction extends AdvancedRobot {
         
 
     	ArrayList<CustomAction> customActions = new ArrayList<CustomAction>();
-
-        CustomAction ca
-                = new CustomAction("http://my.custom-actions.domain/CUSTOM",
-                        "testAction", TestAction.class);
-        TestAction.addRobot(this);
+       
+        customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
+                "testAction", TestAction.class));
         
-        customActions.add(ca);
+        customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
+                "setAheadAction", SetAheadAction.class));
+        
+        customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
+                "setBackAction", SetBackAction.class));
+        
         return customActions;
     }
 

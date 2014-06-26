@@ -1,4 +1,4 @@
-package com.hofbauer.robocode.simulateur.Action;
+package com.hofbauer.robocode.simulateur.action.customaction;
 
 import java.util.Collection;
 
@@ -13,7 +13,7 @@ import org.apache.commons.scxml.model.ModelException;
 import robocode.AdvancedRobot;
 
 
-public class TestAction extends FilsAction{
+public class TestAction extends Action{
 	
     private String x;
     private String y;
@@ -48,11 +48,7 @@ public class TestAction extends FilsAction{
         super();
         
     }
-    static AdvancedRobot robot;
-    public static void addRobot(AdvancedRobot r)
-    {
-    robot=r;	
-    }
+
 
 
     @Override
@@ -61,11 +57,7 @@ public class TestAction extends FilsAction{
             throws ModelException, SCXMLExpressionException {
     	
    
-        System.out.println("Mon Action est executée");
-        if(robot!=null)
-        {
-        	robot.back(100);
-        }
+
         System.out.println(x);
         System.out.println(y);
 

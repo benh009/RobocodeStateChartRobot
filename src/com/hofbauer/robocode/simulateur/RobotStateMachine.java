@@ -1,7 +1,7 @@
 package com.hofbauer.robocode.simulateur;
 
-import com.hofbauer.robocode.simulateur.Action.TestAction;
-import com.hofbauer.robocode.simulateur.Action.myListener;
+import com.hofbauer.robocode.simulateur.action.customaction.TestAction;
+import com.hofbauer.robocode.simulateur.action.myListener;
 
 import java.awt.List;
 import java.io.File;
@@ -44,7 +44,7 @@ public class RobotStateMachine extends MyAbstractStateMachine {
 
     }
 
-    public RobotStateMachine(AdvancedRobot r,ArrayList<CustomAction> customActions ) {
+    public RobotStateMachine(AdvancedRobot robot,ArrayList<CustomAction> customActions ) {
     
         super(RobotStateMachine.class.getClass().getResource("/com/hofbauer/robocode/resources/simulation/scxml/testTresSimple.scxml"), customActions);
         
@@ -53,7 +53,7 @@ public class RobotStateMachine extends MyAbstractStateMachine {
 
         //a garder car sinon n'accepte pas le robot
         
-        myListener listener = new myListener();
+        myListener listener = new myListener(robot);
         this.getEngine().addListener(this.getEngine().getStateMachine(), listener);
 
 

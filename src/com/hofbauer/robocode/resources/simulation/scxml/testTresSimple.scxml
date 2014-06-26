@@ -1,8 +1,12 @@
-<scxml initial="new_node17" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=115 h=263  -->
+<scxml initial="new_node17" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=168,5 h=263  -->
  <state id="new_node17"><!--   node-size-and-position x=20 y=43 w=75 h=75  -->
   <transition event="onHitWall" target="new_node14">
-   <my:testAction x="world"></my:testAction>
+   <my:setBackAction distance="300"></my:setBackAction>
   </transition>
  </state>
- <state id="new_node14"><!--   node-size-and-position x=20 y=168 w=75 h=75  --></state>
+ <state id="new_node14"><!--   node-size-and-position x=20 y=168 w=75 h=75  -->
+  <transition event="onHitWall">
+   <my:setBackAction distance="300"></my:setBackAction>
+  </transition>
+ </state>
 </scxml>

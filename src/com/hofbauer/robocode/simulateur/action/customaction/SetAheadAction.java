@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.hofbauer.robocode.simulateur.Action;
+package com.hofbauer.robocode.simulateur.action.customaction;
 
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
 import java.util.Collection;
@@ -22,28 +22,26 @@ import org.apache.commons.scxml.model.ModelException;
  */
 public class SetAheadAction extends Action {
 
-    private String x;
-    private String y;
+    private String distance;
+
     /**
      * Serial version UID.
      */
     private static final long serialVersionUID = 1L;
 
-    public String getX() {
-        return x;
+    public String getDistance() {
+        return distance;
+    }
+    
+    public Double getDistanceDouble() {
+        return Double.parseDouble(distance);
     }
 
-    public void setX(String x) {
-        this.x = x;
+    public void setDistance(String distance) {
+        this.distance = distance ;
     }
 
-    public String getY() {
-        return y;
-    }
 
-    public void setY(String y) {
-        this.y = y;
-    }
 
     public SetAheadAction() {
         super();
@@ -53,11 +51,6 @@ public class SetAheadAction extends Action {
     public void execute(EventDispatcher evtDispatcher, ErrorReporter errRep,
             SCInstance scInstance, Log appLog, Collection derivedEvents)
             throws ModelException, SCXMLExpressionException {
-        
-        System.out.println("Mon Action est executée");
-
-        System.out.println(x);
-        System.out.println(y);
 
     }
 
