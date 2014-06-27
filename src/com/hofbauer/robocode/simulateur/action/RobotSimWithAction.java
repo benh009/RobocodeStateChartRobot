@@ -15,7 +15,9 @@ import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.Set;
 
+import org.apache.commons.scxml.TriggerEvent;
 import org.apache.commons.scxml.model.CustomAction;
+import org.apache.commons.scxml.model.ModelException;
 import org.apache.commons.scxml.model.State;
 
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
@@ -34,6 +36,7 @@ import robocode.HitByBulletEvent;
 import robocode.HitRobotEvent;
 import robocode.HitWallEvent;
 import robocode.ScannedRobotEvent;
+import robocode.TurnCompleteCondition;
 
 
 /**
@@ -67,21 +70,24 @@ robotModel.getEngine().getRootContext().set("Height", this.getHeight());
         	robotModel.getEngine().getRootContext().set("X", this.getX());
         	robotModel.getEngine().getRootContext().set("Y", this.getY());
         	robotModel.getEngine().getRootContext().set("Energy", this.getEnergy());
+        	
         	robotModel.fireEvent("");
-
+        	robotModel.fireEvent("t");
+			waitFor(new TurnCompleteCondition(this));
             
 
-            execute();
+            //execute();
 
         }
     }
     
     public void onHitWall(HitWallEvent e) {
-        robotModel.fireEvent("onHitWall");
+    	
+        robotModel.fireEvent("onHitWall",new Payload());
     }
 
     public void onScannedRobot(ScannedRobotEvent e) {
-        robotModel.fireEvent("onScannedRobot");
+        robotModel.fireEvent("onScannedRobot",new Payload());
     }
 
     public void onHitRobot(HitRobotEvent event) {
@@ -97,6 +103,8 @@ robotModel.getEngine().getRootContext().set("Height", this.getHeight());
         g.setFont(new Font("Arial Bold", Font.ITALIC, 20));
         g.drawString("mot à écrire", (int) getX(), (int) getY());
     }
+    
+
     
     public  ArrayList<CustomAction> getActionArrayList() {
         

@@ -43,7 +43,6 @@ public class HandlerAction {
 		Object res;
 		for (Action action : a) {
 			String actionClass = action.getClass().toString();
-			//System.out.println(actionClass);
 			switch (actionClass) {
 			case "class com.hofbauer.robocode.simulateur.action.customaction.TestAction":
 				 m = action.getClass().getMethod("getX");
@@ -76,7 +75,7 @@ public class HandlerAction {
 			case "class com.hofbauer.robocode.simulateur.action.customaction.SetFireAction":
 				 m = action.getClass().getMethod("getPowerDouble");
 				 res = m.invoke(action);
-				 robot.setFire((Double)res);
+				 robot.setFire((double)res);
 				 break;
 				
 				

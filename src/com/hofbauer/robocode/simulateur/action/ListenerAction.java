@@ -20,7 +20,6 @@ public class ListenerAction implements SCXMLListener {
 
 	@Override
 	public void onEntry(TransitionTarget state) {
-		
 		handlerAction.handlerAction(state.getOnEntry().getActions());
 		
 

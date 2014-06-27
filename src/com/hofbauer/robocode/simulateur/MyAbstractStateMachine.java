@@ -262,6 +262,24 @@ public abstract class MyAbstractStateMachine {
         }
         return engine.getCurrentStatus().isFinal();
     }
+    
+    /**
+     * Fire an event on the SCXML engine.
+     *
+     * @param event The event name.
+     * @return Whether the state machine has reached a &quot;final&quot;
+     * configuration.
+     */
+    public boolean fireEvent(final String event,Object payload) {
+        TriggerEvent[] evts = {new TriggerEvent(event,
+            TriggerEvent.SIGNAL_EVENT, payload)};
+        try {
+            engine.triggerEvents(evts);
+        } catch (ModelException me) {
+            logError(me);
+        }
+        return engine.getCurrentStatus().isFinal();
+    }
 
     /**
      * Get the SCXML object representing this state machine.
