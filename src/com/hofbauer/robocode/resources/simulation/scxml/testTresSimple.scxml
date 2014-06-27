@@ -1,12 +1,21 @@
-<scxml initial="new_node17" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=168,5 h=263  -->
- <state id="new_node17"><!--   node-size-and-position x=20 y=43 w=75 h=75  -->
-  <transition event="onHitWall" target="new_node14">
-   <my:setBackAction distance="300"></my:setBackAction>
-  </transition>
- </state>
- <state id="new_node14"><!--   node-size-and-position x=20 y=168 w=75 h=75  -->
+<scxml initial="new_node14" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=263 h=141  -->
+ <datamodel>
+  <data expr="&#039;100&#039;" id="Energy"></data>
+ </datamodel>
+ <state id="new_node14"><!--   node-size-and-position x=20 y=43 w=75 h=75  -->
+  <onentry>
+   <my:setAheadAction distance="300"></my:setAheadAction>
+  </onentry>
   <transition event="onHitWall">
-   <my:setBackAction distance="300"></my:setBackAction>
-  </transition>
+   <my:setTurnLeftAction angle="180"></my:setTurnLeftAction>
+<!--    edge-path [new_node14]  x=95 y=37,5   --><!--   edge-path [new_node14]  x=95 y=37,5  --></transition>
+  <transition event="onScannedRobot">
+   <my:setFireAction power="3"></my:setFireAction>
+<!--   edge-path [new_node14]  x=60 y=120  --></transition>
+  <transition cond="Energy&gt;97">
+   <my:setAheadAction distance="300"></my:setAheadAction>
+<!--   edge-path [new_node14]  x=135 y=37,5  --></transition>
+  <transition event="e" target="new_node17"></transition>
  </state>
+ <state id="new_node17"><!--   node-size-and-position x=188 y=66 w=75 h=75  --></state>
 </scxml>

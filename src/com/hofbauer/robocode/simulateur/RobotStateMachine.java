@@ -1,7 +1,8 @@
 package com.hofbauer.robocode.simulateur;
 
+import com.hofbauer.robocode.simulateur.action.ListenerAction;
 import com.hofbauer.robocode.simulateur.action.customaction.TestAction;
-import com.hofbauer.robocode.simulateur.action.myListener;
+
 
 import java.awt.List;
 import java.io.File;
@@ -53,7 +54,7 @@ public class RobotStateMachine extends MyAbstractStateMachine {
 
         //a garder car sinon n'accepte pas le robot
         
-        myListener listener = new myListener(robot);
+        ListenerAction listener = new ListenerAction(robot);
         this.getEngine().addListener(this.getEngine().getStateMachine(), listener);
 
 

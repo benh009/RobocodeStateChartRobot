@@ -43,7 +43,7 @@ public class HandlerAction {
 		Object res;
 		for (Action action : a) {
 			String actionClass = action.getClass().toString();
-			System.out.println(actionClass);
+			//System.out.println(actionClass);
 			switch (actionClass) {
 			case "class com.hofbauer.robocode.simulateur.action.customaction.TestAction":
 				 m = action.getClass().getMethod("getX");
@@ -62,6 +62,21 @@ public class HandlerAction {
 				 m = action.getClass().getMethod("getDistanceDouble");
 				 res = m.invoke(action);
 				 robot.setAhead((Double)res);
+				 break;
+			case "class com.hofbauer.robocode.simulateur.action.customaction.SetTurnLeftAction":
+				 m = action.getClass().getMethod("getAngleDouble");
+				 res = m.invoke(action);
+				 robot.setTurnLeft((Double)res);
+				 break;
+			case "class com.hofbauer.robocode.simulateur.action.customaction.SetTurnRightAction":
+				 m = action.getClass().getMethod("getAngleDouble");
+				 res = m.invoke(action);
+				 robot.setTurnRight((Double)res);
+				 break;
+			case "class com.hofbauer.robocode.simulateur.action.customaction.SetFireAction":
+				 m = action.getClass().getMethod("getPowerDouble");
+				 res = m.invoke(action);
+				 robot.setFire((Double)res);
 				 break;
 				
 				
