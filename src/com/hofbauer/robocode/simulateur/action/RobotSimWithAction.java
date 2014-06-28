@@ -21,6 +21,7 @@ import org.apache.commons.scxml.model.ModelException;
 import org.apache.commons.scxml.model.State;
 
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
+import com.hofbauer.robocode.simulateur.action.customaction.RobotAction;
 import com.hofbauer.robocode.simulateur.action.customaction.SetAheadAction;
 import com.hofbauer.robocode.simulateur.action.customaction.SetBackAction;
 import com.hofbauer.robocode.simulateur.action.customaction.SetFireAction;
@@ -53,23 +54,15 @@ public class RobotSimWithAction extends AdvancedRobot {
         if (robotModel == null) {
             robotModel = new RobotStateMachine(this,getActionArrayList());
         }
-        //Initialise dans la stateMachine les informations relative au combat
-        robotModel.getEngine().getRootContext()
-        .set("BattleFieldWidth", this.getBattleFieldWidth());
-robotModel.getEngine().getRootContext()
-        .set("BattleFieldHeight", this.getBattleFieldHeight());
-//taille du robot
-robotModel.getEngine().getRootContext().set("Width", this.getWidth());
-robotModel.getEngine().getRootContext().set("Height", this.getHeight());
+
+robotModel.getEngine().getRootContext().set("Robot", this);
       
 
 
         while (true) {
         	//mettre a jour a chaque tour
         	//position du robot
-        	robotModel.getEngine().getRootContext().set("X", this.getX());
-        	robotModel.getEngine().getRootContext().set("Y", this.getY());
-        	robotModel.getEngine().getRootContext().set("Energy", this.getEnergy());
+        	
         	
         	robotModel.fireEvent("");
         	robotModel.fireEvent("t");
@@ -87,7 +80,11 @@ robotModel.getEngine().getRootContext().set("Height", this.getHeight());
     }
 
     public void onScannedRobot(ScannedRobotEvent e) {
-        robotModel.fireEvent("onScannedRobot",new Payload());
+    	
+		System.out.println("onscanned");
+
+        robotModel.fireEvent("onScannedRobot",e);
+        
     }
 
     public void onHitRobot(HitRobotEvent event) {
@@ -125,6 +122,9 @@ robotModel.getEngine().getRootContext().set("Height", this.getHeight());
                 "setTurnRightAction", SetTurnRightAction.class));
         customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
                 "setFireAction", SetFireAction.class));
+        
+        customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
+                "robotAction", RobotAction.class));
         
         return customActions;
     }

@@ -7,24 +7,23 @@
    <my:setAheadAction distance="300"></my:setAheadAction>
   </onentry>
   <transition event="onHitWall">
-   <my:setTurnLeftAction angle="180"></my:setTurnLeftAction>
-<!--     edge-path [new_node14]  x=95 y=37,5    --><!--   edge-path [new_node14]  x=60 y=-13  --></transition>
-  <transition cond="_eventdata.distance eq 2" event="onScannedRobot">
-   <my:setFireAction power="Energy"></my:setFireAction>
+   <my:robotAction expression="Robot.setTurnLeft(180)"></my:robotAction>
+<!--      edge-path [new_node14]  x=95 y=37,5     --><!--   edge-path [new_node14]  x=60 y=-13  --></transition>
+  <transition event="onScannedRobot">
+   <my:setFireAction power="Robot.getX()"></my:setFireAction>
 <!--   edge-path [new_node14]  x=60 y=120  --></transition>
   <transition cond="Energy&gt;50">
-   <my:setAheadAction distance="300"></my:setAheadAction>
-   <my:setTurnRightAction angle="3"></my:setTurnRightAction>
+   <my:robotAction expression="Robot.setAhead(100)"></my:robotAction>
   </transition>
-  <transition cond="Energy&lt;94" event="t" target="new_node17"></transition>
+  <transition cond="Robot.getEnergy()&lt;94" event="t" target="new_node17"></transition>
  </state>
  <state id="new_node17"><!--   node-size-and-position x=180 y=120 w=75 h=75  -->
   <transition event="onScannedRobot">
-   <my:setFireAction power="_eventdata"></my:setFireAction>
+   <my:setFireAction power="Robot.getX()"></my:setFireAction>
    <my:setAheadAction distance="300"></my:setAheadAction>
-<!--   edge-path [new_node17]  x=310 y=170 pointx=0 pointy=10 offsetx=3 offsety=0  --></transition>
+<!--   edge-path [new_node17]  x=130 y=50 pointx=0 pointy=10 offsetx=3 offsety=0  --></transition>
   <transition cond="Energy&lt;97">
-   <my:setTurnRightAction angle="3"></my:setTurnRightAction>
+   <my:robotAction expression="Robot.setTurnRight(10)"></my:robotAction>
 <!--   edge-path [new_node17]  x=50 y=80  --></transition>
  </state>
 </scxml>

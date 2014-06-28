@@ -73,9 +73,11 @@ public class HandlerAction {
 				 robot.setTurnRight((Double)res);
 				 break;
 			case "class com.hofbauer.robocode.simulateur.action.customaction.SetFireAction":
+				 System.out.println("fire ");
 				 m = action.getClass().getMethod("getPowerDouble");
 				 res = m.invoke(action);
 				 robot.setFire((double)res);
+				 System.out.println("power : " +(double)res);
 				 break;
 				
 				
