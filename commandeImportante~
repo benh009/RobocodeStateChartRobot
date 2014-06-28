@@ -1,0 +1,1 @@
+<my:setFireAction power="_eventdata.getDistance()"></my:setFireAction>

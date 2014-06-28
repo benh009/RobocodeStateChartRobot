@@ -22,11 +22,6 @@ import org.apache.commons.scxml.model.State;
 
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
 import com.hofbauer.robocode.simulateur.action.customaction.RobotAction;
-import com.hofbauer.robocode.simulateur.action.customaction.SetAheadAction;
-import com.hofbauer.robocode.simulateur.action.customaction.SetBackAction;
-import com.hofbauer.robocode.simulateur.action.customaction.SetFireAction;
-import com.hofbauer.robocode.simulateur.action.customaction.SetTurnLeftAction;
-import com.hofbauer.robocode.simulateur.action.customaction.SetTurnRightAction;
 import com.hofbauer.robocode.simulateur.action.customaction.TestAction;
 
 import robocode.AdvancedRobot;
@@ -109,19 +104,7 @@ robotModel.getEngine().getRootContext().set("Robot", this);
     	ArrayList<CustomAction> customActions = new ArrayList<CustomAction>();
        
         customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
-                "testAction", TestAction.class));
-        
-        customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
-                "setAheadAction", SetAheadAction.class));
-        
-        customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
-                "setBackAction", SetBackAction.class));
-        customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
-                "setTurnLeftAction", SetTurnLeftAction.class));
-        customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
-                "setTurnRightAction", SetTurnRightAction.class));
-        customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
-                "setFireAction", SetFireAction.class));
+                "testAction", TestAction.class));        
         
         customActions.add(new CustomAction("http://my.custom-actions.domain/CUSTOM",
                 "robotAction", RobotAction.class));

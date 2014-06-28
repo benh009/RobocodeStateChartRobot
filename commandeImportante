@@ -1,0 +1,6 @@
+<my:setFireAction power="_eventdata.getDistance()"></my:setFireAction>
+
+
+<my:setAheadAction distance="300"></my:setAheadAction>
+   <my:setTurnRightAction angle="3"></my:setTurnRightAction>
+
