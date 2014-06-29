@@ -1,13 +1,16 @@
-<scxml initial="etat_1" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=168,5 h=263  --><!-- node-size-and-position x=0 y=0 w=168,5 h=263 -->
+<scxml initial="etat_1" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=168,5 h=263  --><!-- node-size-and-position x=0 y=0 w=168,5 h=263   node-size-and-position x=0 y=0 w=168,5 h=263 -->
  <state id="etat_1"><!--   node-size-and-position x=20 y=43 w=75 h=75  -->
   <onentry>
-   <my:testAction x="world"></my:testAction>
+   <log expr="Robot.setAhead(1000)"></log>
   </onentry>
   <transition event="onHitWall" target="etat_2">
-   <my:testAction x="world"></my:testAction>
+   <log expr="Robot.fire(3)"></log>
+  </transition>
+  <transition event="t">
+   <my:robotAction expression="Robot.setAhead(1000)"></my:robotAction>
   </transition>
  </state>
  <state id="etat_2"><!--   node-size-and-position x=20 y=168 w=75 h=75  -->
-  <transition event="onHitWall">TestAction</transition>
+  <transition event="onHitWall"></transition>
  </state>
 </scxml>

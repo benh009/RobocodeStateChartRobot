@@ -1,16 +1,11 @@
 package com.hofbauer.robocode.simulateur.action.customaction;
 
-import java.util.Collection;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.scxml.ErrorReporter;
-import org.apache.commons.scxml.EventDispatcher;
-import org.apache.commons.scxml.SCInstance;
-import org.apache.commons.scxml.SCXMLExpressionException;
-import org.apache.commons.scxml.model.Action;
-import org.apache.commons.scxml.model.ModelException;
+import org.apache.commons.scxml2.ActionExecutionContext;
+import org.apache.commons.scxml2.SCXMLExpressionException;
+import org.apache.commons.scxml2.model.Action;
+import org.apache.commons.scxml2.model.ModelException;
 
-import robocode.AdvancedRobot;
 
 
 public class TestAction extends Action{
@@ -51,16 +46,13 @@ public class TestAction extends Action{
 
 
 
-    @Override
-    public void execute(EventDispatcher evtDispatcher, ErrorReporter errRep,
-            SCInstance scInstance, Log appLog, Collection derivedEvents)
-            throws ModelException, SCXMLExpressionException {
-    	
-   
 
-        System.out.println(x);
-        System.out.println(y);
 
-    }
+	@Override
+	public void execute(ActionExecutionContext arg0) throws ModelException,
+			SCXMLExpressionException {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

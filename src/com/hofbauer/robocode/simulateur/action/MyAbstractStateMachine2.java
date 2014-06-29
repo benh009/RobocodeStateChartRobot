@@ -1,49 +1,34 @@
-package com.hofbauer.robocode.simulateur;
+package com.hofbauer.robocode.simulateur.action;
 
-/*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-import java.io.File;
-import java.io.FileReader;
+import java.net.URL;
+
+import org.apache.commons.scxml2.Context;
+import org.apache.commons.scxml2.Evaluator;
+import org.apache.commons.scxml2.TriggerEvent;
+import org.apache.commons.scxml2.env.AbstractStateMachine;
+import org.apache.commons.scxml2.env.SimpleDispatcher;
+import org.apache.commons.scxml2.env.SimpleErrorReporter;
+import org.apache.commons.scxml2.io.SCXMLReader;
+import org.apache.commons.scxml2.io.SCXMLReader.Configuration;
+import org.apache.commons.scxml2.model.ModelException;
+import org.apache.commons.scxml2.model.SCXML;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-
 
 import javax.xml.stream.XMLStreamException;
 
-
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.commons.scxml2.Context;
 import org.apache.commons.scxml2.Evaluator;
 import org.apache.commons.scxml2.SCXMLExecutor;
 import org.apache.commons.scxml2.SCXMLListener;
 import org.apache.commons.scxml2.TriggerEvent;
-import org.apache.commons.scxml2.env.SimpleDispatcher;
-import org.apache.commons.scxml2.env.SimpleErrorHandler;
-import org.apache.commons.scxml2.env.SimpleErrorReporter;
 import org.apache.commons.scxml2.env.jexl.JexlContext;
 import org.apache.commons.scxml2.env.jexl.JexlEvaluator;
 import org.apache.commons.scxml2.io.SCXMLReader;
@@ -54,34 +39,34 @@ import org.apache.commons.scxml2.model.SCXML;
 import org.apache.commons.scxml2.model.Transition;
 import org.apache.commons.scxml2.model.TransitionTarget;
 
+import com.hofbauer.robocode.simulateur.action.customaction.RobotAction;
+import com.hofbauer.robocode.simulateur.action.customaction.TestAction;
+
 /**
- * <p>
- * This class demonstrates one approach for providing the base functionality
- * needed by classes representing stateful entities, whose behaviors are defined
- * via SCXML documents.</p>
+ * <p>This class demonstrates one approach for providing the base
+ * functionality needed by classes representing stateful entities,
+ * whose behaviors are defined via SCXML documents.</p>
  *
- * <p>
- * SCXML documents (more generically, UML state chart diagrams) can be used to
- * define stateful behavior of objects, and Commons SCXML enables developers to
- * use this model directly into the corresponding code artifacts. The resulting
- * artifacts tend to be much simpler, embody a useful separation of concerns and
- * are easier to understand and maintain. As the size of the modeled entity
- * grows, these benefits become more apparent.</p>
+ * <p>SCXML documents (more generically, UML state chart diagrams) can be
+ * used to define stateful behavior of objects, and Commons SCXML enables
+ * developers to use this model directly into the corresponding code
+ * artifacts. The resulting artifacts tend to be much simpler, embody
+ * a useful separation of concerns and are easier to understand and
+ * maintain. As the size of the modeled entity grows, these benefits
+ * become more apparent.</p>
  *
- * <p>
- * This approach functions by registering an SCXMLListener that gets notified
- * onentry, and calls the namesake method for each state that has been
- * entered.</p>
+ * <p>This approach functions by registering an SCXMLListener that gets
+ * notified onentry, and calls the namesake method for each state that
+ * has been entered.</p>
  *
- * <p>
- * This class swallows all exceptions only to log them. Developers of subclasses
- * should think of themselves as &quot;component developers&quot; catering to
- * other end users, and therefore ensure that the subclasses are free of
- * <code>ModelException</code>s and the like. Most methods are
- * <code>protected</code> for ease of subclassing.</p>
+ * <p>This class swallows all exceptions only to log them. Developers of
+ * subclasses should think of themselves as &quot;component developers&quot;
+ * catering to other end users, and therefore ensure that the subclasses
+ * are free of <code>ModelException</code>s and the like. Most methods
+ * are <code>protected</code> for ease of subclassing.</p>
  *
  */
-public abstract class MyAbstractStateMachine {
+public abstract class MyAbstractStateMachine2 {
 
     /**
      * The state machine that will drive the instances of this class.
@@ -99,14 +84,14 @@ public abstract class MyAbstractStateMachine {
     private Log log;
 
     /**
-     * The method signature for the activities corresponding to each state in
-     * the SCXML document.
+     * The method signature for the activities corresponding to each
+     * state in the SCXML document.
      */
-    private static final Class[] SIGNATURE = new Class[0];
+    private static final Class<?>[] SIGNATURE = new Class[0];
 
     /**
-     * The method parameters for the activities corresponding to each state in
-     * the SCXML document.
+     * The method parameters for the activities corresponding to each
+     * state in the SCXML document.
      */
     private static final Object[] PARAMETERS = new Object[0];
 
@@ -114,86 +99,38 @@ public abstract class MyAbstractStateMachine {
      * Convenience constructor, object instantiation incurs parsing cost.
      *
      * @param scxmlDocument The URL pointing to the SCXML document that
-     * describes the &quot;lifecycle&quot; of the instances of this class.
+     *                      describes the &quot;lifecycle&quot; of the
+     *                      instances of this class.
      */
-    public MyAbstractStateMachine(final URL scxmlDocument) {
+    public MyAbstractStateMachine2(final URL scxmlDocument) throws ModelException {
         // default is JEXL
         this(scxmlDocument, new JexlContext(), new JexlEvaluator());
-    }
-
-    public MyAbstractStateMachine(final URL scxmlDocument, ArrayList<CustomAction> ar) {
-        // default is JEXL
-        this(scxmlDocument, new JexlContext(), new JexlEvaluator(), ar);
-    }
-
-    public MyAbstractStateMachine(final URL scxmlDocument,
-            final Context rootCtx, final Evaluator evaluator, ArrayList<CustomAction> ar) {
-        log = LogFactory.getLog(this.getClass());
-        ErrorHandler errHandler = new SimpleErrorHandler();
-        try {
-            stateMachine = SCXMLParser.parse(scxmlDocument,
-                    errHandler, ar);
-
-        } catch (IOException ioe) {
-            System.out.println("ici1");
-            logError(ioe);
-        } catch (SAXException sae) {
-            System.out.println("ici2");
-            logError(sae);
-        } catch (ModelException me) {
-            System.out.println("ici3");
-            logError(me);
-        }
-        initialize(stateMachine, rootCtx, evaluator);
-    }
-
-    public MyAbstractStateMachine(final File f) {
-
-        this(f, new JexlContext(), new JexlEvaluator());
-    }
-
-    public MyAbstractStateMachine(final File f,
-            final Context rootCtx, final Evaluator evaluator) {
-        log = LogFactory.getLog(this.getClass());
-        ErrorHandler errHandler = new SimpleErrorHandler();
-        try {
-
-            stateMachine = SCXMLParser.parse(new InputSource(new FileReader(f)),
-                    errHandler);
-
-        } catch (IOException ioe) {
-            logError(ioe);
-        } catch (SAXException sae) {
-            logError(sae);
-        } catch (ModelException me) {
-            logError(me);
-        }
-        initialize(stateMachine, rootCtx, evaluator);
     }
 
     /**
      * Primary constructor, object instantiation incurs parsing cost.
      *
      * @param scxmlDocument The URL pointing to the SCXML document that
-     * describes the &quot;lifecycle&quot; of the instances of this class.
+     *                      describes the &quot;lifecycle&quot; of the
+     *                      instances of this class.
      * @param rootCtx The root context for this instance.
      * @param evaluator The expression evaluator for this instance.
      *
      * @see Context
      * @see Evaluator
      */
-    public MyAbstractStateMachine(final URL scxmlDocument,
-            final Context rootCtx, final Evaluator evaluator) {
-        log = LogFactory.getLog(this.getClass());
-        ErrorHandler errHandler = new SimpleErrorHandler();
-        try {
-            stateMachine = SCXMLParser.parse(scxmlDocument,
-                    errHandler);
+    public MyAbstractStateMachine2(final URL scxmlDocument,
+            final Context rootCtx, final Evaluator evaluator) throws ModelException {
 
+		
+        log = LogFactory.getLog(this.getClass());
+        try {
+            Configuration configuration = new Configuration(null, null, getActionArrayList());
+            stateMachine = SCXMLReader.read(scxmlDocument,configuration);
         } catch (IOException ioe) {
             logError(ioe);
-        } catch (SAXException sae) {
-            logError(sae);
+        } catch (XMLStreamException xse) {
+            logError(xse);
         } catch (ModelException me) {
             logError(me);
         }
@@ -203,12 +140,13 @@ public abstract class MyAbstractStateMachine {
     /**
      * Convenience constructor.
      *
-     * @param stateMachine The parsed SCXML instance that describes the
-     * &quot;lifecycle&quot; of the instances of this class.
+     * @param stateMachine The parsed SCXML instance that
+     *                     describes the &quot;lifecycle&quot; of the
+     *                     instances of this class.
      *
      * @since 0.7
      */
-    public MyAbstractStateMachine(final SCXML stateMachine) {
+    public MyAbstractStateMachine2(final SCXML stateMachine) throws ModelException {
         // default is JEXL
         this(stateMachine, new JexlContext(), new JexlEvaluator());
     }
@@ -216,8 +154,9 @@ public abstract class MyAbstractStateMachine {
     /**
      * Primary constructor.
      *
-     * @param stateMachine The parsed SCXML instance that describes the
-     * &quot;lifecycle&quot; of the instances of this class.
+     * @param stateMachine The parsed SCXML instance that
+     *                     describes the &quot;lifecycle&quot; of the
+     *                     instances of this class.
      * @param rootCtx The root context for this instance.
      * @param evaluator The expression evaluator for this instance.
      *
@@ -226,8 +165,9 @@ public abstract class MyAbstractStateMachine {
      *
      * @since 0.7
      */
-    public MyAbstractStateMachine(final SCXML stateMachine,
-            final Context rootCtx, final Evaluator evaluator) {
+    public MyAbstractStateMachine2(final SCXML stateMachine,
+            final Context rootCtx, final Evaluator evaluator) throws ModelException {
+        log = LogFactory.getLog(this.getClass());
         initialize(stateMachine, rootCtx, evaluator);
     }
 
@@ -239,14 +179,12 @@ public abstract class MyAbstractStateMachine {
      * @param evaluator The expression evaluator
      */
     private void initialize(final SCXML stateMachine,
-            final Context rootCtx, final Evaluator evaluator) {
+            final Context rootCtx, final Evaluator evaluator) throws ModelException {
         engine = new SCXMLExecutor(evaluator, new SimpleDispatcher(),
-                new SimpleErrorReporter());
-        
+            new SimpleErrorReporter());
         engine.setStateMachine(stateMachine);
-        engine.setSuperStep(true);
         engine.setRootContext(rootCtx);
-
+        //engine.addListener(stateMachine, new EntryListener(this));
         try {
             engine.go();
         } catch (ModelException me) {
@@ -259,11 +197,11 @@ public abstract class MyAbstractStateMachine {
      *
      * @param event The event name.
      * @return Whether the state machine has reached a &quot;final&quot;
-     * configuration.
+     *         configuration.
      */
     public boolean fireEvent(final String event) {
         TriggerEvent[] evts = {new TriggerEvent(event,
-            TriggerEvent.SIGNAL_EVENT, null)};
+                TriggerEvent.SIGNAL_EVENT)};
         try {
             engine.triggerEvents(evts);
         } catch (ModelException me) {
@@ -291,18 +229,8 @@ public abstract class MyAbstractStateMachine {
     }
 
     /**
-     * Get the SCXML object representing this state machine.
-     *
-     * @return Returns the stateMachine.
-     * @deprecated Returns null, use getEngine().getStateMachine() instead
-     */
-    public static SCXML getStateMachine() {
-        return null;
-    }
-
-    /**
-     * Get the SCXML engine driving the &quot;lifecycle&quot; of the instances
-     * of this class.
+     * Get the SCXML engine driving the &quot;lifecycle&quot; of the
+     * instances of this class.
      *
      * @return Returns the engine.
      */
@@ -335,7 +263,7 @@ public abstract class MyAbstractStateMachine {
      * @return Whether the invoke was successful.
      */
     public boolean invoke(final String methodName) {
-        Class clas = this.getClass();
+        Class<?> clas = this.getClass();
         try {
             Method method = clas.getDeclaredMethod(methodName, SIGNATURE);
             method.invoke(this, PARAMETERS);
@@ -383,5 +311,17 @@ public abstract class MyAbstractStateMachine {
             log.error(exception.getMessage(), exception);
         }
     }
+    
+	public ArrayList<CustomAction> getActionArrayList() {
+
+		ArrayList<CustomAction> customActions = new ArrayList<CustomAction>();
+		customActions.add(new CustomAction(
+				"http://my.custom-actions.domain/CUSTOM", "robotAction",
+				RobotAction.class));
+
+		return customActions;
+	}
+
+
 
 }

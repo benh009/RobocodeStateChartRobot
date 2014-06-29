@@ -1,3 +1,7 @@
+import org.apache.commons.scxml2.Evaluator;
+import org.apache.commons.scxml2.env.jexl.JexlEvaluator;
+import org.apache.commons.scxml2.test.StandaloneUtils;
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -16,9 +20,6 @@
  */
 
 
-import org.apache.commons.scxml.Evaluator;
-import org.apache.commons.scxml.env.jexl.JexlEvaluator;
-import org.apache.commons.scxml.test.StandaloneUtils;
 
 /**
  * Standalone SCXML interpreter, useful for command-line testing and

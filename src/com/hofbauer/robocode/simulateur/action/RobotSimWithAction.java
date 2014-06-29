@@ -5,7 +5,6 @@
  */
 package com.hofbauer.robocode.simulateur.action;
 
-import static com.hofbauer.robocode.simulateur.RobotSimBasic.robotModel;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,10 +14,10 @@ import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.apache.commons.scxml.TriggerEvent;
-import org.apache.commons.scxml.model.CustomAction;
-import org.apache.commons.scxml.model.ModelException;
-import org.apache.commons.scxml.model.State;
+import org.apache.commons.scxml2.model.CustomAction;
+import org.apache.commons.scxml2.model.ModelException;
+
+
 
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
 import com.hofbauer.robocode.simulateur.action.customaction.RobotAction;
@@ -41,19 +40,31 @@ import robocode.TurnCompleteCondition;
 public class RobotSimWithAction extends AdvancedRobot {
 
 	public RobotStateMachine robotModel = null;
+	
+	public RobotSimWithAction()
+	{
+		if (robotModel == null) {
+			try {
+				robotModel = new RobotStateMachine();
+			} catch (ModelException e) {
+				System.out.println("Error init robotStateMachine");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public void run() {
 
 		// initialise la stateMachine
-		if (robotModel == null) {
-			robotModel = new RobotStateMachine(this, getActionArrayList());
-		}
 
 
+robotModel.getEngine().getRootContext().getVars();
 		robotModel.getEngine().getRootContext().set("Robot", this);
+		robotModel.getEngine().getRootContext().setLocal("Robot", this);
 		robotModel.getEngine().getRootContext()
 				.set("ActionTools", new ActionTools(this));
-
+System.out.println("ici" +robotModel.getEngine().getRootContext().getVars());
 		while (true) {
 			// mettre a jour a chaque tour
 			// position du robot
@@ -68,7 +79,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 	}
 
 	public void onHitWall(HitWallEvent e) {
-
+ 
 		robotModel.fireEvent("onHitWall", new Payload());
 	}
 
@@ -94,19 +105,5 @@ public class RobotSimWithAction extends AdvancedRobot {
 		g.drawString("mot à écrire", (int) getX(), (int) getY());
 	}
 
-	public ArrayList<CustomAction> getActionArrayList() {
-
-		ArrayList<CustomAction> customActions = new ArrayList<CustomAction>();
-
-		customActions.add(new CustomAction(
-				"http://my.custom-actions.domain/CUSTOM", "testAction",
-				TestAction.class));
-
-		customActions.add(new CustomAction(
-				"http://my.custom-actions.domain/CUSTOM", "robotAction",
-				RobotAction.class));
-
-		return customActions;
-	}
 
 }

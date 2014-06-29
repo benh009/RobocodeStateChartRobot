@@ -1,4 +1,4 @@
-<scxml initial="new_node34" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1020 h=747  -->
+<scxml initial="new_node34" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1020 h=747  -->
  <state id="new_node34" initial="new_node12"><!--   node-size-and-position x=140 y=100 w=511 h=487  -->
   <transition event="onScannedRobot">
    <my:robotAction expression="Robot.fire(3))"></my:robotAction>

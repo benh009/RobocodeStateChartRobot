@@ -1,6 +1,5 @@
 package com.hofbauer.robocode.simulateur.action;
 
-import org.apache.commons.beanutils.converters.DoubleConverter;
 
 import robocode.AdvancedRobot;
 

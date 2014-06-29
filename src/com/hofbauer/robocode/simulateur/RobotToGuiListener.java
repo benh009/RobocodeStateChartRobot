@@ -13,10 +13,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import org.apache.commons.scxml.SCXMLListener;
-import org.apache.commons.scxml.model.Action;
-import org.apache.commons.scxml.model.Transition;
-import org.apache.commons.scxml.model.TransitionTarget;
+import org.apache.commons.scxml2.SCXMLListener;
+import org.apache.commons.scxml2.model.EnterableState;
+import org.apache.commons.scxml2.model.Transition;
+import org.apache.commons.scxml2.model.TransitionTarget;
+
+
 
 public class RobotToGuiListener extends Thread implements SCXMLListener {
 
@@ -78,7 +80,7 @@ public class RobotToGuiListener extends Thread implements SCXMLListener {
     private boolean checkConnection() {
         return connected() || reconnect();
     }
-
+/**
     @Override
     public void onEntry(TransitionTarget state) {
     	
@@ -119,7 +121,7 @@ public class RobotToGuiListener extends Thread implements SCXMLListener {
             set.add(tr);
         }
     }
-
+**/
     private void sendActiveState(TransitionTarget state) throws InterruptedException {
         events.put("1 " + state.getId());
         HashSet<Transition> set = activeTransitions.get(state);
@@ -147,4 +149,23 @@ public class RobotToGuiListener extends Thread implements SCXMLListener {
     private void sendInactiveTransition(TransitionTarget to, Transition tr) throws InterruptedException {
         events.put("2 " + tr.getParent().getId() + " -> " + to.getId());
     }
+
+	@Override
+	public void onEntry(EnterableState arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onExit(EnterableState arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTransition(TransitionTarget arg0, TransitionTarget arg1,
+			Transition arg2, String arg3) {
+		// TODO Auto-generated method stub
+		
+	}
 }
