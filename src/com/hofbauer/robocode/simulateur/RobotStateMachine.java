@@ -47,22 +47,19 @@ public class RobotStateMachine extends MyAbstractStateMachine {
 
     public RobotStateMachine(AdvancedRobot robot,ArrayList<CustomAction> customActions ) {
     
-        super(RobotStateMachine.class.getClass().getResource("/com/hofbauer/robocode/resources/simulation/scxml/testTresSimple.scxml"), customActions);
+        super(RobotStateMachine.class.getClass().getResource("/com/hofbauer/robocode/resources/simulation/scxml/walls.scxml"), customActions);
         
-   
-        //super(RobotStateMachine.class.getClass().getResource("/com/hofbauer/robocode/simulation/scxml/testTresSimple.scxml"));
-
-        //a garder car sinon n'accepte pas le robot
-        
-
-
+  
+        //print des logs
         //SimpleSCXMLListener sListerner = new SimpleSCXMLListener();
-        //testsimu.getEngine().addListener(testsimu.getEngine().getStateMachine(), sListerner);
+        //this.getEngine().addListener(this.getEngine().getStateMachine(), sListerner);
 
         
         //problème au niveau des threads a quitter 
         //myListerner = new RobotToGuiListener(null, 9999);
         //this.getEngine().addListener(this.getEngine().getStateMachine(), myListerner);
+        //this.getEngine().addListener(this.getEngine().getStateMachine(), myListerner);
+
     }
 
     static RobotStateMachine testsimu;

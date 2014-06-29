@@ -101,7 +101,7 @@ public class RobotToGuiListener extends Thread implements SCXMLListener {
     @Override
     public void onTransition(TransitionTarget from, TransitionTarget to, Transition tr) {
     
-        Action a = (Action) tr.getActions().get(0);
+        //Action a = (Action) tr.getActions().get(0);
 
         assert (from.equals(tr.getParent()));
         assert (tr.getTargets().contains(to) || tr.getTargets().isEmpty());

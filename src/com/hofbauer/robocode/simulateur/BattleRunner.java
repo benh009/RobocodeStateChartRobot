@@ -34,15 +34,20 @@ public class BattleRunner {
 
         int numberOfRounds = 5;
         BattlefieldSpecification battlefield = new BattlefieldSpecification(800, 600); // 800x600
-        RobotSpecification[] selectedRobots = engine.getLocalRepository("sample.RamFire,sample.RamFire");
+
+        /**for (RobotSpecification r :engine.getLocalRepository())
+        {
+        	
+        	System.out.println(r.getName());
+        }**/
+        engine.printRunningThreads();
+        
+        RobotSpecification[] selectedRobots = engine.getLocalRepository("sample.RamFire,com.hofbauer.robocode.simulateur.action.RobotSimWithAction*");
+
+        
         
         BattleSpecification battleSpec = new BattleSpecification(numberOfRounds, battlefield, selectedRobots);
         
-        for (RobotSpecification r :engine.getLocalRepository())
-        {
-        	System.out.println(r.getClassName());
-        }
-        engine.printRunningThreads();
         
         // Run our specified battle and let it run till it is over
         engine.runBattle(battleSpec, true); // waits till the battle finishes

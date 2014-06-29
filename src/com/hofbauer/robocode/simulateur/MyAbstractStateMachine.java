@@ -234,6 +234,7 @@ public abstract class MyAbstractStateMachine {
             final Context rootCtx, final Evaluator evaluator) {
         engine = new SCXMLExecutor(evaluator, new SimpleDispatcher(),
                 new SimpleErrorReporter());
+        
         engine.setStateMachine(stateMachine);
         engine.setSuperStep(true);
         engine.setRootContext(rootCtx);

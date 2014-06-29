@@ -1,12 +1,14 @@
 package com.hofbauer.robocode.simulateur.action;
 
+import org.apache.commons.beanutils.converters.DoubleConverter;
+
 import robocode.AdvancedRobot;
 
-public class RobotActionTools {
+public class ActionTools {
 	
 	
 	private AdvancedRobot robot;
-	public RobotActionTools(AdvancedRobot robot)
+	public ActionTools(AdvancedRobot robot)
 	{
 		this.robot=robot;
 	}
@@ -27,6 +29,28 @@ public class RobotActionTools {
                 robot.setTurnRight(360 - directionActuelle + directionVoulue);
             } else {
                 robot.setTurnLeft(directionActuelle - directionVoulue);
+            }
+        }
+    }
+    
+    public void directionGun(double directionVoulue) {
+    	System.out.println("prout dir gun"+" \n" );
+
+        double directionActuelle = robot.getGunHeading();
+
+        if (Math.abs(directionVoulue - directionActuelle) < 1) {
+
+        } else if (directionVoulue > directionActuelle) {
+            if ((360 - directionVoulue + directionActuelle) < (directionVoulue - directionActuelle)) {
+                robot.setTurnGunLeft(360 - directionVoulue + directionActuelle);
+            } else {
+                robot.setTurnGunRight(directionVoulue - directionActuelle);
+            }
+        } else if (directionVoulue <= directionActuelle) {
+            if ((360 - directionActuelle + directionVoulue) < (directionActuelle - directionVoulue)) {
+                robot.setTurnGunRight(360 - directionActuelle + directionVoulue);
+            } else {
+                robot.setTurnGunLeft(directionActuelle - directionVoulue);
             }
         }
     }
@@ -77,5 +101,16 @@ public class RobotActionTools {
         }
 
     }
+    
+    
+    public Boolean equalsPrec(Double val1,Float precision )
+    {
+        	
+    	System.out.println((Math.abs(val1)<precision)+" \n" );
+    	return Math.abs(val1)<precision;
+    }
+
+    
+    
 
 }

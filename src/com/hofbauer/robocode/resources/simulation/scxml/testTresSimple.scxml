@@ -1,16 +1,16 @@
-<scxml initial="new_node14" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=320 h=210  -->
+<scxml initial="new_node14" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1050 h=720  -->
  <datamodel>
   <data expr="&#039;100&#039;" id="Energy"></data>
  </datamodel>
  <state id="new_node14"><!--   node-size-and-position x=20 y=43 w=75 h=75  -->
   <transition event="onHitWall">
    <my:robotAction expression="Robot.setTurnLeft(180)"></my:robotAction>
-<!--      edge-path [new_node14]  x=95 y=37,5     --><!--   edge-path [new_node14]  x=60 y=-13  --></transition>
+<!--       edge-path [new_node14]  x=95 y=37,5      --><!--   edge-path [new_node14]  x=60 y=-13  --></transition>
   <transition event="onScannedRobot">
    <my:robotAction expression="Robot.setFire(Robot.getEnergy())"></my:robotAction>
 <!--   edge-path [new_node14]  x=60 y=120  --></transition>
-  <transition cond="Robot.getEnergy() &gt;50">
-   <my:robotAction expression="Robot.setAhead(100)"></my:robotAction>
+  <transition cond="!((Robot.getHeading()%90) eq 0)">
+   <my:robotAction expression="ActionTools.direction(0)"></my:robotAction>
   </transition>
   <transition cond="Robot.getEnergy()&lt;94" event="t" target="new_node17"></transition>
  </state>
