@@ -102,7 +102,7 @@ public class ActionTools {
     }
     
     
-    public Boolean equalsPrec(Double val1,Float precision )
+    public Boolean equalsPrec(double val1,float precision )
     {
         	
     	System.out.println((Math.abs(val1)<precision)+" \n" );

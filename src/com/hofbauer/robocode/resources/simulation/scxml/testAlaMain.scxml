@@ -1,0 +1,10 @@
+<scxml initial="new_node14" version="1.0" xmlns="http://www.w3.org/2005/07/scxml"><!--   node-size-and-position x=0 y=0 w=664 h=619  -->
+ <state id="new_node14"><!--   node-size-and-position x=170 y=110 w=75 h=75  -->
+  <transition event="event" target="new_node16"></transition>
+ </state>
+ <state id="new_node16"><!--   node-size-and-position x=439 y=157 w=75 h=75  -->
+  <onentry>
+   <log expr="Ob.somme(Double1,2.0)" label="MonLabel"></log>
+  </onentry>
+ </state>
+</scxml>

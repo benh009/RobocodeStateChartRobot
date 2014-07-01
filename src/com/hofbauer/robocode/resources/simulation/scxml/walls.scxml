@@ -1,44 +1,44 @@
 <scxml initial="new_node34" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1020 h=747  -->
  <state id="new_node34" initial="new_node12"><!--   node-size-and-position x=140 y=100 w=511 h=487  -->
   <transition event="onScannedRobot">
-   <my:robotAction expression="Robot.fire(3))"></my:robotAction>
+   <my:robotAction expression="Robot.fire(3.0)"></my:robotAction>
   </transition>
   <state id="new_node12"><!--   node-size-and-position x=100 y=90 w=75 h=75  -->
-   <transition cond="Robot.getHeading() eq 0 &amp;&amp;   Robot.getY() ==  Robot.getBattleFieldHeight() - Robot.getHeight()/2 &amp;&amp;  ActionTools.equalsPrec(Robot.getGunHeading()-90,1.0)" target="new_node14"><!--   edge-path [new_node14]  x=259 y=136  --></transition>
-   <transition cond="!(Robot.getHeading()eq 0)">
-    <my:robotAction expression="ActionTools.direction(0)"></my:robotAction>
+   <transition cond="Robot.getHeading() eq 0 &amp;&amp;   Robot.getY() ==  Robot.getBattleFieldHeight() - Robot.getHeight()/2 &amp;&amp;  ActionTools.equalsPrec(Robot.getGunHeading()-90,1.0)" event="t" target="new_node14"><!--   edge-path [new_node14]  x=259 y=136  --></transition>
+   <transition cond="!(Robot.getHeading()eq 0)" event="t">
+    <my:robotAction expression="ActionTools.direction(0.0)"></my:robotAction>
 <!--   edge-path [new_node12]  x=137 y=85  --></transition>
-   <transition cond="Robot.getHeading() eq 0 &amp;&amp;  Robot.getY() !=  Robot.getBattleFieldHeight() -Robot.getHeight()/2">
+   <transition cond="Robot.getHeading() eq 0 &amp;&amp;  Robot.getY() !=  Robot.getBattleFieldHeight() -Robot.getHeight()/2" event="t">
     <my:robotAction expression="Robot.setAhead( Robot.getBattleFieldHeight()-Robot.getY()-Robot.getHeight()/2)"></my:robotAction>
 <!--   edge-path [new_node12]  x=57 y=95 pointx=0 pointy=2 offsetx=13 offsety=0  --></transition>
-   <transition cond="!ActionTools.equalsPrec(Robot.getGunHeading()-90,1.0) &amp;&amp; Robot.getHeading()eq 0">
+   <transition cond="!ActionTools.equalsPrec(Robot.getGunHeading()-90,1.0) &amp;&amp; Robot.getHeading()eq 0" event="t">
     <my:robotAction expression="ActionTools.directionGun(90)"></my:robotAction>
 <!--   edge-path [new_node12]  x=-50 y=30  --></transition>
   </state>
   <state id="new_node14"><!--   node-size-and-position x=340 y=110 w=75 h=75  -->
-   <transition cond="!(Robot.getHeading()eq 90)">
+   <transition cond="!(Robot.getHeading()eq 90)" event="t">
     <my:robotAction expression="ActionTools.direction(90)"></my:robotAction>
    </transition>
-   <transition cond="(Robot.getHeading()eq 90)  &amp;&amp; Robot.getBattleFieldWidth()  -Robot.getHeight()/2 != Robot.getX()">
+   <transition cond="(Robot.getHeading()eq 90)  &amp;&amp; Robot.getBattleFieldWidth()  -Robot.getHeight()/2 != Robot.getX()" event="t">
     <my:robotAction expression="Robot.setAhead(Robot.getBattleFieldWidth()- Robot.getX()- Robot.getHeight()/2)"></my:robotAction>
 <!--   edge-path [new_node14]  x=34 y=94  --></transition>
-   <transition cond="Robot.getHeading() eq 90 &amp;&amp;  Robot.getBattleFieldWidth()  -Robot.getHeight()/2 == Robot.getX()" target="new_node24"></transition>
+   <transition cond="Robot.getHeading() eq 90 &amp;&amp;  Robot.getBattleFieldWidth()  -Robot.getHeight()/2 == Robot.getX()" event="t" target="new_node24"></transition>
   </state>
   <state id="new_node24"><!--   node-size-and-position x=310 y=320 w=75 h=75  -->
-   <transition cond="Robot.getHeading() eq 180 &amp;&amp;  Robot.getY() != Robot.getHeight()/2">
+   <transition cond="Robot.getHeading() eq 180 &amp;&amp;  Robot.getY() != Robot.getHeight()/2" event="t">
     <my:robotAction expression="Robot.setAhead( Robot.getY()-Robot.getHeight()/2)"></my:robotAction>
    </transition>
-   <transition cond="(Robot.getHeading()!=180)">
+   <transition cond="(Robot.getHeading()!=180)" event="t">
     <my:robotAction expression="ActionTools.direction(180)"></my:robotAction>
 <!--   edge-path [new_node24]  x=-33 y=28  --></transition>
-   <transition cond="Robot.getHeading() == 180 &amp;&amp; Robot.getY() ==  Robot.getHeight()/2" target="new_node26"></transition>
+   <transition cond="Robot.getHeading() == 180 &amp;&amp; Robot.getY() ==  Robot.getHeight()/2" event="t" target="new_node26"></transition>
   </state>
   <state id="new_node26"><!--   node-size-and-position x=80 y=310 w=75 h=75  -->
-   <transition cond="Robot.getHeading() eq 270 &amp;&amp;   Robot.getX() ==  Robot.getHeight()/2" target="new_node12"></transition>
-   <transition cond="!(Robot.getHeading()eq 270)">
+   <transition cond="Robot.getHeading() eq 270 &amp;&amp;   Robot.getX() ==  Robot.getHeight()/2" event="t" target="new_node12"></transition>
+   <transition cond="!(Robot.getHeading()eq 270)" event="t">
     <my:robotAction expression="ActionTools.direction(270)"></my:robotAction>
 <!--   edge-path [new_node26]  x=-20 y=40  --></transition>
-   <transition cond="(Robot.getHeading()eq 270 )  &amp;&amp; Robot.getHeight()/2 != Robot.getX()">
+   <transition cond="(Robot.getHeading()eq 270 )  &amp;&amp; Robot.getHeight()/2 != Robot.getX()" event="t">
     <my:robotAction expression="Robot.setAhead(Robot.getX()- Robot.getHeight()/2)"></my:robotAction>
 <!--   edge-path [new_node26]  x=40 y=100  --></transition>
   </state>

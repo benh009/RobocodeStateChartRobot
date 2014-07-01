@@ -6,6 +6,7 @@
 package com.hofbauer.robocode.simulateur.action;
 
 
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -19,6 +20,7 @@ import org.apache.commons.scxml2.model.ModelException;
 
 
 
+import com.hofbauer.robocode.simulateur.ObjectTestNewSCXML;
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
 import com.hofbauer.robocode.simulateur.action.customaction.RobotAction;
 import com.hofbauer.robocode.simulateur.action.customaction.TestAction;
@@ -43,9 +45,10 @@ public class RobotSimWithAction extends AdvancedRobot {
 	
 	public RobotSimWithAction()
 	{
+		super();
 		if (robotModel == null) {
 			try {
-				robotModel = new RobotStateMachine();
+				robotModel = new RobotStateMachine("/com/hofbauer/robocode/resources/simulation/scxml/walls.scxml");
 			} catch (ModelException e) {
 				System.out.println("Error init robotStateMachine");
 				// TODO Auto-generated catch block
@@ -60,8 +63,10 @@ public class RobotSimWithAction extends AdvancedRobot {
 
 
 robotModel.getEngine().getRootContext().getVars();
+robotModel.getEngine().getRootContext().set("Ob", new ObjectTestNewSCXML(this) );
+
 		robotModel.getEngine().getRootContext().set("Robot", this);
-		robotModel.getEngine().getRootContext().setLocal("Robot", this);
+		//robotModel.getEngine().getRootContext().setLocal("Robot", this);
 		robotModel.getEngine().getRootContext()
 				.set("ActionTools", new ActionTools(this));
 System.out.println("ici" +robotModel.getEngine().getRootContext().getVars());
@@ -69,8 +74,8 @@ System.out.println("ici" +robotModel.getEngine().getRootContext().getVars());
 			// mettre a jour a chaque tour
 			// position du robot
 
-			robotModel.fireEvent("");
 			robotModel.fireEvent("t");
+			//robotModel.fireEvent("t");
 			waitFor(new TurnCompleteCondition(this));
 
 			// execute();

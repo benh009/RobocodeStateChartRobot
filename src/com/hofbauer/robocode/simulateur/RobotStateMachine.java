@@ -10,10 +10,10 @@ import org.apache.commons.scxml2.model.ModelException;
 public class RobotStateMachine extends MyAbstractStateMachine2 {
 
 
-    public RobotStateMachine( ) throws ModelException {
+    public RobotStateMachine(String path) throws ModelException {
     
     	
-        super(RobotStateMachine.class.getClass().getResource("/com/hofbauer/robocode/resources/simulation/scxml/testSimple.scxml"));
+        super(RobotStateMachine.class.getClass().getResource(path));
         
   
         //print des logs

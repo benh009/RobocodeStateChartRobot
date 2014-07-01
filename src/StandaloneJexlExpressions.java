@@ -2,6 +2,8 @@ import org.apache.commons.scxml2.Evaluator;
 import org.apache.commons.scxml2.env.jexl.JexlEvaluator;
 import org.apache.commons.scxml2.test.StandaloneUtils;
 
+import com.hofbauer.robocode.simulateur.RobotStateMachine;
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -58,7 +60,10 @@ public final class StandaloneJexlExpressions {
             System.exit(-1);
         }
         Evaluator evaluator = new JexlEvaluator();
+     	
+
         StandaloneUtils.execute(args[0], evaluator);
+      
     }
 
     /**
