@@ -1,6 +1,5 @@
 import org.apache.commons.scxml2.model.ModelException;
 
-import com.hofbauer.robocode.simulateur.ObjectTestNewSCXML;
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
 
 
@@ -19,7 +18,7 @@ public class SimulateurALaMain {
 			e.printStackTrace();
 		}
 		robotModel.getEngine().getRootContext().set("Double1", new Double(2));
-		robotModel.getEngine().getRootContext().set("Ob", new ObjectTestNewSCXML() );
+		//robotModel.getEngine().getRootContext().set("Ob", new ObjectTestNewSCXML() );
 
 		robotModel.fireEvent("event");
 Double x = new Double(3);

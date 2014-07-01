@@ -22,8 +22,7 @@ public class RobotStateMachine extends MyAbstractStateMachine2 {
 
         
         //problème au niveau des threads a quitter 
-        //myListerner = new RobotToGuiListener(null, 9999);
-        //this.getEngine().addListener(this.getEngine().getStateMachine(), myListerner);
+        //RobotToGuiListener myListerner = new RobotToGuiListener(null, 9999);
         //this.getEngine().addListener(this.getEngine().getStateMachine(), myListerner);
 
     }

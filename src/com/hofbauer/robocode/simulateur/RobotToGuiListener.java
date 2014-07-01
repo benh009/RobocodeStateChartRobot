@@ -151,21 +151,21 @@ public class RobotToGuiListener extends Thread implements SCXMLListener {
     }
 
 	@Override
-	public void onEntry(EnterableState arg0) {
-		// TODO Auto-generated method stub
+	public void onEntry(EnterableState state) {
+
 		
 	}
 
 	@Override
-	public void onExit(EnterableState arg0) {
-		// TODO Auto-generated method stub
+	public void onExit(EnterableState state) {
+
 		
 	}
 
 	@Override
-	public void onTransition(TransitionTarget arg0, TransitionTarget arg1,
-			Transition arg2, String arg3) {
-		// TODO Auto-generated method stub
+	public void onTransition(TransitionTarget from, TransitionTarget to,
+			Transition tr, String arg3) {
+
 		
 	}
 }
