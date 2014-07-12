@@ -31,7 +31,6 @@ public class ActionTools {
 	}
 
 	public void directionGun(double directionVoulue) {
-		System.out.println("prout dir gun" + " \n");
 
 		double directionActuelle = robot.getGunHeading();
 
@@ -40,6 +39,27 @@ public class ActionTools {
 		} else if (directionVoulue > directionActuelle) {
 			if ((360 - directionVoulue + directionActuelle) < (directionVoulue - directionActuelle)) {
 				robot.setTurnGunLeft(360 - directionVoulue + directionActuelle);
+			} else {
+				robot.setTurnGunRight(directionVoulue - directionActuelle);
+			}
+		} else if (directionVoulue <= directionActuelle) {
+			if ((360 - directionActuelle + directionVoulue) < (directionActuelle - directionVoulue)) {
+				robot.setTurnGunRight(360 - directionActuelle + directionVoulue);
+			} else {
+				robot.setTurnGunLeft(directionActuelle - directionVoulue);
+			}
+		}
+	}
+	
+	public void directionGunPal(double directionVoulue,double palier) {
+
+		double directionActuelle = robot.getGunHeading();
+
+		if (Math.abs(directionVoulue - directionActuelle) < 1) {
+
+		} else if (directionVoulue > directionActuelle) {
+			if ((360 - directionVoulue + directionActuelle) < (directionVoulue - directionActuelle)) {
+				robot.setTurnGunLeft((360 - directionVoulue + directionActuelle));
 			} else {
 				robot.setTurnGunRight(directionVoulue - directionActuelle);
 			}

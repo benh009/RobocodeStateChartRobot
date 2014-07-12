@@ -1,0 +1,48 @@
+<scxml initial="tourne" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1113 h=723  -->
+ <state id="tourne"><!--   node-size-and-position x=60 y=90 w=75 h=75  --><!-- smartfire
+pas arreter de tourner -->
+  <transition cond="_eventdata.getDistance()==1" event="onScannedRobot">
+   <my:robotAction expression="RobotGunAction.smartFire(100)"></my:robotAction>
+  </transition>
+  <transition cond="RobotInfo.Heading(0)" event="t" target="new_node35"></transition>
+  <transition cond="!RobotInfo.Heading(0)" event="t">
+   <my:robotAction expression="ActionTools.direction(0.0)"></my:robotAction>
+<!--   edge-path [tourne]  x=80 y=270  --></transition>
+ </state>
+ <state id="new_node35" initial="goCorner"><!--   node-size-and-position x=300 y=80 w=595 h=185  -->
+  <transition cond="_eventdata.getDistance()==1" event="onScannedRobot">
+   <my:robotAction expression="RobotGunAction.smartFire(_eventdata.getDistance())"></my:robotAction>
+  </transition>
+<!-- stop action si scan un robot -->
+  <state id="goCorner"><!--   node-size-and-position x=30 y=50 w=75 h=75  -->
+   <transition cond="RobotInfo.Y() ==  GameInfo.BattleFieldHeight() -RobotInfo.Height()/2 &amp;&amp; RobotInfo.Heading(90) &amp;&amp;  GameInfo.BattleFieldWidth()  -RobotInfo.Height()/2 == RobotInfo.X()" event="t" target="TurnInCorner"></transition>
+   <transition cond="RobotInfo.Y() !=  GameInfo.BattleFieldHeight() -RobotInfo.Height()/2" event="t">
+    <my:robotAction expression="RobotAction.Ahead( GameInfo.BattleFieldHeight()-RobotInfo.Y()-RobotInfo.Height()/2)"></my:robotAction>
+<!--   edge-path [goCorner]  x=20 y=100  --></transition>
+   <transition cond="RobotInfo.Y() ==  GameInfo.BattleFieldHeight() -RobotInfo.Height()/2 &amp;&amp; !RobotInfo.Heading(90)" event="t">
+    <my:robotAction expression="ActionTools.direction(90)"></my:robotAction>
+<!--   edge-path [goCorner]  x=50 y=80  --></transition>
+   <transition cond="RobotInfo.Y() ==  GameInfo.BattleFieldHeight() -RobotInfo.Height()/2 &amp;&amp; RobotInfo.Heading(90) &amp;&amp;  GameInfo.BattleFieldWidth()  -RobotInfo.Height()/2 != RobotInfo.X()" event="t">
+    <my:robotAction expression="RobotAction.Ahead(GameInfo.BattleFieldWidth()- RobotInfo.X()- RobotInfo.Height()/2)"></my:robotAction>
+<!--   edge-path [goCorner]  x=40 y=-10  --></transition>
+  </state>
+  <state id="TurnInCorner"><!--   node-size-and-position x=140 y=50 w=75 h=75  -->
+   <transition cond="RobotGunInfo.Heading(180)" event="t" target="new_node25"></transition>
+   <transition cond="!RobotGunInfo.Heading(180)" event="t">
+    <my:robotAction expression="ActionTools.directionGun(180)"></my:robotAction>
+   </transition>
+  </state>
+  <state id="new_node25"><!--   node-size-and-position x=270 y=50 w=75 h=75  -->
+   <transition cond="!RobotGunInfo.Heading(270)" event="t">
+    <my:robotAction expression="ActionTools.directionGun(270)"></my:robotAction>
+   </transition>
+   <transition cond="RobotGunInfo.Heading(270)" event="t" target="new_node30"><!--   edge-path [new_node30]  x=390 y=130  --></transition>
+  </state>
+  <state id="new_node30"><!--   node-size-and-position x=450 y=60 w=75 h=75  -->
+   <transition cond="!RobotGunInfo.Heading(180)" event="t">
+    <my:robotAction expression="ActionTools.directionGun(180)"></my:robotAction>
+   </transition>
+   <transition cond="RobotGunInfo.Heading(180)" event="t" target="new_node25"></transition>
+  </state>
+ </state>
+</scxml>

@@ -110,6 +110,7 @@ public abstract class MyAbstractStateMachine2 {
 			throws ModelException {
 		// default is JEXL
 		this(scxmlDocument, new JexlContext(), new JexlEvaluator());
+
 	}
 
 	/**
@@ -200,6 +201,8 @@ public abstract class MyAbstractStateMachine2 {
 		engine.setStateMachine(stateMachine);
 		engine.setRootContext(rootCtx);
 		// engine.addListener(stateMachine, new EntryListener(this));
+		engine.addListener(stateMachine, new StateListener());
+
 		try {
 			engine.go();
 		} catch (ModelException me) {
@@ -237,8 +240,12 @@ public abstract class MyAbstractStateMachine2 {
 	public boolean fireEvent(final String event, Object payload) {
 		TriggerEvent[] evts = { new TriggerEvent(event,
 				TriggerEvent.SIGNAL_EVENT, payload) };
+		
+		
 		try {
 			engine.triggerEvents(evts);
+			System.out.println("playloadev");
+			
 		} catch (ModelException me) {
 			logError(me);
 		}

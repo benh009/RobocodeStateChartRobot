@@ -35,7 +35,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 		if (robotModel == null) {
 			try {
 				robotModel = new RobotStateMachine(
-						"/com/hofbauer/robocode/resources/simulation/scxml/walls.scxml");
+						"/com/hofbauer/robocode/resources/simulation/scxml/corner.scxml");
 			} catch (ModelException e) {
 				System.out.println("Error init robotStateMachine");
 				// TODO Auto-generated catch block
@@ -51,6 +51,15 @@ public class RobotSimWithAction extends AdvancedRobot {
 		robotModel.getEngine().getRootContext().set("Robot", this);
 		robotModel.getEngine().getRootContext()
 				.set("ActionTools", new ActionTools(this));
+		
+		robotModel.getEngine().getRootContext().set("RobotInfo", new RobotInfoProxy(this));
+		robotModel.getEngine().getRootContext().set("RobotAction", new RobotActionProxy(this));
+		
+		robotModel.getEngine().getRootContext().set("RobotGunInfo", new RobotGunInfoProxy(this));
+		robotModel.getEngine().getRootContext().set("RobotGunAction", new RobotGunActionProxy(this));
+		
+		robotModel.getEngine().getRootContext().set("GameInfo", new GameInfoProxy(this));
+		
 		while (true) {
 			// mettre a jour a chaque tour
 			// position du robot
@@ -69,6 +78,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
+		
 		robotModel.fireEvent("onScannedRobot", e);
 
 	}

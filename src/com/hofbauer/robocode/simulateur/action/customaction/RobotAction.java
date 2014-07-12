@@ -52,12 +52,21 @@ public class RobotAction extends Action {
 	
         EnterableState parentState = getParentEnterableState();
         Context ctx = exctx.getContext(parentState);
-     System.out.println("ctx"+ctx.getVars());
-     System.out.println("ex "+exctx.getGlobalContext().getVars());
+     //System.out.println("ctx"+ctx);
+     
+     //System.out.println("ex "+exctx.getGlobalContext().getVars().values());
         Evaluator eval = exctx.getEvaluator();
 	    ctx.setLocal(getNamespacesKey(), getNamespaces());
-	        
-	         eval.eval(ctx, expression);
+	    System.out.println("ctx size"+exctx.getGlobalContext().getVars().get("_eventdatamap"));
+	
+	    for(String s : ctx.getVars().keySet())
+	    {
+	    	System.out.println(s);
+	    }
+
+	   
+	     
+	         eval.eval(exctx.getGlobalContext(), expression);
 	         ctx.setLocal(getNamespacesKey(), null);
 
 		
