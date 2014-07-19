@@ -1,4 +1,4 @@
-package com.hofbauer.robocode.simulateur.action;
+package com.hofbauer.robocode.simulateur.proxy;
 
 import robocode.AdvancedRobot;
 
@@ -17,6 +17,7 @@ public class RobotGunActionProxy {
 		this.robot.setTurnGunRight(degrees);
 	}
 	public void smartFire(double robotDistance) {
+		System.out.println("tire avec distance : "+robotDistance);
 		if (robotDistance > 200 || robot.getEnergy() < 15) {
 			robot.fire(1);
 		} else if (robotDistance > 50) {

@@ -1,18 +1,20 @@
-package com.hofbauer.robocode.simulateur.action;
+package com.hofbauer.robocode.simulateur.Listener;
 
 import org.apache.commons.scxml2.SCXMLListener;
 import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.Transition;
 import org.apache.commons.scxml2.model.TransitionTarget;
 
+import com.hofbauer.robocode.simulateur.MyAbstractStateMachine;
+
 /**
  * A SCXMLListener that is only concerned about &quot;onentry&quot;
  * notifications.
  */
 public class EntryListener implements SCXMLListener {
-	MyAbstractStateMachine2 stateMachine;
+	MyAbstractStateMachine stateMachine;
 
-	public EntryListener(MyAbstractStateMachine2 stateMachine) {
+	public EntryListener(MyAbstractStateMachine stateMachine) {
 		this.stateMachine = stateMachine;
 	}
 

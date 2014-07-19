@@ -1,15 +1,16 @@
-package com.hofbauer.robocode.simulateur.action;
+package com.hofbauer.robocode.simulateur.Listener;
 
 import org.apache.commons.scxml2.SCXMLListener;
 import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.Transition;
 import org.apache.commons.scxml2.model.TransitionTarget;
 
-public class StateListener implements SCXMLListener {
+public class ActionListener implements SCXMLListener {
 
 	@Override
 	public void onEntry(EnterableState arg0) {
-		System.out.println("state : "+arg0.getId());
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -21,8 +22,7 @@ public class StateListener implements SCXMLListener {
 	@Override
 	public void onTransition(TransitionTarget arg0, TransitionTarget arg1,
 			Transition arg2, String arg3) {
-		System.out.println("trans : "+arg2.getCond());
-
+		// TODO Auto-generated method stub
 
 	}
 

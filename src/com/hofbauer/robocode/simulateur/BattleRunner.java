@@ -42,7 +42,7 @@ public class BattleRunner {
         }**/
         engine.printRunningThreads();
         
-        RobotSpecification[] selectedRobots = engine.getLocalRepository("sample.RamFire,com.hofbauer.robocode.simulateur.action.RobotSimWithAction*");
+        RobotSpecification[] selectedRobots = engine.getLocalRepository("sample.Walls,com.hofbauer.robocode.simulateur.action.RobotSimWithAction*");
 
         
         

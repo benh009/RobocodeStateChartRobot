@@ -1,4 +1,4 @@
-package com.hofbauer.robocode.simulateur.action;
+package com.hofbauer.robocode.simulateur.proxy;
 
 import robocode.AdvancedRobot;
 

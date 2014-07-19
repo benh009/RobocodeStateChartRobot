@@ -1,4 +1,4 @@
-package com.hofbauer.robocode.simulateur.action;
+package com.hofbauer.robocode.simulateur.toolsaction;
 
 import robocode.AdvancedRobot;
 
@@ -11,65 +11,73 @@ public class ActionTools {
 	}
 
 	public void direction(double directionVoulue) {
-		double directionActuelle = robot.getHeading();
-
-		if (Math.abs(directionVoulue - directionActuelle) < 1) {
-
-		} else if (directionVoulue > directionActuelle) {
-			if ((360 - directionVoulue + directionActuelle) < (directionVoulue - directionActuelle)) {
-				robot.setTurnLeft(360 - directionVoulue + directionActuelle);
-			} else {
-				robot.setTurnRight(directionVoulue - directionActuelle);
-			}
-		} else if (directionVoulue <= directionActuelle) {
-			if ((360 - directionActuelle + directionVoulue) < (directionActuelle - directionVoulue)) {
-				robot.setTurnRight(360 - directionActuelle + directionVoulue);
-			} else {
-				robot.setTurnLeft(directionActuelle - directionVoulue);
-			}
-		}
+		robot.setTurnRight(directionG(robot.getHeading(),directionVoulue));
 	}
 
 	public void directionGun(double directionVoulue) {
 
-		double directionActuelle = robot.getGunHeading();
+		robot.setTurnGunRight(directionG(robot.getGunHeading(),directionVoulue));
 
-		if (Math.abs(directionVoulue - directionActuelle) < 1) {
 
-		} else if (directionVoulue > directionActuelle) {
-			if ((360 - directionVoulue + directionActuelle) < (directionVoulue - directionActuelle)) {
-				robot.setTurnGunLeft(360 - directionVoulue + directionActuelle);
-			} else {
-				robot.setTurnGunRight(directionVoulue - directionActuelle);
-			}
-		} else if (directionVoulue <= directionActuelle) {
-			if ((360 - directionActuelle + directionVoulue) < (directionActuelle - directionVoulue)) {
-				robot.setTurnGunRight(360 - directionActuelle + directionVoulue);
-			} else {
-				robot.setTurnGunLeft(directionActuelle - directionVoulue);
-			}
-		}
 	}
 	
 	public void directionGunPal(double directionVoulue,double palier) {
+		System.out.println("gun direction palier :  "+direction(robot.getGunHeading(),directionVoulue, palier));
+		robot.setTurnGunRight(direction(robot.getGunHeading(),directionVoulue, palier));
+		
+	}
+	
+	public double directionG(double directionActuelle,double directionVoulue)
+	{
 
-		double directionActuelle = robot.getGunHeading();
-
+		//pour la precision
 		if (Math.abs(directionVoulue - directionActuelle) < 1) {
 
 		} else if (directionVoulue > directionActuelle) {
+			//pour deciser du plus court 
 			if ((360 - directionVoulue + directionActuelle) < (directionVoulue - directionActuelle)) {
-				robot.setTurnGunLeft((360 - directionVoulue + directionActuelle));
+				return -(360 - directionVoulue + directionActuelle);
 			} else {
-				robot.setTurnGunRight(directionVoulue - directionActuelle);
+				return (directionVoulue - directionActuelle);
 			}
 		} else if (directionVoulue <= directionActuelle) {
 			if ((360 - directionActuelle + directionVoulue) < (directionActuelle - directionVoulue)) {
-				robot.setTurnGunRight(360 - directionActuelle + directionVoulue);
+				return (360 - directionActuelle + directionVoulue);
 			} else {
-				robot.setTurnGunLeft(directionActuelle - directionVoulue);
+				return -(directionActuelle - directionVoulue);
 			}
 		}
+		return directionActuelle;
+		
+	}
+	
+	public double direction(double directionActuelle ,double directionVoulue,double palier)
+	{
+		//positif vers la droite
+		/// negatif vers la gauche
+	 
+
+		//permet de ne pas tourner si trop précis 
+		if (Math.abs(directionVoulue - directionActuelle) < 0.01) {
+			return 0.;
+		} else if (directionVoulue > directionActuelle) {
+			if ((360 - directionVoulue + directionActuelle) < (directionVoulue - directionActuelle)) {
+				
+				//tjs positif
+				//Left
+				return -Math.min((360 - directionVoulue + directionActuelle),palier);
+			} else {
+				return Math.min((directionVoulue - directionActuelle),palier);
+			}
+		} else if (directionVoulue <= directionActuelle) {
+			if ((360 - directionActuelle + directionVoulue) < (directionActuelle - directionVoulue)) {
+				return Math.min((360 - directionActuelle + directionVoulue),palier);
+			} else {
+				return -Math.min((directionActuelle - directionVoulue),palier);
+			}
+		}
+		
+		return 0;
 	}
 
 	public void goTo(double nx, double ny) {

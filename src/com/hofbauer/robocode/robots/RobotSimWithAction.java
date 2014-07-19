@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.hofbauer.robocode.simulateur.action;
+package com.hofbauer.robocode.robots;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,6 +13,12 @@ import java.awt.Graphics2D;
 import org.apache.commons.scxml2.model.ModelException;
 
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
+import com.hofbauer.robocode.simulateur.proxy.GameInfoProxy;
+import com.hofbauer.robocode.simulateur.proxy.RobotActionProxy;
+import com.hofbauer.robocode.simulateur.proxy.RobotGunActionProxy;
+import com.hofbauer.robocode.simulateur.proxy.RobotGunInfoProxy;
+import com.hofbauer.robocode.simulateur.proxy.RobotInfoProxy;
+import com.hofbauer.robocode.simulateur.toolsaction.ActionTools;
 
 import robocode.AdvancedRobot;
 

@@ -1,13 +1,12 @@
 package com.hofbauer.robocode.simulateur;
 
 
-import com.hofbauer.robocode.simulateur.action.MyAbstractStateMachine2;
 import org.apache.commons.scxml2.model.ModelException;
 
 
 
 
-public class RobotStateMachine extends MyAbstractStateMachine2 {
+public class RobotStateMachine extends MyAbstractStateMachine {
 
 
     public RobotStateMachine(String path) throws ModelException {

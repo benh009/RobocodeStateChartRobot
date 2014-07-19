@@ -1,4 +1,4 @@
-package com.hofbauer.robocode.simulateur.action;
+package com.hofbauer.robocode.simulateur;
 
 import java.net.URL;
 
@@ -38,7 +38,7 @@ import org.apache.commons.scxml2.model.SCXML;
 import org.apache.commons.scxml2.model.Transition;
 import org.apache.commons.scxml2.model.TransitionTarget;
 
-import com.hofbauer.robocode.simulateur.action.customaction.RobotAction;
+import com.hofbauer.robocode.simulateur.Listener.StateListener;
 
 /**
  * <p>
@@ -70,7 +70,7 @@ import com.hofbauer.robocode.simulateur.action.customaction.RobotAction;
  * </p>
  * 
  */
-public abstract class MyAbstractStateMachine2 {
+public abstract class MyAbstractStateMachine {
 
 	/**
 	 * The state machine that will drive the instances of this class.
@@ -106,7 +106,7 @@ public abstract class MyAbstractStateMachine2 {
 	 *            The URL pointing to the SCXML document that describes the
 	 *            &quot;lifecycle&quot; of the instances of this class.
 	 */
-	public MyAbstractStateMachine2(final URL scxmlDocument)
+	public MyAbstractStateMachine(final URL scxmlDocument)
 			throws ModelException {
 		// default is JEXL
 		this(scxmlDocument, new JexlContext(), new JexlEvaluator());
@@ -127,7 +127,7 @@ public abstract class MyAbstractStateMachine2 {
 	 * @see Context
 	 * @see Evaluator
 	 */
-	public MyAbstractStateMachine2(final URL scxmlDocument,
+	public MyAbstractStateMachine(final URL scxmlDocument,
 			final Context rootCtx, final Evaluator evaluator)
 			throws ModelException {
 
@@ -155,7 +155,7 @@ public abstract class MyAbstractStateMachine2 {
 	 * 
 	 * @since 0.7
 	 */
-	public MyAbstractStateMachine2(final SCXML stateMachine)
+	public MyAbstractStateMachine(final SCXML stateMachine)
 			throws ModelException {
 		// default is JEXL
 		this(stateMachine, new JexlContext(), new JexlEvaluator());
@@ -177,7 +177,7 @@ public abstract class MyAbstractStateMachine2 {
 	 * 
 	 * @since 0.7
 	 */
-	public MyAbstractStateMachine2(final SCXML stateMachine,
+	public MyAbstractStateMachine(final SCXML stateMachine,
 			final Context rootCtx, final Evaluator evaluator)
 			throws ModelException {
 		log = LogFactory.getLog(this.getClass());
@@ -243,9 +243,7 @@ public abstract class MyAbstractStateMachine2 {
 		
 		
 		try {
-			engine.triggerEvents(evts);
-			System.out.println("playloadev");
-			
+			engine.triggerEvents(evts);			
 		} catch (ModelException me) {
 			logError(me);
 		}

@@ -1,4 +1,4 @@
-package com.hofbauer.robocode.simulateur.action.customaction;
+package com.hofbauer.robocode.simulateur;
 
 
 import org.apache.commons.scxml2.ActionExecutionContext;
@@ -23,28 +23,13 @@ public class RobotAction extends Action {
     }
     
     public String getExpression() {
-        System.out.println("Y");
-
         return expression;
     }
 
     public void setExpression(String expression) {
         this.expression = expression;
     }
-/**
-	@Override
-	public void execute(EventDispatcher evtDispatcher, ErrorReporter errRep,
-			SCInstance scInstance, Log appLog, Collection derivedEvents)
-			throws ModelException, SCXMLExpressionException {
-	     Context ctx = scInstance.getContext(getParentTransitionTarget());
-	        Evaluator eval = scInstance.getEvaluator();
-	        ctx.setLocal(getNamespacesKey(), getNamespaces());
-	        
-	         eval.eval(ctx, expression);
-	        ctx.setLocal(getNamespacesKey(), null);
-		
 
-	}**/
 
 	@Override
 	public void execute(ActionExecutionContext exctx) throws ModelException,
@@ -52,20 +37,11 @@ public class RobotAction extends Action {
 	
         EnterableState parentState = getParentEnterableState();
         Context ctx = exctx.getContext(parentState);
-     //System.out.println("ctx"+ctx);
      
-     //System.out.println("ex "+exctx.getGlobalContext().getVars().values());
         Evaluator eval = exctx.getEvaluator();
+        
 	    ctx.setLocal(getNamespacesKey(), getNamespaces());
-	    System.out.println("ctx size"+exctx.getGlobalContext().getVars().get("_eventdatamap"));
-	
-	    for(String s : ctx.getVars().keySet())
-	    {
-	    	System.out.println(s);
-	    }
 
-	   
-	     
 	         eval.eval(exctx.getGlobalContext(), expression);
 	         ctx.setLocal(getNamespacesKey(), null);
 

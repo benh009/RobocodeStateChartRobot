@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<SCXMLConstraints>
+        <restrictedState name="StateRobocode">
+                <color>red</color>
+                <documentation>Restriction sur les evenements pour pouvoir utiliser dans robocodes</documentation>
+                <possibleEvent name="hitRobot">
+                        <documentation>Evenement lors de la colliction avec un robot</documentation>
+                </possibleEvent>
+                 <possibleEvent name="t">
+                        <documentation>nouveau tick permetant de soumettre des actions</documentation>
+                </possibleEvent>
+                
+                <possibleEvent name="onScannedRobot">
+                        <documentation>Evenement lors de la detection d'un robot par le radar </documentation>
+                </possibleEvent>
+                
+                
+        </restrictedState>
+</SCXMLConstraints>
