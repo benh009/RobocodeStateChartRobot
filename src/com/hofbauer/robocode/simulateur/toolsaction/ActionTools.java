@@ -10,7 +10,7 @@ public class ActionTools {
 		this.robot = robot;
 	}
 
-	public void direction(double directionVoulue) {
+	public  void direction(double directionVoulue) {
 		robot.setTurnRight(directionG(robot.getHeading(),directionVoulue));
 	}
 
@@ -27,7 +27,7 @@ public class ActionTools {
 		
 	}
 	
-	public double directionG(double directionActuelle,double directionVoulue)
+	public static double directionG(double directionActuelle,double directionVoulue)
 	{
 
 		//pour la precision
@@ -51,7 +51,7 @@ public class ActionTools {
 		
 	}
 	
-	public double direction(double directionActuelle ,double directionVoulue,double palier)
+	public static double direction(double directionActuelle ,double directionVoulue,double palier)
 	{
 		//positif vers la droite
 		/// negatif vers la gauche
@@ -127,10 +127,12 @@ public class ActionTools {
 
 	}
 
-	public Boolean equalsPrec(double val1, float precision) {
-
-		System.out.println((Math.abs(val1) < precision) + " \n");
-		return Math.abs(val1) < precision;
+	public Boolean equalsPrec(double val1,double val2, float precision) {
+		return Math.abs(val1-val2) < precision;
 	}
 
+	public Boolean e(Double val1,Double val2) {
+		float precision =1;
+		return equalsPrec(val1,val2, precision);
+	}
 }

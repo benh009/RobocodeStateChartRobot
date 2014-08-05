@@ -12,6 +12,7 @@ pas arreter de tourner -->
  <state id="new_node35" initial="goCorner"><!--   node-size-and-position x=300 y=80 w=600 h=270  --><!--  restriction_type:StateRobocode;  -->
   <transition event="onScannedRobot">
    <my:robotAction expression="RobotGunAction.smartFire(_event.data.getDistance())"></my:robotAction>
+   <my:robotAction expression="RobotGunAction.scan()"></my:robotAction>
   </transition>
 <!-- stop action si scan un robot -->
   <state id="goCorner"><!--   node-size-and-position x=30 y=50 w=75 h=75  --><!--  restriction_type:StateRobocode;  -->

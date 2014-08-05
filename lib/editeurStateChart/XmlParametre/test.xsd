@@ -20,6 +20,23 @@
                                                                 <xsd:attribute name="name" type="xsd:string" />
                                                         </xsd:complexType>
                                                 </xsd:element>
+                                                <xsd:element name="possibleInformation" maxOccurs="unbounded">
+                                                        <xsd:complexType>
+                                                                <xsd:sequence>
+                                                                        <xsd:element name="documentation" type="xsd:string" />
+                                                                </xsd:sequence>
+                                                                <xsd:attribute name="name" type="xsd:string" />
+                                                        </xsd:complexType>
+                                                </xsd:element>
+                                                <xsd:element name="possibleAction" maxOccurs="unbounded">
+                                                        <xsd:complexType>
+                                                                <xsd:sequence>
+                                                                        <xsd:element name="documentation" type="xsd:string" />
+                                                                </xsd:sequence>
+                                                                <xsd:attribute name="name" type="xsd:string" />
+                                                        </xsd:complexType>
+                                                </xsd:element>
+                                                
                                         </xsd:sequence>
                                         <xsd:attribute name="name" type="xsd:string" />
                                 </xsd:complexType>

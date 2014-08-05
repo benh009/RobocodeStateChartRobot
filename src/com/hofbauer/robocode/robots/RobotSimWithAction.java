@@ -8,6 +8,7 @@ package com.hofbauer.robocode.robots;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
 
 
 import org.apache.commons.scxml2.model.ModelException;
@@ -35,17 +36,17 @@ import robocode.TurnCompleteCondition;
 public class RobotSimWithAction extends AdvancedRobot {
 
 	public RobotStateMachine robotModel = null;
-
+	public Boolean scan=false;
 	public RobotSimWithAction() {
 		super();
 		if (robotModel == null) {
 			try {
 				robotModel = new RobotStateMachine(
-						"/com/hofbauer/robocode/resources/simulation/scxml/corner.scxml");
+						"/com/hofbauer/robocode/resources/simulation/scxml/SpinBot.scxml");
 			} catch (ModelException e) {
 				System.out.println("Error init robotStateMachine");
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e.printStackTrace(); 
 			}
 		}
 	}
@@ -56,7 +57,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 
 		robotModel.getEngine().getRootContext().set("Robot", this);
 		robotModel.getEngine().getRootContext()
-				.set("ActionTools", new ActionTools(this));
+				.set("T", new ActionTools(this));
 		
 		robotModel.getEngine().getRootContext().set("RobotInfo", new RobotInfoProxy(this));
 		robotModel.getEngine().getRootContext().set("RobotAction", new RobotActionProxy(this));
@@ -86,15 +87,41 @@ public class RobotSimWithAction extends AdvancedRobot {
 	public void onScannedRobot(ScannedRobotEvent e) {
 		
 		robotModel.fireEvent("onScannedRobot", e);
+		if(scan)
+		{
+			scan=false;
+			scan();
+			
+		}
+		
+		
 
+
+	}
+	public void onMousePressed(MouseEvent e) {
+		robotModel.fireEvent("MouseEvent", e);
+		
 	}
 
 	public void onHitRobot(HitRobotEvent e) {
+		System.out.println("onHitRobot");
 		robotModel.fireEvent("onHitRobot", e);
+		if(scan)
+		{
+			scan=false;
+			scan();
+			
+		}
 	}
 
 	public void onHitByBullet(HitByBulletEvent e) {
 		robotModel.fireEvent("onHitByBullet", e);
+		if(scan)
+		{
+			scan=false;
+			scan();
+
+		}
 	}
 
 	public void onPaint(Graphics2D g) {

@@ -34,15 +34,15 @@ public class BattleRunner {
 
         int numberOfRounds = 5;
         BattlefieldSpecification battlefield = new BattlefieldSpecification(800, 600); // 800x600
-
-        /**for (RobotSpecification r :engine.getLocalRepository())
+/**
+        for (RobotSpecification r :engine.getLocalRepository())
         {
         	
         	System.out.println(r.getName());
         }**/
         engine.printRunningThreads();
         
-        RobotSpecification[] selectedRobots = engine.getLocalRepository("sample.Walls,com.hofbauer.robocode.simulateur.action.RobotSimWithAction*");
+        RobotSpecification[] selectedRobots = engine.getLocalRepository("sample.TrackFire,com.hofbauer.robocode.robots.RobotSimWithAction*");
 
         
         

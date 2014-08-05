@@ -9,23 +9,23 @@ public class RobotInfoProxy {
 	{
 		this.robot=robot;
 	}
-	public double X()
+	public double x()
 	{
 		return this.robot.getX();
 	}
-	public double Y()
+	public double y()
 	{
 		return this.robot.getY();
 	}
-	public double Energy()
+	public double energy()
 	{
 		return this.robot.getEnergy();
 	}
-	public double Heading()
+	public double heading()
 	{
 		return this.robot.getHeading();
 	}
-	public boolean Heading(double deg)
+	public boolean heading(Double deg)
 	{
 		return (Math.abs((this.robot.getHeading()+0.00001)%360-deg)<precisionheading);
 	}
@@ -37,6 +37,19 @@ public class RobotInfoProxy {
 	public double Width()
 	{
 		return this.robot.getWidth();
+	}
+	
+	public Position positionRobotScanned(Double distance,Double bearing)
+	{
+		Double direction =this.robot.getHeading()+bearing;
+		Double x = this.robot.getX()+(distance*Math.cos(direction));
+		Double y = this.robot.getY()+(distance*Math.sin(direction));
+		return new Position(x,y);
+	}
+	public double distance(Double x1,Double x2, Double y1, Double y2)
+	{
+		
+		return Math.sqrt(Math.pow((x1-x2),2)+Math.pow((y1-y2),2));
 	}
 	
 	

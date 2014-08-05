@@ -20,7 +20,7 @@ public class SimulateurALaMain {
 		robotModel.getEngine().getRootContext().set("Double1", new Double(2));
 		//robotModel.getEngine().getRootContext().set("Ob", new ObjectTestNewSCXML() );
 
-		robotModel.fireEvent("event");
+		robotModel.fireEvent("event", new Double(4));
 Double x = new Double(3);
 
 
