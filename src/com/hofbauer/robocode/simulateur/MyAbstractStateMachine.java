@@ -341,7 +341,7 @@ public abstract class MyAbstractStateMachine {
 
 		ArrayList<CustomAction> customActions = new ArrayList<CustomAction>();
 		customActions.add(new CustomAction(
-				"http://my.custom-actions.domain/CUSTOM", "robotAction",
+				"http://my.custom-actions.domain/CUSTOM", "RA",
 				RobotAction.class));
 
 		return customActions;

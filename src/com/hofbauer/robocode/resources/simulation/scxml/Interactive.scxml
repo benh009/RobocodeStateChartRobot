@@ -1,0 +1,22 @@
+<scxml initial="new_node21" name="Interactive" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=664 h=619  -->
+ <state id="hard"><!--   node-size-and-position x=318 y=436 w=75 h=75  --></state>
+ <state id="new_node21" initial="easy"><!--   node-size-and-position x=20 y=130 w=490 h=220  -->
+  <transition event="onScannedRobot">
+   <log expr="&#039;scanned&#039;" label="X"></log>
+   <my:RA expression="RGA.fire(3.0d)"></my:RA>
+  </transition>
+  <state id="medium"><!--   node-size-and-position x=290 y=50 w=75 h=75  -->
+   <transition target="hard"></transition>
+  </state>
+  <state id="easy"><!--   node-size-and-position x=90 y=70 w=75 h=75  -->
+   <transition event="onKeyPressed">
+    <log expr="&#039;keypressed&#039;" label="X"></log>
+    <my:RA expression="RA.scheduleOnKeyPressed(_event.data)"></my:RA>
+<!--   edge-path [easy]  x=30 y=90  --></transition>
+   <transition event="onHitWall" target="medium"></transition>
+   <transition event="onKeyReleased">
+    <my:RA expression="RA.scheduleOnKeyReleased(_event.data)"></my:RA>
+<!--   edge-path [easy]  x=-30 y=60  --></transition>
+  </state>
+ </state>
+</scxml>

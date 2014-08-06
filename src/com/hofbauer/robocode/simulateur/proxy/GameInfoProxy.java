@@ -9,11 +9,11 @@ public class GameInfoProxy {
 	{
 		this.robot=robot;
 	}
-	public double BattleFieldHeight()
+	public double battleFieldHeight()
 	{
 		return this.robot.getBattleFieldHeight();
 	}
-	public double BattleFieldWidth()
+	public double battleFieldWidth()
 	{
 		return this.robot.getBattleFieldWidth();
 	}

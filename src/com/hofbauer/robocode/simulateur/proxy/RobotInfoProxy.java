@@ -30,11 +30,11 @@ public class RobotInfoProxy {
 		return (Math.abs((this.robot.getHeading()+0.00001)%360-deg)<precisionheading);
 	}
 	
-	public double Height()
+	public double height()
 	{
 		return this.robot.getHeight();
 	}
-	public double Width()
+	public double width()
 	{
 		return this.robot.getWidth();
 	}

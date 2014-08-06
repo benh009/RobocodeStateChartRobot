@@ -26,6 +26,8 @@ import robocode.AdvancedRobot;
 import robocode.HitByBulletEvent;
 import robocode.HitRobotEvent;
 import robocode.HitWallEvent;
+import java.awt.event.KeyEvent;
+
 import robocode.ScannedRobotEvent;
 import robocode.TurnCompleteCondition;
 
@@ -42,7 +44,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 		if (robotModel == null) {
 			try {
 				robotModel = new RobotStateMachine(
-						"/com/hofbauer/robocode/resources/simulation/scxml/SpinBot.scxml");
+						"/com/hofbauer/robocode/resources/simulation/scxml/walls.scxml");
 			} catch (ModelException e) {
 				System.out.println("Error init robotStateMachine");
 				// TODO Auto-generated catch block
@@ -59,13 +61,13 @@ public class RobotSimWithAction extends AdvancedRobot {
 		robotModel.getEngine().getRootContext()
 				.set("T", new ActionTools(this));
 		
-		robotModel.getEngine().getRootContext().set("RobotInfo", new RobotInfoProxy(this));
-		robotModel.getEngine().getRootContext().set("RobotAction", new RobotActionProxy(this));
+		robotModel.getEngine().getRootContext().set("RI", new RobotInfoProxy(this));
+		robotModel.getEngine().getRootContext().set("RA", new RobotActionProxy(this));
 		
-		robotModel.getEngine().getRootContext().set("RobotGunInfo", new RobotGunInfoProxy(this));
-		robotModel.getEngine().getRootContext().set("RobotGunAction", new RobotGunActionProxy(this));
+		robotModel.getEngine().getRootContext().set("RGI", new RobotGunInfoProxy(this));
+		robotModel.getEngine().getRootContext().set("RGA", new RobotGunActionProxy(this));
 		
-		robotModel.getEngine().getRootContext().set("GameInfo", new GameInfoProxy(this));
+		robotModel.getEngine().getRootContext().set("GI", new GameInfoProxy(this));
 		
 		while (true) {
 			// mettre a jour a chaque tour
@@ -80,19 +82,13 @@ public class RobotSimWithAction extends AdvancedRobot {
 	}
 
 	public void onHitWall(HitWallEvent e) {
-
 		robotModel.fireEvent("onHitWall", e);
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
 		
 		robotModel.fireEvent("onScannedRobot", e);
-		if(scan)
-		{
-			scan=false;
-			scan();
-			
-		}
+		mscan();
 		
 		
 
@@ -102,26 +98,23 @@ public class RobotSimWithAction extends AdvancedRobot {
 		robotModel.fireEvent("MouseEvent", e);
 		
 	}
+	
+	public void onKeyPressed(KeyEvent e) {
+		robotModel.fireEvent("onKeyPressed", e);
+	}
+	public void onKeyReleased(KeyEvent e) {
+		robotModel.fireEvent("onKeyReleased", e);
+	}
+
 
 	public void onHitRobot(HitRobotEvent e) {
-		System.out.println("onHitRobot");
 		robotModel.fireEvent("onHitRobot", e);
-		if(scan)
-		{
-			scan=false;
-			scan();
-			
-		}
+		mscan();
 	}
 
 	public void onHitByBullet(HitByBulletEvent e) {
 		robotModel.fireEvent("onHitByBullet", e);
-		if(scan)
-		{
-			scan=false;
-			scan();
-
-		}
+		mscan();
 	}
 
 	public void onPaint(Graphics2D g) {
@@ -129,5 +122,13 @@ public class RobotSimWithAction extends AdvancedRobot {
 		g.setFont(new Font("Arial Bold", Font.ITALIC, 20));
 		g.drawString("mot à écrire", (int) getX(), (int) getY());
 	}
+	public void mscan()
+	{
+		if(scan)
+		{
+			scan=false;
+			scan();
 
+		}
+	}
 }

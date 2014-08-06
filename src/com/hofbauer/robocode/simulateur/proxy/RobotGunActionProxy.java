@@ -1,6 +1,7 @@
 package com.hofbauer.robocode.simulateur.proxy;
 
 import com.hofbauer.robocode.robots.RobotSimWithAction;
+import com.hofbauer.robocode.simulateur.toolsaction.ActionTools;
 
 import robocode.AdvancedRobot;
 
@@ -49,6 +50,14 @@ public class RobotGunActionProxy {
 	public void scan()
 	{
 		robot.scan=true;
+	}
+	public void directionGun(double directionVoulue) {
+
+		robot.setTurnGunRight(ActionTools.directionG(robot.getGunHeading(),directionVoulue));
+	}
+	public void directionGun(double directionVoulue,double palier) {
+		robot.setTurnGunRight(ActionTools.direction(robot.getGunHeading(),directionVoulue, palier));
+		
 	}
 
 }

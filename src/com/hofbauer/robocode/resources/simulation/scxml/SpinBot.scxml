@@ -1,0 +1,18 @@
+<scxml initial="new_node14" name="SpinBot" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=664 h=591  -->
+ <state id="new_node14"><!--   node-size-and-position x=210 y=250 w=75 h=75  -->
+  <transition event="onScannedRobot">
+   <my:RA expression="RGA.fire(42.0d)"></my:RA>
+  </transition>
+  <transition event="t">
+   <my:RA expression="RA.ahead(100)"></my:RA>
+   <my:RA expression="RA.turnRight(100)"></my:RA>
+<!--   edge-path [new_node14]  x=240 y=240  --></transition>
+  <transition cond="_event.data.getBearing()&gt;-10 &amp;&amp;  _event.data.getBearing()&lt;10" event="onHitRobot">
+   <my:RA expression="RGA.fire(42.0d)"></my:RA>
+<!--   edge-path [new_node14]  x=-20 y=40  --></transition>
+  <transition event="MouseEvent">
+   <my:RA expression="RGA.fire(42.0d)"></my:RA>
+<!--   edge-path [new_node14]  x=40 y=100  --></transition>
+ </state>
+ <state id="new_node16"><!--   node-size-and-position x=514 y=160 w=75 h=75  --></state>
+</scxml>

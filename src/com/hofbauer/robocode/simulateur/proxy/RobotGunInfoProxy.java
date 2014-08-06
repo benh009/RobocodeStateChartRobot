@@ -10,11 +10,11 @@ public class RobotGunInfoProxy {
 	{
 		this.robot=robot;
 	}
-	public double Heading()
+	public double heading()
 	{
 		return this.robot.getGunHeading();
 	}
-	public boolean Heading(double deg)
+	public boolean heading(double deg)
 	{
 		return (Math.abs(this.robot.getGunHeading()-deg)<precisionheading);
 	}
