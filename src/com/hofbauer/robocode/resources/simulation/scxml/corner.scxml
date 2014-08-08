@@ -1,49 +1,49 @@
-<scxml initial="tourne" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1113 h=723  -->
- <state id="tourne"><!--   node-size-and-position x=20 y=140 w=75 h=75  --><!--  restriction_type:StateRobocode;  --><!-- smartfire
+<scxml initial="FaceAuMur" name="corner" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1113 h=723  -->
+ <state id="FaceAuMur"><!--   node-size-and-position x=50 y=120 w=75 h=75  --><!-- smartfire
 pas arreter de tourner -->
   <transition event="onScannedRobot">
    <my:RA expression="RGA.smartFire(100)"></my:RA>
-<!--   edge-path [tourne]  x=65 y=110  --></transition>
-  <transition cond="RI.heading(0.0d)" event="t" target="new_node35"></transition>
+<!--   edge-path [FaceAuMur]  x=-30 y=70 pointx=1 pointy=-30 offsetx=-53 offsety=-2  --></transition>
+  <transition cond="RI.heading(0.0d)" event="t" target="Corner"></transition>
   <transition cond="!RI.heading(0.0d)" event="t">
    <my:RA expression="RA.direction(0.0d)"></my:RA>
-<!--   edge-path [tourne]  x=56 y=435  --></transition>
+<!--   edge-path [FaceAuMur]  x=70 y=-20  --></transition>
  </state>
- <state id="new_node35" initial="goCorner"><!--   node-size-and-position x=300 y=80 w=600 h=270  --><!--  restriction_type:StateRobocode;  -->
+ <state id="Corner" initial="PositonVersLeCoin"><!--   node-size-and-position x=240 y=80 w=660 h=220  -->
   <transition event="onScannedRobot">
    <my:RA expression="RGA.smartFire(_event.data.getDistance())"></my:RA>
    <my:RA expression="RGA.scan()"></my:RA>
-  </transition>
+<!--   edge-path [Corner]  x=620 y=200 pointx=0 pointy=60 offsetx=0 offsety=5  --></transition>
 <!-- stop action si scan un robot -->
-  <state id="goCorner"><!--   node-size-and-position x=30 y=50 w=75 h=75  --><!--  restriction_type:StateRobocode;  -->
-   <transition cond="RI.y() ==  GI.battleFieldHeight() -RI.height()/2 &amp;&amp; RI.heading(90.0d) &amp;&amp;  GI.battleFieldWidth()  -RI.height()/2 == RI.x()" event="t" target="TurnInCorner"></transition>
+  <state id="PositonVersLeCoin"><!--   node-size-and-position x=70 y=50 w=110 h=80  -->
+   <transition cond="RI.y() ==  GI.battleFieldHeight() -RI.height()/2 &amp;&amp; RI.heading(90.0d) &amp;&amp;  GI.battleFieldWidth()  -RI.height()/2 == RI.x()" event="t" target="PositionInitialCanon"></transition>
    <transition cond="RI.y() !=  GI.battleFieldHeight() -RI.height()/2" event="t">
     <my:RA expression="RA.ahead( GI.battleFieldHeight()-RI.y()-RI.height()/2)"></my:RA>
-<!--   edge-path [goCorner]  x=20 y=100  --></transition>
+<!--   edge-path [PositonVersLeCoin]  x=10 y=100  --></transition>
    <transition cond="RI.y() ==  GI.battleFieldHeight() -RI.height()/2 &amp;&amp; !RI.heading(90.0d)" event="t">
     <my:RA expression="RA.direction(90.0d)"></my:RA>
-<!--   edge-path [goCorner]  x=50 y=80  --></transition>
+<!--   edge-path [PositonVersLeCoin]  x=-10 y=60  --></transition>
    <transition cond="RI.y() ==  GI.battleFieldHeight() -RI.height()/2 &amp;&amp; RI.heading(90.0d) &amp;&amp;  GI.battleFieldWidth()  -RI.height()/2 != RI.x()" event="t">
     <my:RA expression="RA.ahead(GI.battleFieldWidth()- RI.x()- RI.height()/2)"></my:RA>
-<!--   edge-path [goCorner]  x=40 y=-10  --></transition>
+<!--   edge-path [PositonVersLeCoin]  x=70 y=-20  --></transition>
   </state>
-  <state id="TurnInCorner"><!--   node-size-and-position x=140 y=50 w=75 h=75  --><!--  restriction_type:StateRobocode;  -->
-   <transition cond="RGI.heading(180.0d)" event="t" target="new_node25"></transition>
+  <state id="PositionInitialCanon"><!--   node-size-and-position x=240 y=40 w=110 h=90  -->
+   <transition cond="RGI.heading(180.0d)" event="t" target="ScanneBasHaut"></transition>
    <transition cond="!RGI.heading(180.0d)" event="t">
     <my:RA expression="RGA.directionGun(180.0d)"></my:RA>
-   </transition>
+<!--   edge-path [PositionInitialCanon]  x=60 y=-10  --></transition>
   </state>
-  <state id="new_node25"><!--   node-size-and-position x=270 y=50 w=75 h=75  --><!--  restriction_type:StateRobocode;  -->
+  <state id="ScanneBasHaut"><!--   node-size-and-position x=410 y=40 w=90 h=90  -->
    <transition cond="!RGI.heading(270.0d)" event="t">
     <my:RA expression="RGA.directionGun(270.0d,3.0d)"></my:RA>
-   </transition>
-   <transition cond="RGI.heading(270.0d)" event="t" target="new_node30"><!--   edge-path [new_node30]  x=390 y=130  --></transition>
+<!--   edge-path [ScanneBasHaut]  x=60 y=-20  --></transition>
+   <transition cond="RGI.heading(270.0d)" event="t" target="ScanneHautBas"><!--   edge-path [ScanneHautBas]  x=530 y=110 pointx=0 pointy=10 offsetx=11 offsety=-9  --></transition>
   </state>
-  <state id="new_node30"><!--   node-size-and-position x=450 y=60 w=75 h=75  --><!--  restriction_type:StateRobocode;  -->
+  <state id="ScanneHautBas"><!--   node-size-and-position x=560 y=40 w=90 h=90  -->
    <transition cond="!RGI.heading(180)" event="t">
     <my:RA expression="RAGunPal(180.0d,3.0d)"></my:RA>
-   </transition>
-   <transition cond="RGI.heading(180.0d)" event="t" target="new_node25"></transition>
+<!--   edge-path [ScanneHautBas]  x=60 y=-10  --></transition>
+   <transition cond="RGI.heading(180.0d)" event="t" target="ScanneBasHaut"></transition>
   </state>
  </state>
 </scxml>

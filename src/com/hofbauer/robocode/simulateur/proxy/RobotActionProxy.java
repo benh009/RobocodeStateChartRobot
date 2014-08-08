@@ -90,6 +90,16 @@ public class RobotActionProxy {
 			break;
 		}
 	}
+	
+	public void setMaxTurnRate(double maxTurnRate)
+	{
+		this.robot.setMaxTurnRate(maxTurnRate);
+		
+	}
+	public void setMaxVelocity(double maxVelocity)
+	{
+		this.robot.setMaxVelocity(maxVelocity);
+	}
 
 	
 

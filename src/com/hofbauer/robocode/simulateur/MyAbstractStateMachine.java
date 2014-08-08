@@ -38,6 +38,7 @@ import org.apache.commons.scxml2.model.SCXML;
 import org.apache.commons.scxml2.model.Transition;
 import org.apache.commons.scxml2.model.TransitionTarget;
 
+import com.hofbauer.robocode.simulateur.Listener.RobotToGuiListener;
 import com.hofbauer.robocode.simulateur.Listener.StateListener;
 
 /**
@@ -202,6 +203,7 @@ public abstract class MyAbstractStateMachine {
 		engine.setRootContext(rootCtx);
 		// engine.addListener(stateMachine, new EntryListener(this));
 		engine.addListener(stateMachine, new StateListener());
+		//engine.addListener(stateMachine, robotToGuiListener);
 
 		try {
 			engine.go();
@@ -209,6 +211,7 @@ public abstract class MyAbstractStateMachine {
 			logError(me);
 		}
 	}
+
 
 	/**
 	 * Fire an event on the SCXML engine.

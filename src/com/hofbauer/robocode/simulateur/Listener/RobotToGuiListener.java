@@ -1,9 +1,6 @@
 package com.hofbauer.robocode.simulateur.Listener;
 
-/**
- * source
- * https://code.google.com/p/scxmlgui/source/browse/trunk/extra/MySCXMLListener.java
- */
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -37,6 +34,7 @@ public class RobotToGuiListener extends Thread implements SCXMLListener {
         reconnect();
         activeTransitions.clear();
         events.clear();
+        
         start();
     }
 
@@ -44,8 +42,9 @@ public class RobotToGuiListener extends Thread implements SCXMLListener {
         while (true) {
             if (!events.isEmpty() && checkConnection()) {
                 try {
+                	
                     String event = events.take();
-                    //System.out.println(event);
+                    System.out.println(event);
                     out.println(event);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -80,31 +79,65 @@ public class RobotToGuiListener extends Thread implements SCXMLListener {
     private boolean checkConnection() {
         return connected() || reconnect();
     }
-/**
-    @Override
-    public void onEntry(TransitionTarget state) {
-    	
-        try {
-            sendActiveState(state);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
-    @Override
-    public void onExit(TransitionTarget state) {
-        try {
-            sendInactiveState(state);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onTransition(TransitionTarget from, TransitionTarget to, Transition tr) {
     
-        //Action a = (Action) tr.getActions().get(0);
 
+    private void sendActiveTransition(TransitionTarget from, TransitionTarget to, Transition tr) throws InterruptedException {
+        events.put("3 " + from.getId() + " -> " + to.getId());
+    }
+
+
+
+	@Override
+	public void onEntry(EnterableState state) {
+		
+        try {
+			events.put("1 " + state.getId());
+	        HashSet<Transition> set = activeTransitions.get(state);
+	        
+	        if (set != null) {
+	            for (Transition tr : set) {
+	            
+	                System.out.println(tr.getParent().getId());
+	            	events.put("2 " + tr.getParent().getId() + " -> " + state.getId());
+
+	            }
+	        }
+
+
+		} catch (InterruptedException e) {
+
+			e.printStackTrace();
+		}
+
+
+	}
+
+	@Override
+	public void onExit(EnterableState state) {
+        try {
+			events.put("0 " + state.getId());
+	        HashSet<Transition> set = activeTransitions.get(state);
+	        
+	        if (set != null) {
+	            for (Transition tr : set) {
+	            
+	                System.out.println(tr.getParent().getId());
+	            	events.put("2 " + tr.getParent().getId() + " -> " + state.getId());
+
+	            }}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+ 
+	}
+
+	@Override
+	public void onTransition(TransitionTarget from, TransitionTarget to,
+			Transition tr, String arg3) {
+        //Action a = (Action) tr.getActions().get(0);
+		
         assert (from.equals(tr.getParent()));
         assert (tr.getTargets().contains(to) || tr.getTargets().isEmpty());
         try {
@@ -120,51 +153,6 @@ public class RobotToGuiListener extends Thread implements SCXMLListener {
             HashSet<Transition> set = activeTransitions.get(to);
             set.add(tr);
         }
-    }
-**/
-    private void sendActiveState(TransitionTarget state) throws InterruptedException {
-        events.put("1 " + state.getId());
-        HashSet<Transition> set = activeTransitions.get(state);
-        if (set != null) {
-            for (Transition tr : set) {
-                sendInactiveTransition(state, tr);
-            }
-        }
-    }
-
-    private void sendInactiveState(TransitionTarget state) throws InterruptedException {
-        events.put("0 " + state.getId());
-        HashSet<Transition> set = activeTransitions.get(state);
-        if (set != null) {
-            for (Transition tr : set) {
-                sendInactiveTransition(state, tr);
-            }
-        }
-    }
-
-    private void sendActiveTransition(TransitionTarget from, TransitionTarget to, Transition tr) throws InterruptedException {
-        events.put("3 " + from.getId() + " -> " + to.getId());
-    }
-
-    private void sendInactiveTransition(TransitionTarget to, Transition tr) throws InterruptedException {
-        events.put("2 " + tr.getParent().getId() + " -> " + to.getId());
-    }
-
-	@Override
-	public void onEntry(EnterableState state) {
-
-		
-	}
-
-	@Override
-	public void onExit(EnterableState state) {
-
-		
-	}
-
-	@Override
-	public void onTransition(TransitionTarget from, TransitionTarget to,
-			Transition tr, String arg3) {
 
 		
 	}

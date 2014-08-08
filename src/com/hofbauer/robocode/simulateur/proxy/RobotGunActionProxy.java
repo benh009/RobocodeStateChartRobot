@@ -11,40 +11,41 @@ public class RobotGunActionProxy {
 	{
 		this.robot=(RobotSimWithAction) robot;
 	}
-	public void TurnGunLeft(double degrees)
+	public void turnGunLeft(double degrees)
 	{
 		this.robot.setTurnGunLeft(degrees);
 	}
-	public void TurnGunRight(double degrees)
+	public void turnGunRight(double degrees)
 	{
 		this.robot.setTurnGunRight(degrees);
 	}
 	public void smartFire(double robotDistance) {
-		System.out.println("tire avec distance : "+robotDistance);
 		if (robotDistance > 200 || robot.getEnergy() < 15) {
-			robot.fire(1);
+			fire(1.);
 		} else if (robotDistance > 50) {
-			robot.fire(2);
+			fire(2.);
 		} else {
-			robot.fire(3);
+			fire(3.);
 		}
 	}
 	public void fire(Double power)
 	{
-		robot.fire(power);
+		if(robot.getEnergy()>power){
+			robot.fire(power);
+		}
 	}
 	public void smartFireRam(double robotEnergy)
 	{
 		if (robotEnergy> 16) {
-			robot.fire(3);
+			fire(3.0);
 		} else if (robotEnergy > 10) {
-			robot.fire(2);
+			fire(2.0);
 		} else if (robotEnergy > 4) {
-			robot.fire(1);
+			fire(1.0);
 		} else if (robotEnergy > 2) {
-			robot.fire(.5);
+			fire(.5);
 		} else if (robotEnergy > .4) {
-			robot.fire(.1);
+			fire(.1);
 		}	
 	}
 	public void scan()

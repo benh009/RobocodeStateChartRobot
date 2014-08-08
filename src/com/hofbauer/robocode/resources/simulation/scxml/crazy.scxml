@@ -1,0 +1,36 @@
+<scxml initial="crazy" name="Crazy" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1113 h=723  -->
+ <datamodel>
+  <data expr="1" id="directionRobot"></data>
+  <data expr="0" id="turnCounter"></data>
+ </datamodel>
+ <state id="crazy" initial="zigzague"><!--   node-size-and-position x=50 y=190 w=200 h=250  -->
+  <transition event="onHitWall">
+   <assign expr="directionRobot*(-1)" name="directionRobot"></assign>
+   <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
+<!--   edge-path [crazy]  x=-14 y=40  --></transition>
+  <transition cond="_event.data.isMyFault()" event="onHitRobot">
+   <assign expr="directionRobot*(-1)" name="directionRobot"></assign>
+   <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
+<!--   edge-path [crazy]  x=260 y=200  --></transition>
+  <transition event="onScannedRobot">
+   <my:RA expression="RGA.fire(1.0d)"></my:RA>
+<!--   edge-path [crazy]  x=170 y=280 pointx=0 pointy=12 offsetx=-20 offsety=22  --></transition>
+  <state id="zigzague"><!--   node-size-and-position x=50 y=50 w=75 h=75  -->
+   <transition cond="turnCounter%3==0" event="t">
+    <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
+    <my:RA expression="RA.turnRight(90)"></my:RA>
+    <assign expr="turnCounter+1" name="turnCounter"></assign>
+<!--   edge-path [zigzague]  x=-40 y=50  --></transition>
+   <transition cond="turnCounter%3==1" event="t">
+    <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
+    <my:RA expression="RA.turnLeft(180)"></my:RA>
+    <assign expr="turnCounter+1" name="turnCounter"></assign>
+   </transition>
+   <transition cond="turnCounter%3==2" event="t">
+    <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
+    <my:RA expression="RA.turnRight(180)"></my:RA>
+    <assign expr="turnCounter+1" name="turnCounter"></assign>
+<!--   edge-path [zigzague]  x=40 y=100  --></transition>
+  </state>
+ </state>
+</scxml>

@@ -1,46 +1,46 @@
-<scxml initial="new_node34" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1020 h=747  -->
- <state id="new_node34" initial="AllerCoinDroit"><!--   node-size-and-position x=140 y=100 w=511 h=487  -->
+<scxml initial="LongeMurs" name="Walls" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=670 h=600  -->
+ <state id="LongeMurs" initial="CoinSuperieurGauche"><!--   node-size-and-position x=50 y=50 w=511 h=487  -->
   <transition event="onScannedRobot">
    <my:RA expression="RGA.fire(3.0d)"></my:RA>
-  </transition>
-  <state id="AllerCoinDroit"><!--   node-size-and-position x=100 y=90 w=75 h=75  -->
-   <transition cond="RI.heading() eq 0 &amp;&amp;   RI.y() ==  GI.battleFieldHeight() - RI.height()/2 &amp;&amp;  RGI.heading(90)" event="t" target="new_node14"><!--   edge-path [new_node14]  x=259 y=136  --></transition>
+<!--   edge-path [LongeMurs]  x=590 y=360 pointx=0 pointy=30 offsetx=0 offsety=6  --></transition>
+  <state id="CoinSuperieurGauche"><!--   node-size-and-position x=50 y=50 w=140 h=110  -->
+   <transition cond="RI.heading() eq 0 &amp;&amp;   RI.y() ==  GI.battleFieldHeight() - RI.height()/2 &amp;&amp;  RGI.heading(90)" event="t" target="CoinSuperieurDroit"><!--   edge-path [CoinSuperieurDroit]   --></transition>
    <transition cond="!(RI.heading()eq 0)" event="t">
     <my:RA expression="RA.direction(0.0d)"></my:RA>
-<!--   edge-path [AllerCoinDroit]  x=137 y=85  --></transition>
+<!--   edge-path [CoinSuperieurGauche]  x=160 y=30  --></transition>
    <transition cond="RI.heading() eq 0 &amp;&amp;  RI.y() !=  GI.battleFieldHeight() -RI.height()/2" event="t">
     <my:RA expression="RA.ahead( GI.battleFieldHeight()-RI.y()-RI.height()/2)"></my:RA>
-<!--   edge-path [AllerCoinDroit]  x=57 y=95 pointx=0 pointy=2 offsetx=13 offsety=0  --></transition>
+<!--   edge-path [CoinSuperieurGauche]  x=110 y=-10 pointx=0 pointy=2 offsetx=13 offsety=0  --></transition>
    <transition cond="!T.equalsPrec(RGI.heading()-90,1.0) &amp;&amp; RI.heading()eq 0" event="t">
     <my:RA expression="RGA.directionGun(90.0d)"></my:RA>
-<!--   edge-path [AllerCoinDroit]  x=-50 y=30  --></transition>
+<!--   edge-path [CoinSuperieurGauche]  x=-30 y=30 pointx=0 pointy=10 offsetx=0 offsety=-5  --></transition>
   </state>
-  <state id="new_node14"><!--   node-size-and-position x=340 y=110 w=75 h=75  -->
+  <state id="CoinSuperieurDroit"><!--   node-size-and-position x=310 y=60 w=140 h=100  -->
    <transition cond="!(RI.heading()eq 90)" event="t">
     <my:RA expression="RA.direction(90.0d)"></my:RA>
-   </transition>
-   <transition cond="(RI.heading()eq 90)  &amp;&amp; GI.battleFieldWidth()  -RI.height()/2 != RI.x()" event="t">
+<!--   edge-path [CoinSuperieurDroit]  x=110 y=-20  --></transition>
+   <transition cond="(RI.heading()eq 90)  &amp;&amp; GI.battleFieldWidth()  -RI.height()/2 != RI.x()" event="t" target="CoinSuperieurDroit">
     <my:RA expression="RA.ahead(GI.battleFieldWidth()- RI.x()- RI.height()/2)"></my:RA>
-<!--   edge-path [new_node14]  x=34 y=94  --></transition>
-   <transition cond="RI.heading() eq 90 &amp;&amp;  GI.battleFieldWidth()  -RI.height()/2 == RI.x()" event="t" target="new_node24"></transition>
+<!--   edge-path [CoinSuperieurDroit]  x=170 y=80 pointx=0 pointy=-11 offsetx=21 offsety=0  --></transition>
+   <transition cond="RI.heading() eq 90 &amp;&amp;  GI.battleFieldWidth()  -RI.height()/2 == RI.x()" event="t" target="coinInferieurDroit"></transition>
   </state>
-  <state id="new_node24"><!--   node-size-and-position x=310 y=320 w=75 h=75  -->
+  <state id="coinInferieurDroit"><!--   node-size-and-position x=310 y=300 w=160 h=110  -->
    <transition cond="RI.heading() eq 180 &amp;&amp;  RI.y() != RI.height()/2" event="t">
     <my:RA expression="RA.ahead( RI.y()-RI.height()/2)"></my:RA>
-   </transition>
+<!--   edge-path [coinInferieurDroit]  x=170 y=90  --></transition>
    <transition cond="(RI.heading()!=180)" event="t">
     <my:RA expression="RA.direction(180.0d)"></my:RA>
-<!--   edge-path [new_node24]  x=-33 y=28  --></transition>
-   <transition cond="RI.heading() == 180 &amp;&amp; RI.y() ==  RI.height()/2" event="t" target="new_node26"></transition>
+<!--   edge-path [coinInferieurDroit]  x=50 y=130  --></transition>
+   <transition cond="RI.heading() == 180 &amp;&amp; RI.y() ==  RI.height()/2" event="t" target="CoinInferieurGauche"></transition>
   </state>
-  <state id="new_node26"><!--   node-size-and-position x=80 y=310 w=75 h=75  -->
-   <transition cond="RI.heading() eq 270 &amp;&amp;   RI.x() ==  RI.height()/2" event="t" target="AllerCoinDroit"></transition>
+  <state id="CoinInferieurGauche"><!--   node-size-and-position x=40 y=300 w=160 h=120  -->
+   <transition cond="RI.heading() eq 270 &amp;&amp;   RI.x() ==  RI.height()/2" event="t" target="CoinSuperieurGauche"></transition>
    <transition cond="!(RI.heading()eq 270)" event="t">
     <my:RA expression="RA.direction(270.0d)"></my:RA>
-<!--   edge-path [new_node26]  x=-20 y=40  --></transition>
+<!--   edge-path [CoinInferieurGauche]  x=-20 y=40  --></transition>
    <transition cond="(RI.heading()eq 270 )  &amp;&amp; RI.height()/2 != RI.x()" event="t">
     <my:RA expression="RA.ahead(RI.x()- RI.height()/2)"></my:RA>
-<!--   edge-path [new_node26]  x=40 y=100  --></transition>
+<!--   edge-path [CoinInferieurGauche]  x=40 y=140  --></transition>
   </state>
  </state>
 </scxml>

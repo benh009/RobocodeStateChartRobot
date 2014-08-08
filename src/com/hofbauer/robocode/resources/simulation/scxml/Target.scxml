@@ -1,8 +1,8 @@
-<scxml initial="Fuire" name="Target" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=664 h=591  -->
+<scxml initial="Fuir" name="Target" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=664 h=591  -->
  <datamodel>
   <data expr="80" id="trigger"></data>
  </datamodel>
- <state id="Fuire"><!--   node-size-and-position x=136 y=135 w=75 h=75  -->
+ <state id="Fuir"><!--   node-size-and-position x=136 y=135 w=75 h=75  -->
   <onentry>
    <assign expr="80" name="trigger"></assign>
   </onentry>
@@ -13,6 +13,6 @@
   </transition>
   <transition event="onHitWall">
    <my:RA expression="RA.back(100)"></my:RA>
-<!--   edge-path [Fuire]  x=190 y=220  --></transition>
+<!--   edge-path [Fuir]  x=-36 y=75  --></transition>
  </state>
 </scxml>

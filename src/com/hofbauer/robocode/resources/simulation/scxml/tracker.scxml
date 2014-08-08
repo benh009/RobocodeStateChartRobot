@@ -1,0 +1,35 @@
+<scxml initial="new_node18" name="Tracker" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=664 h=591  -->
+ <datamodel>
+  <data expr="0" id="count"></data>
+  <data expr="null" id="trackName"></data>
+ </datamodel>
+ <state id="new_node18" initial="new_node22"><!--   node-size-and-position x=230 y=170 w=210 h=230  -->
+  <transition cond="trackName == null or trackName == _event.data.getName()" event="onScannedRobot" target="new_node18">
+   <assign expr="_event.data.getName()" name="trackName"></assign>
+   <assign expr="0" name="count"></assign>
+   <my:RA expression="RGA.fire(3.0d)"></my:RA>
+   <my:RA expression="RGA.scan()"></my:RA>
+<!--   edge-path [new_node18]  x=-40 y=60  --></transition>
+  <transition event="onHitRobot" target="new_node18">
+   <assign expr="_event.data.getName()" name="trackName"></assign>
+  </transition>
+  <state id="new_node22"><!--   node-size-and-position x=60 y=80 w=75 h=75  -->
+   <transition cond="count&gt;11" event="t" target="new_node22">
+    <my:RA expression="RGA.turnGunRight(10.0d)"></my:RA>
+    <my:RA expression="RGA.scan()"></my:RA>
+    <assign expr="count+1" name="count"></assign>
+    <assign expr="null" name="trackName"></assign>
+<!--   edge-path [new_node22]  x=40 y=-20  --></transition>
+   <transition cond="count&gt;5 or count&lt;2" event="t" target="new_node22">
+    <my:RA expression="RGA.turnGunRight(10.0d)"></my:RA>
+    <my:RA expression="RGA.scan()"></my:RA>
+    <assign expr="count+1" name="count"></assign>
+<!--   edge-path [new_node22]  x=-10 y=50  --></transition>
+   <transition cond="count&gt;=2" event="t" target="new_node22">
+    <my:RA expression="RGA.turnGunLeft(7.0d)"></my:RA>
+    <my:RA expression="RGA.scan()"></my:RA>
+    <assign expr="count+1" name="count"></assign>
+<!--   edge-path [new_node22]  x=30 y=110  --></transition>
+  </state>
+ </state>
+</scxml>
