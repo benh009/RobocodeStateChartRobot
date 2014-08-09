@@ -17,12 +17,15 @@ pas arreter de tourner -->
 <!-- stop action si scan un robot -->
   <state id="PositonVersLeCoin"><!--   node-size-and-position x=70 y=50 w=110 h=80  -->
    <transition cond="RI.y() ==  GI.battleFieldHeight() -RI.height()/2 &amp;&amp; RI.heading(90.0d) &amp;&amp;  GI.battleFieldWidth()  -RI.height()/2 == RI.x()" event="t" target="PositionInitialCanon"></transition>
+<!-- Avance -->
    <transition cond="RI.y() !=  GI.battleFieldHeight() -RI.height()/2" event="t">
     <my:RA expression="RA.ahead( GI.battleFieldHeight()-RI.y()-RI.height()/2)"></my:RA>
 <!--   edge-path [PositonVersLeCoin]  x=10 y=100  --></transition>
+<!-- Direction90 -->
    <transition cond="RI.y() ==  GI.battleFieldHeight() -RI.height()/2 &amp;&amp; !RI.heading(90.0d)" event="t">
     <my:RA expression="RA.direction(90.0d)"></my:RA>
 <!--   edge-path [PositonVersLeCoin]  x=-10 y=60  --></transition>
+<!-- Avance -->
    <transition cond="RI.y() ==  GI.battleFieldHeight() -RI.height()/2 &amp;&amp; RI.heading(90.0d) &amp;&amp;  GI.battleFieldWidth()  -RI.height()/2 != RI.x()" event="t">
     <my:RA expression="RA.ahead(GI.battleFieldWidth()- RI.x()- RI.height()/2)"></my:RA>
 <!--   edge-path [PositonVersLeCoin]  x=70 y=-20  --></transition>
@@ -41,7 +44,7 @@ pas arreter de tourner -->
   </state>
   <state id="ScanneHautBas"><!--   node-size-and-position x=560 y=40 w=90 h=90  -->
    <transition cond="!RGI.heading(180)" event="t">
-    <my:RA expression="RAGunPal(180.0d,3.0d)"></my:RA>
+    <my:RA expression="RGA.directionGun(180.0d,3.0d)"></my:RA>
 <!--   edge-path [ScanneHautBas]  x=60 y=-10  --></transition>
    <transition cond="RGI.heading(180.0d)" event="t" target="ScanneBasHaut"></transition>
   </state>

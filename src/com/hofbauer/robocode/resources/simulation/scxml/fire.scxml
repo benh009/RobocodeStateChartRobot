@@ -1,4 +1,4 @@
-<scxml initial="fire" name="Fire" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=664 h=591  -->
+<scxml initial="fire" name="Fire" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=664 h=591  -->
  <state id="fire"><!--   node-size-and-position x=130 y=270 w=75 h=75  -->
   <transition event="onHitRobot">
    <my:RA expression="RGA.fire(3.0d)"></my:RA>

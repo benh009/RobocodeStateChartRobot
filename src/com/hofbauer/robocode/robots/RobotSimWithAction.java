@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import org.apache.commons.scxml2.model.ModelException;
 
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
+import com.hofbauer.robocode.simulateur.Listener.ActionListener;
 import com.hofbauer.robocode.simulateur.Listener.RobotToGuiListener;
 import com.hofbauer.robocode.simulateur.proxy.GameInfoProxy;
 import com.hofbauer.robocode.simulateur.proxy.RobotActionProxy;
@@ -34,6 +35,9 @@ import robocode.RoundEndedEvent;
 import robocode.WinEvent;
 
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import robocode.ScannedRobotEvent;
 import robocode.TurnCompleteCondition;
@@ -44,24 +48,45 @@ import robocode.TurnCompleteCondition;
  */
 public class RobotSimWithAction extends AdvancedRobot {
 
-	public RobotStateMachine robotModel = null;
+	public static RobotStateMachine robotModel = null;
 	public Boolean scan=false;
 	public RobotToGuiListener robotToGuiListener;
 	public RobotSimWithAction() {
 		super();
+		boolean bolscxmlgui = false;
+		ActionListener a = new ActionListener();
 		if (robotModel == null) {
 			try {
-				robotModel = new RobotStateMachine("/com/hofbauer/robocode/resources/simulation/scxml/corner.scxml");
-			} catch (ModelException e) {
+		    	 String path = "";
+
+		        	 BufferedReader in
+		      	      = new BufferedReader(new FileReader(getClass().getResource("/settings/settings").getFile()));
+		        	 in.readLine();
+		        	 path= in.readLine();
+
+		        	 in.readLine();
+		        	 String stringscxmlgui = in.readLine();
+		        	 System.out.println(stringscxmlgui);
+		        	 System.out.println(path);
+		        	 
+		        	 bolscxmlgui = stringscxmlgui.equals("true");
+				
+				robotModel = new RobotStateMachine(getClass().getResource("/com/hofbauer/robocode/resources/simulation/scxml/fire.scxml"));
+				
+				in.close();
+			} catch (ModelException | IOException e) {
 				System.out.println("Error init robotStateMachine");
 				// TODO Auto-generated catch block
 				e.printStackTrace(); 
 			}
 		}
+		System.out.println(bolscxmlgui);
 		
-		robotToGuiListener=new RobotToGuiListener(null, 9999);
-		robotModel.getEngine().addListener(robotModel.getEngine().getStateMachine(),robotToGuiListener );
-		
+		if(bolscxmlgui)
+		{
+			robotToGuiListener=new RobotToGuiListener(null, 9999);
+			robotModel.getEngine().addListener(robotModel.getEngine().getStateMachine(),robotToGuiListener );
+		}
 
 	}
 
@@ -95,6 +120,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 	}
 
 	public void onHitWall(HitWallEvent e) {
+		
 		robotModel.fireEvent("onHitWall", e);
 		
 	}
@@ -140,6 +166,8 @@ public class RobotSimWithAction extends AdvancedRobot {
 	}
 	@Override
 	public void onBattleEnded(BattleEndedEvent event){
+		robotModel.resetMachine();
+
 		
 	}
 	@Override

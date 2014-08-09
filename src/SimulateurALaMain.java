@@ -11,7 +11,7 @@ public class SimulateurALaMain {
 	public static void main(String[] args) {
 		RobotStateMachine robotModel=null;
 		try {
-			 robotModel = new RobotStateMachine("/com/hofbauer/robocode/resources/simulation/scxml/testAlaMain.scxml");
+			 robotModel = new RobotStateMachine(SimulateurALaMain.class.getResource("/com/hofbauer/robocode/resources/simulation/scxml/testAlaMain.scxml"));
 		} catch (ModelException e) {
 			System.out.println("Error init robotStateMachine");
 			// TODO Auto-generated catch block

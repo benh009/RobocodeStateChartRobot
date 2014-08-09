@@ -1,6 +1,9 @@
 package com.hofbauer.robocode.simulateur;
 
 
+import java.io.File;
+import java.net.URL;
+
 import org.apache.commons.scxml2.model.ModelException;
 
 
@@ -9,12 +12,14 @@ import org.apache.commons.scxml2.model.ModelException;
 public class RobotStateMachine extends MyAbstractStateMachine {
 
 
-    public RobotStateMachine(String path) throws ModelException {
+
+
+	public RobotStateMachine(URL url) throws ModelException {
     
     	
-        super(RobotStateMachine.class.getClass().getResource(path));
+        super(url);
         
-  
+ 
         //print des logs
         //SimpleSCXMLListener sListerner = new SimpleSCXMLListener();
         //this.getEngine().addListener(this.getEngine().getStateMachine(), sListerner);

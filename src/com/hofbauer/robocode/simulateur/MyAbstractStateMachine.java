@@ -345,7 +345,7 @@ public abstract class MyAbstractStateMachine {
 		ArrayList<CustomAction> customActions = new ArrayList<CustomAction>();
 		customActions.add(new CustomAction(
 				"http://my.custom-actions.domain/CUSTOM", "RA",
-				RobotAction.class));
+				com.hofbauer.robocode.simulateur.RobotAction.class));
 
 		return customActions;
 	}

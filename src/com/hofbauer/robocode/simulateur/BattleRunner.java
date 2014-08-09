@@ -1,5 +1,13 @@
 package com.hofbauer.robocode.simulateur;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+
+import org.apache.commons.scxml2.model.ModelException;
+
 import robocode.control.*;
 import robocode.control.events.*;
 
@@ -18,9 +26,10 @@ public class BattleRunner {
         
 
         // Create the RobocodeEngine
-        //   RobocodeEngine engine = new RobocodeEngine(); // Run from current working directory
-        RobocodeEngine engine = new RobocodeEngine(new java.io.File("/home/hofbauer/robocode")); // Run from C:/Robocode
-        
+        //   RobocodeEngine engine = new RobocodeEngine(); // Run from current working directory  
+    	
+
+        RobocodeEngine engine = new RobocodeEngine(); // Run from C:/Robocode
         // Add our own battle listener to the RobocodeEngine 
         engine.addBattleListener(new BattleObserver());
 
