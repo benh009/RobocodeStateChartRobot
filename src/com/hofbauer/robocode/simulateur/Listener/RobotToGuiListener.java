@@ -26,9 +26,11 @@ public class RobotToGuiListener extends Thread implements SCXMLListener {
     private InputStream in;
     private String server;
     private int port;
+    public boolean runThread = true;
 
     public RobotToGuiListener(String server, int port) {
         super();
+        System.out.println("initserver");
         this.server = server;
         this.port = port;
         reconnect();
@@ -39,7 +41,7 @@ public class RobotToGuiListener extends Thread implements SCXMLListener {
     }
 
     public void run() {
-        while (true) {
+        while (runThread) {
             if (!events.isEmpty() && checkConnection()) {
                 try {
                 	

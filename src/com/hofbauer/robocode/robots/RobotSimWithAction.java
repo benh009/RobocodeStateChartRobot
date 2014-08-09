@@ -47,14 +47,17 @@ import robocode.TurnCompleteCondition;
  * @author hofbauer
  */
 public class RobotSimWithAction extends AdvancedRobot {
+	public Boolean runTread;
 
-	public static RobotStateMachine robotModel = null;
+	public RobotStateMachine robotModel = null;
+	public  boolean bolscxmlgui = false;
 	public Boolean scan=false;
 	public RobotToGuiListener robotToGuiListener;
 	public RobotSimWithAction() {
 		super();
-		boolean bolscxmlgui = false;
-		ActionListener a = new ActionListener();
+		
+		
+		runTread=true;
 		if (robotModel == null) {
 			try {
 		    	 String path = "";
@@ -71,7 +74,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 		        	 
 		        	 bolscxmlgui = stringscxmlgui.equals("true");
 				
-				robotModel = new RobotStateMachine(getClass().getResource("/com/hofbauer/robocode/resources/simulation/scxml/fire.scxml"));
+				robotModel = new RobotStateMachine(getClass().getResource(path));
 				
 				in.close();
 			} catch (ModelException | IOException e) {
@@ -84,6 +87,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 		
 		if(bolscxmlgui)
 		{
+			
 			robotToGuiListener=new RobotToGuiListener(null, 9999);
 			robotModel.getEngine().addListener(robotModel.getEngine().getStateMachine(),robotToGuiListener );
 		}
@@ -159,30 +163,26 @@ public class RobotSimWithAction extends AdvancedRobot {
 	public void onWin(WinEvent e) 
 	{
 		robotModel.fireEvent("onWin", e);
-		robotModel.resetMachine();
-		robotToGuiListener.stop();
+		robotToGuiListener.runThread=false;
 		
 
 	}
 	@Override
 	public void onBattleEnded(BattleEndedEvent event){
 		robotModel.resetMachine();
-
+		robotToGuiListener.runThread=false;
 		
 	}
 	@Override
 	public void onRoundEnded(RoundEndedEvent event)
 	{
 
-
+		robotToGuiListener.runThread=false;
 		
 	}
 	public void onDeath(DeathEvent event)
 	{
-		robotToGuiListener.stop();
-		
-		robotModel.resetMachine();
-
+		robotToGuiListener.runThread=false;
 	}
 	 
 
