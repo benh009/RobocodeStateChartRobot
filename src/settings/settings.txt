@@ -1,0 +1,11 @@
+Robot
+/com/hofbauer/robocode/resources/simulation/scxml/corner.scxml
+Server pour envoyer etat scxmlgui
+true
+
+
+
+
+/com/hofbauer/robocode/resources/simulation/scxml/crazy.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/fire.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/corner.scxml

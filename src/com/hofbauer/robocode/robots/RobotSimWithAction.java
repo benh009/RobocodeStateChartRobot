@@ -63,7 +63,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 		    	 String path = "";
 
 		        	 BufferedReader in
-		      	      = new BufferedReader(new FileReader(getClass().getResource("/settings/settings").getFile()));
+		      	      = new BufferedReader(new FileReader(getClass().getResource("/settings/settings.txt").getFile()));
 		        	 in.readLine();
 		        	 path= in.readLine();
 
