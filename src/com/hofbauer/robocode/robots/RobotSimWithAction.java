@@ -13,10 +13,13 @@ import java.awt.event.MouseEvent;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.scxml2.model.ModelException;
 
+
+
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
 import com.hofbauer.robocode.simulateur.Listener.ActionListener;
 import com.hofbauer.robocode.simulateur.Listener.RobotToGuiListener;
 import com.hofbauer.robocode.simulateur.proxy.GameInfoProxy;
+import com.hofbauer.robocode.simulateur.proxy.Message;
 import com.hofbauer.robocode.simulateur.proxy.RobotActionProxy;
 import com.hofbauer.robocode.simulateur.proxy.RobotGunActionProxy;
 import com.hofbauer.robocode.simulateur.proxy.RobotGunInfoProxy;
@@ -30,8 +33,10 @@ import robocode.DeathEvent;
 import robocode.HitByBulletEvent;
 import robocode.HitRobotEvent;
 import robocode.HitWallEvent;
+import robocode.MessageEvent;
 import robocode.RobotDeathEvent;
 import robocode.RoundEndedEvent;
+import robocode.TeamRobot;
 import robocode.WinEvent;
 
 import java.awt.event.KeyEvent;
@@ -46,7 +51,7 @@ import robocode.TurnCompleteCondition;
  * 
  * @author hofbauer
  */
-public class RobotSimWithAction extends AdvancedRobot {
+public abstract class RobotSimWithAction extends TeamRobot {
 	
 
 	public  RobotStateMachine robotModel;
@@ -56,29 +61,43 @@ public class RobotSimWithAction extends AdvancedRobot {
 	public Boolean endRound;
 	
 
-	public RobotSimWithAction() {
+	public RobotSimWithAction(int idrobot) {
 		super();
 		endRound = false;
 		 
 		if (robotModel == null) {
 			try {
 				LogFactory.releaseAll();
-				String path = "";
+				String pathRobot = "";
 
 				BufferedReader in = new BufferedReader(new FileReader(
 						getClass().getResource("/settings/settings.txt")
 								.getFile()));
-				in.readLine();
-				path = in.readLine();
 
+				
+				String stringscxmlgui="";
+				if(idrobot==1)
+				{
+					in.readLine();
+					pathRobot = in.readLine();
+					in.readLine();in.readLine();
+				}
+				else if(idrobot==2)
+				{
+					in.readLine();in.readLine();in.readLine(); //passe robot1
+					pathRobot = in.readLine();
+
+				}
+				
 				in.readLine();
-				String stringscxmlgui = in.readLine();
+				stringscxmlgui=in.readLine();
+				
 				System.out.println(stringscxmlgui);
-				System.out.println(path);
+				System.out.println(pathRobot);
 
 				bolscxmlgui = stringscxmlgui.equals("true");
 
-				robotModel = new RobotStateMachine(getClass().getResource(path));
+				robotModel = new RobotStateMachine(getClass().getResource(pathRobot));
 				
 				
 
@@ -106,7 +125,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 		}
 
 	}
-
+	@Override
 	public void run() {
 
 		// initialise la stateMachine
@@ -140,14 +159,15 @@ public class RobotSimWithAction extends AdvancedRobot {
 
 		}
 	}
-
+	@Override
 	public void onHitWall(HitWallEvent e) {
 		if (!endRound) {
 			robotModel.fireEvent("onHitWall", e);
 		}
 	}
-
+	@Override
 	public void onScannedRobot(ScannedRobotEvent e) {
+		
 		if (!endRound) {
 			robotModel.fireEvent("onScannedRobot", e);
 			mscan();
@@ -155,37 +175,45 @@ public class RobotSimWithAction extends AdvancedRobot {
 		}
 
 	}
-
+	@Override
 	public void onMousePressed(MouseEvent e) {
 		if (!endRound) {
 			robotModel.fireEvent("MouseEvent", e);
 		}
 	}
-
+	@Override
 	public void onKeyPressed(KeyEvent e) {
 		if (robotModel != null) {
 			robotModel.fireEvent("onKeyPressed", e);
 		}
 	}
-
+	@Override
 	public void onKeyReleased(KeyEvent e) {
 		if (!endRound) {
 			robotModel.fireEvent("onKeyReleased", e);
 		}
 	}
-
+	@Override
 	public void onHitRobot(HitRobotEvent e) {
 		if (!endRound) {
 			robotModel.fireEvent("onHitRobot", e);
 			mscan();
 		}
 	}
-
+	@Override
 	public void onHitByBullet(HitByBulletEvent e) {
 		if (!endRound) {
 			robotModel.fireEvent("onHitByBullet", e);
 			mscan();
 		}
+	}
+	 @Override
+	 public void onMessageReceived(MessageEvent event)
+	{
+		 System.out.println("Receice");
+			if (!endRound) {
+				robotModel.fireEvent("onMessageReceived", new Message(event));
+			}
 	}
 
 	public void onWin(WinEvent e) {
@@ -217,7 +245,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 		}
 		robotModel.setLog(null);
 	}
-
+	@Override
 	public void onDeath(DeathEvent event) {
 		if (!endRound) {
 			robotToGuiListener.runThread = false;
@@ -226,7 +254,7 @@ public class RobotSimWithAction extends AdvancedRobot {
 		}
 		robotModel.setLog(null);
 	}
-
+	@Override
 	public void onPaint(Graphics2D g) {
 		g.setColor(Color.red);
 		g.drawOval((int) (getX() - 50), (int) (getY() - 50), 100, 100);

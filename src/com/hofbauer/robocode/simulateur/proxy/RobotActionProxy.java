@@ -1,13 +1,16 @@
 package com.hofbauer.robocode.simulateur.proxy;
 
+import com.hofbauer.robocode.robots.RobotSimWithAction;
 import com.hofbauer.robocode.simulateur.toolsaction.ActionTools;
 
 import robocode.AdvancedRobot;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+
 import static java.awt.event.KeyEvent.*;
 public class RobotActionProxy {
-	private AdvancedRobot robot;
-	public RobotActionProxy(AdvancedRobot robot)
+	private RobotSimWithAction robot;
+	public RobotActionProxy(RobotSimWithAction robot)
 	{
 		this.robot=robot;
 	
@@ -101,6 +104,29 @@ public class RobotActionProxy {
 		this.robot.setMaxVelocity(maxVelocity);
 	}
 
-	
+	//team 
+	public void broadcastMessage(String message)
+	{
+		try {
+			robot.broadcastMessage(message);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void sendMessage(String name,
+            String message){
+		 System.out.println("Receice");
+		try {
+			robot.sendMessage(name, message);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void print(String s )
+	{
+		System.out.println(s);
+	}
 
 }

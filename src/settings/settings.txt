@@ -1,5 +1,7 @@
-Robot
-/com/hofbauer/robocode/resources/simulation/scxml/sousCorner.scxml
+Robot 1
+/com/hofbauer/robocode/resources/simulation/scxml/fireTeam.scxml
+Robot 2
+/com/hofbauer/robocode/resources/simulation/scxml/fireTeam.scxml
 Server pour envoyer etat scxmlgui
 true
 
@@ -8,4 +10,5 @@ true
 
 /com/hofbauer/robocode/resources/simulation/scxml/crazy.scxml
 /com/hofbauer/robocode/resources/simulation/scxml/fire.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/fireTeam.scxml
 /com/hofbauer/robocode/resources/simulation/scxml/corner.scxml

@@ -1,11 +1,13 @@
 package com.hofbauer.robocode.simulateur.proxy;
 
+import com.hofbauer.robocode.robots.RobotSimWithAction;
+
 import robocode.AdvancedRobot;
 
 public class GameInfoProxy {
-	private AdvancedRobot robot;
+	private RobotSimWithAction  robot;
 	
-	public GameInfoProxy(AdvancedRobot robot)
+	public GameInfoProxy(RobotSimWithAction robot)
 	{
 		this.robot=robot;
 	}

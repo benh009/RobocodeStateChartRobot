@@ -7,7 +7,7 @@ import robocode.AdvancedRobot;
 
 public class RobotGunActionProxy {
 	private RobotSimWithAction robot;
-	public RobotGunActionProxy(AdvancedRobot robot)
+	public RobotGunActionProxy(RobotSimWithAction robot)
 	{
 		this.robot=(RobotSimWithAction) robot;
 	}
