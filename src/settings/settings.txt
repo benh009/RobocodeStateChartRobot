@@ -1,5 +1,5 @@
 Robot
-/com/hofbauer/robocode/resources/simulation/scxml/corner.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/sousCorner.scxml
 Server pour envoyer etat scxmlgui
 true
 

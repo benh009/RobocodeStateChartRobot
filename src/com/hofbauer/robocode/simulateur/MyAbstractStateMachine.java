@@ -107,9 +107,10 @@ public abstract class MyAbstractStateMachine {
 	 *            The URL pointing to the SCXML document that describes the
 	 *            &quot;lifecycle&quot; of the instances of this class.
 	 */
-	public MyAbstractStateMachine(final URL scxmlDocument)
+	public MyAbstractStateMachine( URL scxmlDocument)
 			throws ModelException {
 		// default is JEXL
+		
 		this(scxmlDocument, new JexlContext(), new JexlEvaluator());
 
 	}
@@ -132,7 +133,9 @@ public abstract class MyAbstractStateMachine {
 			final Context rootCtx, final Evaluator evaluator)
 			throws ModelException {
 
+		
 		log = LogFactory.getLog(this.getClass());
+		
 		try {
 			Configuration configuration = new Configuration(null, null,
 					getActionArrayList());

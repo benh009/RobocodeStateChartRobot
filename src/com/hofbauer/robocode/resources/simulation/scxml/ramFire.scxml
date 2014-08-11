@@ -1,4 +1,4 @@
-<scxml initial="RechercheTire" name="RamFire" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=950 h=340  -->
+<scxml initial="RechercheTire" name="RamFire" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=950 h=340  -->
  <datamodel>
   <data id="directionRobotScanned"></data>
   <data id="distanceRobotScanned"></data>

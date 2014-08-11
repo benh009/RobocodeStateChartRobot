@@ -10,7 +10,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
-
+import org.apache.commons.logging.LogFactory;
 import org.apache.commons.scxml2.model.ModelException;
 
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
@@ -47,75 +47,93 @@ import robocode.TurnCompleteCondition;
  * @author hofbauer
  */
 public class RobotSimWithAction extends AdvancedRobot {
-	public Boolean runTread;
+	
 
-	public RobotStateMachine robotModel = null;
+	public  RobotStateMachine robotModel;
 	public  boolean bolscxmlgui = false;
-	public Boolean scan=false;
+	public Boolean scan = false;
 	public RobotToGuiListener robotToGuiListener;
+	public Boolean endRound;
+	
+
 	public RobotSimWithAction() {
 		super();
-		
-		
-		runTread=true;
+		endRound = false;
+		 
 		if (robotModel == null) {
 			try {
-		    	 String path = "";
+				LogFactory.releaseAll();
+				String path = "";
 
-		        	 BufferedReader in
-		      	      = new BufferedReader(new FileReader(getClass().getResource("/settings/settings.txt").getFile()));
-		        	 in.readLine();
-		        	 path= in.readLine();
+				BufferedReader in = new BufferedReader(new FileReader(
+						getClass().getResource("/settings/settings.txt")
+								.getFile()));
+				in.readLine();
+				path = in.readLine();
 
-		        	 in.readLine();
-		        	 String stringscxmlgui = in.readLine();
-		        	 System.out.println(stringscxmlgui);
-		        	 System.out.println(path);
-		        	 
-		        	 bolscxmlgui = stringscxmlgui.equals("true");
-				
+				in.readLine();
+				String stringscxmlgui = in.readLine();
+				System.out.println(stringscxmlgui);
+				System.out.println(path);
+
+				bolscxmlgui = stringscxmlgui.equals("true");
+
 				robotModel = new RobotStateMachine(getClass().getResource(path));
 				
+				
+
 				in.close();
 			} catch (ModelException | IOException e) {
 				System.out.println("Error init robotStateMachine");
 				// TODO Auto-generated catch block
-				e.printStackTrace(); 
+				e.printStackTrace();
 			}
 		}
 		System.out.println(bolscxmlgui);
-		
-		if(bolscxmlgui)
-		{
-			
-			robotToGuiListener=new RobotToGuiListener(null, 9999);
-			robotModel.getEngine().addListener(robotModel.getEngine().getStateMachine(),robotToGuiListener );
+		try {
+			robotModel.getEngine().reset();
+		} catch (ModelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (bolscxmlgui) {
+
+			robotToGuiListener = new RobotToGuiListener(null, 9999);
+			robotModel.getEngine().addListener(
+					robotModel.getEngine().getStateMachine(),
+					robotToGuiListener);
 		}
 
 	}
 
 	public void run() {
-		//robotModel.getEngine().addListener(robotModel.getEngine().getStateMachine(), new RobotToGuiListener(null, 9999));
-		
 
 		// initialise la stateMachine
 
-		//robotModel.getEngine().getRootContext().set("Robot", this);
-		//robotModel.getEngine().getRootContext().set("T", new ActionTools(this));
-		
-		robotModel.getEngine().getRootContext().set("RI", new RobotInfoProxy(this));
-		robotModel.getEngine().getRootContext().set("RA", new RobotActionProxy(this));
-		
-		robotModel.getEngine().getRootContext().set("RGI", new RobotGunInfoProxy(this));
-		robotModel.getEngine().getRootContext().set("RGA", new RobotGunActionProxy(this));
-		
-		robotModel.getEngine().getRootContext().set("GI", new GameInfoProxy(this));
-		
+		// robotModel.getEngine().getRootContext().set("Robot", this);
+		// robotModel.getEngine().getRootContext().set("T", new
+		// ActionTools(this));
+
+		robotModel.getEngine().getRootContext()
+				.set("RI", new RobotInfoProxy(this));
+		robotModel.getEngine().getRootContext()
+				.set("RA", new RobotActionProxy(this));
+
+		robotModel.getEngine().getRootContext()
+				.set("RGI", new RobotGunInfoProxy(this));
+		robotModel.getEngine().getRootContext()
+				.set("RGA", new RobotGunActionProxy(this));
+
+		robotModel.getEngine().getRootContext()
+				.set("GI", new GameInfoProxy(this));
+
 		while (true) {
 			// mettre a jour a chaque tour
 			// position du robot
-
-			robotModel.fireEvent("t");
+			if (!endRound) {
+				robotModel.fireEvent("t");
+			}
 			waitFor(new TurnCompleteCondition(this));
 
 			// execute();
@@ -124,83 +142,104 @@ public class RobotSimWithAction extends AdvancedRobot {
 	}
 
 	public void onHitWall(HitWallEvent e) {
-		
-		robotModel.fireEvent("onHitWall", e);
-		
+		if (!endRound) {
+			robotModel.fireEvent("onHitWall", e);
+		}
 	}
 
 	public void onScannedRobot(ScannedRobotEvent e) {
-	
-		robotModel.fireEvent("onScannedRobot", e);
-		mscan();
-		
-		
+		if (!endRound) {
+			robotModel.fireEvent("onScannedRobot", e);
+			mscan();
 
+		}
 
 	}
+
 	public void onMousePressed(MouseEvent e) {
-		robotModel.fireEvent("MouseEvent", e);
-		
-	}
-	
-	public void onKeyPressed(KeyEvent e) {
-		robotModel.fireEvent("onKeyPressed", e);
-	}
-	public void onKeyReleased(KeyEvent e) {
-		robotModel.fireEvent("onKeyReleased", e);
+		if (!endRound) {
+			robotModel.fireEvent("MouseEvent", e);
+		}
 	}
 
+	public void onKeyPressed(KeyEvent e) {
+		if (robotModel != null) {
+			robotModel.fireEvent("onKeyPressed", e);
+		}
+	}
+
+	public void onKeyReleased(KeyEvent e) {
+		if (!endRound) {
+			robotModel.fireEvent("onKeyReleased", e);
+		}
+	}
 
 	public void onHitRobot(HitRobotEvent e) {
-		robotModel.fireEvent("onHitRobot", e);
-		mscan();
+		if (!endRound) {
+			robotModel.fireEvent("onHitRobot", e);
+			mscan();
+		}
 	}
 
 	public void onHitByBullet(HitByBulletEvent e) {
-		robotModel.fireEvent("onHitByBullet", e);
-		mscan();
+		if (!endRound) {
+			robotModel.fireEvent("onHitByBullet", e);
+			mscan();
+		}
 	}
-	public void onWin(WinEvent e) 
-	{
-		robotModel.fireEvent("onWin", e);
-		robotToGuiListener.runThread=false;
-		
+
+	public void onWin(WinEvent e) {
+		if (!endRound) {
+			robotModel.fireEvent("onWin", e);
+			robotToGuiListener.runThread = false;
+			//robotModel = null;
+		}
+		robotModel.setLog(null);
 
 	}
+
 	@Override
-	public void onBattleEnded(BattleEndedEvent event){
-		robotModel.resetMachine();
-		robotToGuiListener.runThread=false;
-		
+	public void onBattleEnded(BattleEndedEvent event) {
+		if (!endRound) {
+			robotToGuiListener.runThread = false;
+			endRound=true;
+		}
+		robotModel.setLog(null);
+
 	}
+
 	@Override
-	public void onRoundEnded(RoundEndedEvent event)
-	{
-
-		robotToGuiListener.runThread=false;
-		
+	public void onRoundEnded(RoundEndedEvent event) {
+		if (!endRound) {
+			robotToGuiListener.runThread = false;
+			
+			endRound=true;
+		}
+		robotModel.setLog(null);
 	}
-	public void onDeath(DeathEvent event)
-	{
-		robotToGuiListener.runThread=false;
-	}
-	 
 
-	
+	public void onDeath(DeathEvent event) {
+		if (!endRound) {
+			robotToGuiListener.runThread = false;
+			endRound=true;
+			
+		}
+		robotModel.setLog(null);
+	}
+
 	public void onPaint(Graphics2D g) {
 		g.setColor(Color.red);
 		g.drawOval((int) (getX() - 50), (int) (getY() - 50), 100, 100);
 		g.setColor(new Color(0, 0xFF, 0, 30));
 		g.fillOval((int) (getX() - 60), (int) (getY() - 60), 120, 120);
 	}
-	public void mscan()
-	{
-		if(scan)
-		{
-			scan=false;
+
+	public void mscan() {
+		if (scan) {
+			scan = false;
 			scan();
 
 		}
 	}
-	
+
 }

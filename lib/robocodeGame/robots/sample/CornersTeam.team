@@ -1,0 +1,6 @@
+#Robocode robot team
+#Mon Aug 11 11:55:31 CEST 2014
+team.members=sample.Corners,sample.Crazy
+team.author.name=Mathew Nelson and Flemming N. Larsen
+robocode.version=1.8.3.0
+team.description=\                             A sample robot\n         Moves to a corner, then swings the gun back and forth.\n          If it dies, it tries a new corner in the next round.

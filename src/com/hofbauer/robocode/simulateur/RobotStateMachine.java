@@ -24,10 +24,7 @@ public class RobotStateMachine extends MyAbstractStateMachine {
         //SimpleSCXMLListener sListerner = new SimpleSCXMLListener();
         //this.getEngine().addListener(this.getEngine().getStateMachine(), sListerner);
 
-        
-        //problème au niveau des threads a quitter 
-        //RobotToGuiListener myListerner = new RobotToGuiListener(null, 9999);
-        //this.getEngine().addListener(this.getEngine().getStateMachine(), myListerner);
+
 
     }
 
