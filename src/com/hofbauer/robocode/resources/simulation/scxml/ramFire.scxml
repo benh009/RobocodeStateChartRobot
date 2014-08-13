@@ -6,28 +6,30 @@
   <data id="lastY"></data>
  </datamodel>
 <!-- node-size-and-position x=0 y=0 w=207,49 h=263   node-size-and-position x=0 y=0 w=291,5 h=263 -->
- <state id="Poursuite"><!--   node-size-and-position x=530 y=70 w=75 h=75  --><!-- node-size-and-position x=27,5 y=168 w=75 h=75   node-size-and-position x=27,5 y=168 w=75 h=75   node-size-and-position x=70,49 y=168 w=100 h=75   node-size-and-position x=23,49 y=168 w=100 h=75 -->
-  <transition event="onHitWall" target="RechercheTire"><!--             edge-path [new_node22]  x=53,49 y=143            --><!--   edge-path [RechercheTire]  x=330 y=80 pointx=0 pointy=-19 offsetx=-3 offsety=1  --></transition>
+ <state id="Poursuite"><!--   node-size-and-position x=530 y=70 w=75 h=75  --><!-- t[directionOk et PositionRobotScanneok]/Avancer -->
   <transition cond="RI.heading(directionRobotScanned) &amp;&amp;   T.e(distanceRobotScanned,RI.distance(RI.x(),lastX,RI.y(),lastY))" event="t" target="RechercheTire">
    <my:RA expression="RGA.scan()"></my:RA>
-<!--               edge-path [new_node22]  x=165,5 y=143              --><!--             edge-path [new_node22]  x=73,49 y=143            --><!--            edge-path [RechercheFire]  x=120,49 y=143 pointx=0 pointy=10 offsetx=0 offsety=-3           --><!--   edge-path [RechercheTire]  pointx=0 pointy=-3 offsetx=-25 offsety=1  --></transition>
-<!-- node-size-and-position x=125,5 y=168 w=100 h=75 -->
+<!--                 edge-path [new_node22]  x=165,5 y=143                --><!--               edge-path [new_node22]  x=73,49 y=143              --><!--              edge-path [RechercheFire]  x=120,49 y=143 pointx=0 pointy=10 offsetx=0 offsety=-3             --><!--   edge-path [RechercheTire]  pointx=0 pointy=-3 offsetx=-25 offsety=1  --></transition>
+<!-- t[!DirectionVersRobotScanne]/
+Tourner vers RobotScanne -->
   <transition cond="!RI.heading(directionRobotScanned)" event="t">
    <my:RA expression="RA.direction(directionRobotScanned)"></my:RA>
-<!--               edge-path [OnScannedState]  x=140 y=37,5              --><!--              edge-path [OnScannedState]  x=140 y=37,5             --><!--             edge-path [OnScannedState]  x=140 y=37,5            --><!--           edge-path [Poursuite]  x=95 y=37,5          --><!--          edge-path [Poursuite]  x=95 y=37,5         --><!--   edge-path [Poursuite]  x=90 y=50 pointx=0 pointy=20 offsetx=0 offsety=3  --></transition>
+<!--                 edge-path [OnScannedState]  x=140 y=37,5                --><!--                edge-path [OnScannedState]  x=140 y=37,5               --><!--               edge-path [OnScannedState]  x=140 y=37,5              --><!--             edge-path [Poursuite]  x=95 y=37,5            --><!--            edge-path [Poursuite]  x=95 y=37,5           --><!--   edge-path [Poursuite]  x=90 y=50 pointx=0 pointy=130 offsetx=0 offsety=3  --></transition>
+<!-- t[directionOk et NonPositionRobotScanne]/Avancer -->
   <transition cond="RI.heading(directionRobotScanned) &amp;&amp;    !T.e(distanceRobotScanned,RI.distance(RI.x(),lastX,RI.y(),lastY))" event="t">
    <my:RA expression="RA.ahead(distanceRobotScanned-RI.distance(RI.x(),lastX,RI.y(),lastY))"></my:RA>
-<!--               edge-path [OnScannedState]  x=120 y=37,5              --><!--              edge-path [OnScannedState]  x=120 y=37,5             --><!--             edge-path [OnScannedState]  x=120 y=37,5            --><!--            edge-path [Poursuite]  x=120 y=37,5 pointx=0 pointy=10 offsetx=0 offsety=5           --><!--          edge-path [Poursuite]  x=115 y=37,5         --><!--   edge-path [Poursuite]  x=20 y=-20  --></transition>
+<!--                 edge-path [OnScannedState]  x=120 y=37,5                --><!--                edge-path [OnScannedState]  x=120 y=37,5               --><!--               edge-path [OnScannedState]  x=120 y=37,5              --><!--              edge-path [Poursuite]  x=120 y=37,5 pointx=0 pointy=10 offsetx=0 offsety=5             --><!--            edge-path [Poursuite]  x=115 y=37,5           --><!--   edge-path [Poursuite]  x=550 y=50 pointx=0 pointy=10 offsetx=3 offsety=0  --></transition>
+<!-- onHitRobot/SmartFireRam -->
   <transition event="onHitRobot">
    <my:RA expression="RGA.smartFireRam(_event.data.getEnergy())"></my:RA>
-<!--          edge-path [Poursuite]  x=135 y=37,5         --><!--   edge-path [Poursuite]  x=60 y=140 pointx=0 pointy=-20 offsetx=3 offsety=0  --></transition>
+<!--            edge-path [Poursuite]  x=135 y=37,5           --><!--   edge-path [Poursuite]  x=60 y=140 pointx=0 pointy=-20 offsetx=3 offsety=0  --></transition>
  </state>
 <!-- node-size-and-position x=49,5 y=231 w=75 h=75 -->
- <state id="RechercheTire"><!--   node-size-and-position x=110 y=80 w=90 h=75  --><!-- node-size-and-position x=82,99 y=43 w=75 h=75   node-size-and-position x=35,99 y=43 w=75 h=75 -->
+ <state id="RechercheTire"><!--   node-size-and-position x=110 y=80 w=90 h=75  --><!-- onHitRobot/smartFireRam -->
   <transition event="onHitRobot" target="RechercheTire">
    <my:RA expression="RGA.smartFireRam(_event.data.getEnergy())"></my:RA>
-<!--              edge-path [new_node22]  x=95 y=37,5             --><!--             edge-path [new_node22]  x=115 y=37,5            --><!--           edge-path [RechercheFire]  x=110 y=37,5          --><!--          edge-path [RechercheFire]  x=130 y=37,5         --><!--   edge-path [RechercheTire]  x=-30 y=60 pointx=0 pointy=-10 offsetx=0 offsety=42  --></transition>
-<!-- node-size-and-position x=32,5 y=43 w=75 h=75   action lorsque un robot a été scanné -->
+<!--                edge-path [new_node22]  x=95 y=37,5               --><!--               edge-path [new_node22]  x=115 y=37,5              --><!--             edge-path [RechercheFire]  x=110 y=37,5            --><!--            edge-path [RechercheFire]  x=130 y=37,5           --><!--   edge-path [RechercheTire]  x=-30 y=60 pointx=1 pointy=-31 offsetx=-2 offsety=0  --></transition>
+<!-- onScannedRobot/Sauver Position -->
   <transition event="onScannedRobot" target="Poursuite">
    <assign expr="RI.heading()+_event.data.getBearing()" name="directionRobotScanned"></assign>
    <assign expr="_event.data.getDistance()" name="distanceRobotScanned"></assign>
@@ -36,9 +38,10 @@
    <log expr="&#039;Exc&#039;" label="Exc"></log>
    <log expr="lastX" label="X"></log>
    <log expr="lastY" label="Y"></log>
-<!--               edge-path [OnScannedState]  x=185,5 y=143              --><!--             edge-path [OnScannedState]  x=93,49 y=143            --><!--   edge-path [Poursuite]  x=330 y=180 pointx=0 pointy=24 offsetx=-5 offsety=2  --></transition>
+<!--                 edge-path [OnScannedState]  x=185,5 y=143                --><!--               edge-path [OnScannedState]  x=93,49 y=143              --><!--   edge-path [Poursuite]  x=330 y=180 pointx=0 pointy=-15 offsetx=-27 offsety=15  --></transition>
+<!-- t/tourner -->
   <transition event="t">
    <my:RA expression="RA.turnLeft(10)"></my:RA>
-<!--              edge-path [new_node22]  x=115 y=37,5             --><!--             edge-path [new_node22]  x=95 y=37,5            --><!--            edge-path [RechercheFire]  x=115 y=37,5           --><!--           edge-path [RechercheFire]  x=130 y=37,5          --><!--          edge-path [RechercheFire]  x=110 y=37,5         --><!--   edge-path [RechercheTire]  x=10 y=-10 pointx=0 pointy=-4 offsetx=14 offsety=-7  --></transition>
+<!--                edge-path [new_node22]  x=115 y=37,5               --><!--               edge-path [new_node22]  x=95 y=37,5              --><!--              edge-path [RechercheFire]  x=115 y=37,5             --><!--             edge-path [RechercheFire]  x=130 y=37,5            --><!--            edge-path [RechercheFire]  x=110 y=37,5           --><!--   edge-path [RechercheTire]  x=10 y=-10 pointx=0 pointy=20 offsetx=5 offsety=0  --></transition>
  </state>
 </scxml>

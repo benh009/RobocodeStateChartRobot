@@ -2,8 +2,8 @@ Robot 1
 /com/hofbauer/robocode/resources/simulation/scxml/fireTeam.scxml
 Robot 2
 /com/hofbauer/robocode/resources/simulation/scxml/fireTeam.scxml
-Server pour envoyer etat scxmlgui
-true
+Activer le server pour envoyer état courant à scxmlgui(doit être défini à false si plusieur instance d'un robot dans la même partie )
+false
 
 
 

@@ -3,35 +3,40 @@
   <data expr="0" id="turnCounter"></data>
   <data expr="1" id="directionRobot"></data>
  </datamodel>
- <state id="Veloci" initial="turnCounter640"><!--   node-size-and-position x=190 y=180 w=310 h=250  -->
+ <state id="Veloci" initial="turnCounter640"><!--   node-size-and-position x=150 y=120 w=430 h=250  --><!-- onHitWall/Modifier vitesse et sens -->
   <transition event="onHitWall" target="Veloci">
    <my:RA expression="RA.setMaxVelocity(4.0d)"></my:RA>
    <assign expr="directionRobot*(-1)" name="directionRobot"></assign>
-<!--   edge-path [Veloci]  x=200 y=270 pointx=0 pointy=13 offsetx=3 offsety=0  --></transition>
+<!--   edge-path [Veloci]  x=200 y=270 pointx=0 pointy=-20 offsetx=5 offsety=0  --></transition>
+<!-- onScannedRobot/fire -->
   <transition event="onScannedRobot" target="Veloci">
    <my:RA expression="RGA.fire(3.0d)"></my:RA>
-<!--   edge-path [Veloci]  x=320 y=170 pointx=0 pointy=-49 offsetx=99 offsety=-4  --></transition>
+<!--   edge-path [Veloci]  x=-40 y=160 pointx=0 pointy=-6 offsetx=-24 offsety=-45  --></transition>
+<!-- onHitByBullet/Modifier vitesse rotation -->
   <transition event="onHitByBullet" target="Veloci">
    <my:RA expression="RA.setMaxTurnRate(5.0d)"></my:RA>
-<!--   edge-path [Veloci]  x=200 y=-20  --></transition>
-  <state id="turnCounter640"><!--   node-size-and-position x=20 y=120 w=100 h=80  -->
+<!--   edge-path [Veloci]  x=200 y=-20 pointx=0 pointy=10 offsetx=5 offsety=0  --></transition>
+  <state id="turnCounter640"><!--   node-size-and-position x=100 y=60 w=100 h=80  --><!-- t[turn%64==32]/Changer de sens;Modifier vitesse -->
    <transition cond="turnCounter%64==32" event="t">
     <my:RA expression="RA.setMaxVelocity(6.0d)"></my:RA>
     <assign expr="directionRobot*(-1)" name="directionRobot"></assign>
     <assign expr="turnCounter+1" name="turnCounter"></assign>
-<!--   edge-path [turnCounter640]  x=110 y=110  --></transition>
+<!--   edge-path [turnCounter640]  x=90 y=-10 pointx=0 pointy=10 offsetx=30 offsety=0  --></transition>
+<!-- t[turn%64==0]/changer Sens; 
+Modifier vitesse et vitesse de rotation -->
    <transition cond="turnCounter%64==0" event="t">
     <my:RA expression="RA.setMaxVelocity(4.0d)"></my:RA>
     <my:RA expression="RA.setMaxTurnRate(0.0d)"></my:RA>
     <assign expr="directionRobot*(-1)" name="directionRobot"></assign>
     <assign expr="turnCounter+1" name="turnCounter"></assign>
-   </transition>
+<!--   edge-path [turnCounter640]  pointx=0 pointy=-25 offsetx=135 offsety=0  --></transition>
+<!-- t/avancer;tourner;tournerGun -->
    <transition event="t">
     <assign expr="turnCounter+1" name="turnCounter"></assign>
     <my:RA expression="RA.turnRight(15)"></my:RA>
     <my:RA expression="RGA.turnGunRight(15)"></my:RA>
     <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
-<!--   edge-path [turnCounter640]  x=-10 y=50  --></transition>
+<!--   edge-path [turnCounter640]  x=30 y=90 pointx=0 pointy=-20 offsetx=10 offsety=0  --></transition>
   </state>
  </state>
 </scxml>

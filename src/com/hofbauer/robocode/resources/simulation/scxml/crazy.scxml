@@ -3,34 +3,43 @@
   <data expr="1" id="directionRobot"></data>
   <data expr="0" id="turnCounter"></data>
  </datamodel>
- <state id="crazy" initial="zigzague"><!--   node-size-and-position x=50 y=190 w=200 h=250  -->
+ <state id="crazy" initial="zigzague"><!--   node-size-and-position x=190 y=40 w=310 h=310  --><!-- onHitWall
+/changerDirection;Avancer -->
   <transition event="onHitWall">
    <assign expr="directionRobot*(-1)" name="directionRobot"></assign>
    <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
-<!--   edge-path [crazy]  x=-14 y=40  --></transition>
+<!--   edge-path [crazy]  x=-14 y=40 pointx=0 pointy=-86 offsetx=0 offsety=-25  --></transition>
+<!-- onHitRobot[C est ma faute]
+/changer Direction;Avancer -->
   <transition cond="_event.data.isMyFault()" event="onHitRobot">
    <assign expr="directionRobot*(-1)" name="directionRobot"></assign>
    <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
-<!--   edge-path [crazy]  x=260 y=200  --></transition>
+<!--   edge-path [crazy]  x=520 y=280 pointx=0 pointy=100 offsetx=0 offsety=-5  --></transition>
+<!-- onScannedRobot/fire -->
   <transition event="onScannedRobot">
    <my:RA expression="RGA.fire(1.0d)"></my:RA>
-<!--   edge-path [crazy]  x=170 y=280 pointx=0 pointy=12 offsetx=-20 offsety=22  --></transition>
-  <state id="zigzague"><!--   node-size-and-position x=50 y=50 w=75 h=75  -->
+<!--   edge-path [crazy]  x=110 y=330 pointx=0 pointy=12 offsetx=-20 offsety=22  --></transition>
+  <state id="zigzague"><!--   node-size-and-position x=60 y=90 w=75 h=75  --><!-- t[turn%3==0]
+/Avancer;Tourner a Droited De90 -->
    <transition cond="turnCounter%3==0" event="t">
     <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
     <my:RA expression="RA.turnRight(90)"></my:RA>
     <assign expr="turnCounter+1" name="turnCounter"></assign>
-<!--   edge-path [zigzague]  x=-40 y=50  --></transition>
+<!--   edge-path [zigzague]  x=130 y=70 pointx=0 pointy=20 offsetx=23 offsety=0  --></transition>
+<!-- t[turn%3==1]
+/Avancer;Tourner a Gauche -->
    <transition cond="turnCounter%3==1" event="t">
     <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
     <my:RA expression="RA.turnLeft(180)"></my:RA>
     <assign expr="turnCounter+1" name="turnCounter"></assign>
-   </transition>
+<!--   edge-path [zigzague]  x=150 y=150 pointx=0 pointy=4 offsetx=71 offsety=-27  --></transition>
+<!-- t[turn%3==2]
+/Avancer;Tourner a Droite De 180 -->
    <transition cond="turnCounter%3==2" event="t">
     <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
     <my:RA expression="RA.turnRight(180)"></my:RA>
     <assign expr="turnCounter+1" name="turnCounter"></assign>
-<!--   edge-path [zigzague]  x=40 y=100  --></transition>
+<!--   edge-path [zigzague]  x=60 y=90 pointx=0 pointy=-20 offsetx=3 offsety=0  --></transition>
   </state>
  </state>
 </scxml>

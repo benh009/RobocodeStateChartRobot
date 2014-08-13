@@ -1,17 +1,16 @@
-<scxml initial="tourneEnBoucle" name="SpinBot" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=480 h=290  -->
- <state id="tourneEnBoucle"><!--   node-size-and-position x=120 y=110 w=100 h=80  -->
+<scxml initial="tourneEnBoucle" name="SpinBot" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=480 h=290  -->
+ <state id="tourneEnBoucle"><!--   node-size-and-position x=220 y=110 w=100 h=80  --><!-- onScannedRobot/fire -->
   <transition event="onScannedRobot">
    <my:RA expression="RGA.fire(42.0d)"></my:RA>
 <!--   edge-path [tourneEnBoucle]  x=130 y=70 pointx=0 pointy=60 offsetx=0 offsety=3  --></transition>
+<!-- t/Avance Et Tourne -->
   <transition event="t">
    <my:RA expression="RA.ahead(100)"></my:RA>
    <my:RA expression="RA.turnRight(100)"></my:RA>
-<!--   edge-path [tourneEnBoucle]  x=80 y=-20  --></transition>
+<!--   edge-path [tourneEnBoucle]  x=80 y=-20 pointx=0 pointy=20 offsetx=0 offsety=0  --></transition>
+<!-- onHitRobot[siRobotEnFace]/fire -->
   <transition cond="_event.data.getBearing()&gt;-10 &amp;&amp;  _event.data.getBearing()&lt;10" event="onHitRobot">
-   <my:RA expression="RGA.fire(42.0d)"></my:RA>
-<!--   edge-path [tourneEnBoucle]  x=-30 y=70 pointx=0 pointy=-40 offsetx=0 offsety=3  --></transition>
-  <transition event="MouseEvent">
-   <my:RA expression="RGA.fire(42.0d)"></my:RA>
-<!--   edge-path [tourneEnBoucle]  x=90 y=110 pointx=0 pointy=-20 offsetx=43 offsety=0  --></transition>
+   <my:RA expression="RGA.fire(3.0d)"></my:RA>
+<!--   edge-path [tourneEnBoucle]  x=-30 y=70 pointx=0 pointy=-30 offsetx=0 offsety=50  --></transition>
  </state>
 </scxml>

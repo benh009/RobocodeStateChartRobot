@@ -1,4 +1,4 @@
-<scxml initial="Fuir" name="Target" version="0.9" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=664 h=591  -->
+<scxml initial="Fuir" name="Target" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=664 h=591  -->
  <datamodel>
   <data expr="80" id="trigger"></data>
  </datamodel>
@@ -6,13 +6,15 @@
   <onentry>
    <assign expr="80" name="trigger"></assign>
   </onentry>
+<!-- t[EnergieInferieureAuPalier]/modifierPalier;Tourner;Avancer -->
   <transition cond="RI.energy()&lt;trigger" event="t">
    <assign expr="trigger-20" name="trigger"></assign>
    <my:RA expression="RA.ahead(100)"></my:RA>
    <my:RA expression="RA.turnLeft(60)"></my:RA>
-  </transition>
+<!--   edge-path [Fuir]  x=124 y=15 pointx=0 pointy=120 offsetx=0 offsety=38  --></transition>
+<!-- onHitWall/reculer -->
   <transition event="onHitWall">
    <my:RA expression="RA.back(100)"></my:RA>
-<!--   edge-path [Fuir]  x=-36 y=75  --></transition>
+<!--   edge-path [Fuir]  x=-36 y=75 pointx=0 pointy=-13 offsetx=13 offsety=-52  --></transition>
  </state>
 </scxml>
