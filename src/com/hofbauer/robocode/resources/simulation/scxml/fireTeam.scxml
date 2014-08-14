@@ -1,26 +1,31 @@
-<scxml initial="fire" name="Fire" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=664 h=591  -->
- <state id="fire"><!--   node-size-and-position x=130 y=270 w=75 h=75  -->
+<scxml initial="fire" name="Fire" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=570 h=270  -->
+ <state id="fire"><!--   node-size-and-position x=170 y=130 w=75 h=75  --><!-- onHitRobot/tire -->
   <transition event="onHitRobot">
    <my:RA expression="RGA.fire(3.0d)"></my:RA>
    <my:RA expression="RGA.turnGunRight(50.0d)"></my:RA>
-<!--   edge-path [fire]  x=-40 y=50  --></transition>
+<!--   edge-path [fire]  x=-40 y=50 pointx=0 pointy=-13 offsetx=3 offsety=-27  --></transition>
+<!-- onHitByBullet/tourner;reculer -->
   <transition event="onHitByBullet">
    <my:RA expression="RA.ahead(50.0d)"></my:RA>
    <my:RA expression="RA.turnRight(90.0d)"></my:RA>
    <my:RA expression="RGA.scan()"></my:RA>
-<!--   edge-path [fire]  x=30 y=100  --></transition>
+<!--   edge-path [fire]  x=30 y=100 pointx=0 pointy=-20 offsetx=3 offsety=0  --></transition>
+<!-- onScannedRobot[ennemi]/tire -->
   <transition cond="!RI.isTeammate(_event.data.getName())" event="onScannedRobot">
    <my:RA expression="RGA.smartFire(_event.data.getDistance())"></my:RA>
    <my:RA expression="RGA.scan()"></my:RA>
-<!--   edge-path [fire]  x=20 y=-20  --></transition>
+<!--   edge-path [fire]  x=170 y=80 pointx=0 pointy=0 offsetx=142 offsety=0  --></transition>
+<!-- t/tournerGun -->
   <transition event="t">
    <my:RA expression="RGA.turnGunRight(5.0d)"></my:RA>
-  </transition>
+<!--   edge-path [fire]  pointx=0 pointy=55 offsetx=0 offsety=3  --></transition>
+<!-- onScannedRobot[ami]/saluer -->
   <transition cond="RI.isTeammate(_event.data.getName())" event="onScannedRobot">
    <my:RA expression="RA.sendMessage(_event.data.getName(), &#039;salut copain&#039;)"></my:RA>
-<!--   edge-path [fire]  x=200 y=200  --></transition>
+<!--   edge-path [fire]  x=220 y=100 pointx=0 pointy=20 offsetx=0 offsety=73  --></transition>
+<!-- onMessageReceived/printSalutation -->
   <transition event="onMessageReceived">
    <my:RA expression="RA.print(_event.data.getMessage())"></my:RA>
-<!--   edge-path [fire]  x=70 y=-110  --></transition>
+<!--   edge-path [fire]  x=180 y=30 pointx=0 pointy=-10 offsetx=152 offsety=0  --></transition>
  </state>
 </scxml>

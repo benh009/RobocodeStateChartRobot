@@ -1,5 +1,5 @@
-<scxml initial="FaceAuMur" name="corner" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1300 h=720  -->
- <state id="FaceAuMur"><!--   node-size-and-position x=90 y=190 w=75 h=75  --><!-- onScannedRobot/fire(pas de scan) -->
+<scxml initial="FaceAuMur" name="corner" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1000 h=790  -->
+ <state id="FaceAuMur"><!--   node-size-and-position x=360 y=100 w=75 h=75  --><!-- onScannedRobot/fire(pas de scan) -->
   <transition event="onScannedRobot">
    <my:RA expression="RGA.Fire(1)"></my:RA>
 <!--   edge-path [FaceAuMur]  x=-30 y=70 pointx=1 pointy=-57 offsetx=12 offsety=-5  --></transition>
@@ -10,13 +10,13 @@
    <my:RA expression="RA.direction(0.0d)"></my:RA>
 <!--   edge-path [FaceAuMur]  x=70 y=-20 pointx=0 pointy=20 offsetx=2 offsety=0  --></transition>
  </state>
- <state id="Corner" initial="PositonVersLeCoin"><!--   node-size-and-position x=380 y=80 w=700 h=380  --><!-- onScannedRobot/fire -->
+ <state id="Corner" initial="PositonVersLeCoin"><!--   node-size-and-position x=20 y=370 w=730 h=380  --><!-- onScannedRobot/fire -->
   <transition event="onScannedRobot">
    <my:RA expression="RGA.smartFire(_event.data.getDistance())"></my:RA>
    <my:RA expression="RGA.scan()"></my:RA>
 <!--   edge-path [Corner]  x=620 y=200 pointx=0 pointy=60 offsetx=0 offsety=5  --></transition>
 <!-- stop action si scan un robot -->
-  <state id="PositonVersLeCoin"><!--   node-size-and-position x=140 y=80 w=110 h=70  --><!-- t[BordSup et Direction==90 BordDroit]e -->
+  <state id="PositonVersLeCoin"><!--   node-size-and-position x=120 y=80 w=110 h=70  --><!-- t[BordSup et Direction==90 BordDroit]e -->
    <transition cond="RI.y() ==  GI.battleFieldHeight() -RI.height()/2 &amp;&amp; RI.heading(90.0d) &amp;&amp;  GI.battleFieldWidth()  -RI.height()/2 == RI.x()" event="t" target="PositionInitialCanon"></transition>
 <!-- t[NonBordSup]/Avance -->
    <transition cond="RI.y() !=  GI.battleFieldHeight() -RI.height()/2" event="t">
@@ -26,7 +26,7 @@
 /ChangeDirection -->
    <transition cond="RI.y() ==  GI.battleFieldHeight() -RI.height()/2 &amp;&amp; !RI.heading(90.0d)" event="t">
     <my:RA expression="RA.direction(90.0d)"></my:RA>
-<!--   edge-path [PositonVersLeCoin]  x=-10 y=60 pointx=1 pointy=-30 offsetx=-59 offsety=-11  --></transition>
+<!--   edge-path [PositonVersLeCoin]  x=-10 y=60 pointx=1 pointy=-50 offsetx=-86 offsety=-20  --></transition>
 <!-- t[BordSup et Direction==90 nonBordDroit]/avance -->
    <transition cond="RI.y() ==  GI.battleFieldHeight() -RI.height()/2 &amp;&amp; RI.heading(90.0d) &amp;&amp;  GI.battleFieldWidth()  -RI.height()/2 != RI.x()" event="t">
     <my:RA expression="RA.ahead(GI.battleFieldWidth()- RI.x()- RI.height()/2)"></my:RA>
@@ -39,18 +39,18 @@
     <my:RA expression="RGA.directionGun(180.0d)"></my:RA>
 <!--   edge-path [PositionInitialCanon]  x=30 y=110 pointx=-1 pointy=26 offsetx=-12 offsety=31  --></transition>
   </state>
-  <state id="ScanneBasHaut"><!--   node-size-and-position x=470 y=240 w=90 h=90  --><!-- t[direction!=270]/Deplace Gun -->
+  <state id="ScanneBasHaut"><!--   node-size-and-position x=460 y=240 w=90 h=90  --><!-- t[direction!=270]/Deplace Gun -->
    <transition cond="!RGI.heading(270.0d)" event="t">
     <my:RA expression="RGA.directionGun(270.0d,3.0d)"></my:RA>
 <!--   edge-path [ScanneBasHaut]  x=50 y=100 pointx=0 pointy=-10 offsetx=5 offsety=0  --></transition>
-<!-- t[direction==270] -->
+<!-- t[directionGun==270] -->
    <transition cond="RGI.heading(270.0d)" event="t" target="ScanneHautBas"><!--   edge-path [ScanneHautBas]  x=550 y=190 pointx=0 pointy=-66 offsetx=10 offsety=-28  --></transition>
   </state>
   <state id="ScanneHautBas"><!--   node-size-and-position x=470 y=60 w=90 h=90  --><!-- t[direction!=180]/Deplace Gun -->
    <transition cond="!RGI.heading(180)" event="t">
     <my:RA expression="RGA.directionGun(180.0d,3.0d)"></my:RA>
 <!--   edge-path [ScanneHautBas]  x=60 y=-10 pointx=0 pointy=10 offsetx=5 offsety=0  --></transition>
-<!-- t[direction==180] -->
+<!-- t[directionGun==180] -->
    <transition cond="RGI.heading(180.0d)" event="t" target="ScanneBasHaut"><!--   edge-path [ScanneBasHaut]  x=480 y=180 pointx=0 pointy=-53 offsetx=-11 offsety=-11  --></transition>
   </state>
  </state>

@@ -61,14 +61,17 @@ public class RobotActionProxy {
 		case VK_RIGHT:
 		case VK_D:
 			// Arrow right key: turn direction = right
-			robot.setTurnRight(45);
+			robot.setTurnRight(10);
 			break;
 
 		case VK_LEFT:
 		case VK_A:
 			// Arrow left key: turn direction = left
-			robot.setTurnLeft(45);
+			robot.setTurnLeft(10);
 			
+			break;
+		case VK_SPACE:
+			robot.fire(3);
 			break;
 		}
 	}

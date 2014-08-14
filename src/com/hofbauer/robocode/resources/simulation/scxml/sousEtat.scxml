@@ -1,6 +1,0 @@
-<scxml initial="sousInitial" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1113 h=721  -->
- <state id="sousInitial"><!--   node-size-and-position x=173 y=188 w=75 h=75  -->
-  <transition event="t" target="sousFinal"></transition>
- </state>
- <final id="sousFinal"><!--   node-size-and-position x=461 y=212 w=75 h=75  --></final>
-</scxml>

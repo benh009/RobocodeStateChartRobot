@@ -1,6 +1,7 @@
 package com.hofbauer.robocode.simulateur.proxy;
 
 import com.hofbauer.robocode.robots.RobotSimWithAction;
+import com.hofbauer.robocode.simulateur.toolsaction.ActionTools;
 
 import robocode.AdvancedRobot;
 import robocode.TeamRobot;
@@ -60,6 +61,11 @@ public class RobotInfoProxy {
 	public boolean isTeammate(String name)
 	{
 		return robot.isTeammate(name);
+	}
+	
+	public Boolean e(Double val1,Double val2) {
+		float precision =1;
+		return ActionTools.equalsPrec(val1,val2, precision);
 	}
 	
 

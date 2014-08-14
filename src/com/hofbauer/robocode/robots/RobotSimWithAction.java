@@ -161,12 +161,14 @@ public abstract class RobotSimWithAction extends TeamRobot {
 	}
 	@Override
 	public void onHitWall(HitWallEvent e) {
+		
 		if (!endRound) {
 			robotModel.fireEvent("onHitWall", e);
 		}
 	}
 	@Override
 	public void onScannedRobot(ScannedRobotEvent e) {
+		
 		
 		if (!endRound) {
 			robotModel.fireEvent("onScannedRobot", e);
@@ -195,6 +197,7 @@ public abstract class RobotSimWithAction extends TeamRobot {
 	}
 	@Override
 	public void onHitRobot(HitRobotEvent e) {
+		
 		if (!endRound) {
 			robotModel.fireEvent("onHitRobot", e);
 			mscan();
@@ -202,6 +205,7 @@ public abstract class RobotSimWithAction extends TeamRobot {
 	}
 	@Override
 	public void onHitByBullet(HitByBulletEvent e) {
+		
 		if (!endRound) {
 			robotModel.fireEvent("onHitByBullet", e);
 			mscan();

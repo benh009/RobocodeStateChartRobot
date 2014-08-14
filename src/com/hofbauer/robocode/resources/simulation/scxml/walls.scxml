@@ -4,50 +4,50 @@
    <my:RA expression="RGA.fire(3.0d)"></my:RA>
 <!--   edge-path [LongeMurs]  x=590 y=360 pointx=0 pointy=70 offsetx=0 offsety=7  --></transition>
   <state id="CoinSuperieurGauche"><!--   node-size-and-position x=130 y=60 w=140 h=110  --><!-- t[AuCoinSuperieurGAuhe] -->
-   <transition cond="RI.heading() eq 0 &amp;&amp;   RI.y() ==  GI.battleFieldHeight() - RI.height()/2 &amp;&amp;  RGI.heading(90)" event="t" target="CoinSuperieurDroit"><!--   edge-path [CoinSuperieurDroit]  pointx=0 pointy=-13 offsetx=-5 offsety=0  --></transition>
+   <transition cond="RI.heading(0.0d)  &amp;&amp;   RI.y() ==  GI.battleFieldHeight() - RI.height()/2 &amp;&amp;  RGI.heading(90.0d)" event="t" target="CoinSuperieurDroit"><!--   edge-path [CoinSuperieurDroit]  pointx=0 pointy=-13 offsetx=-5 offsety=0  --></transition>
 <!-- t[Direction!=0]/touner -->
-   <transition cond="!(RI.heading()eq 0)" event="t">
+   <transition cond="!RI.heading(0.0d)" event="t">
     <my:RA expression="RA.direction(0.0d)"></my:RA>
 <!--   edge-path [CoinSuperieurGauche]  x=160 y=30 pointx=-1 pointy=-4 offsetx=73 offsety=-21  --></transition>
 <!-- t[!destination]/Avancer -->
-   <transition cond="RI.heading() eq 0 &amp;&amp;  RI.y() !=  GI.battleFieldHeight() -RI.height()/2" event="t">
+   <transition cond="RI.heading(0.0d) &amp;&amp;  RI.y() !=  GI.battleFieldHeight() -RI.height()/2" event="t">
     <my:RA expression="RA.ahead( GI.battleFieldHeight()-RI.y()-RI.height()/2)"></my:RA>
-<!--   edge-path [CoinSuperieurGauche]  x=110 y=-10 pointx=0 pointy=2 offsetx=13 offsety=0  --></transition>
+<!--   edge-path [CoinSuperieurGauche]  x=110 y=-10 pointx=0 pointy=20 offsetx=10 offsety=0  --></transition>
 <!-- t[DirectionGun!=90]/tounerGun -->
-   <transition cond="!T.equalsPrec(RGI.heading()-90,1.0) &amp;&amp; RI.heading()eq 0" event="t">
+   <transition cond="!RGI.heading(90.0d) &amp;&amp; RI.heading(0.0d)" event="t">
     <my:RA expression="RGA.directionGun(90.0d)"></my:RA>
 <!--   edge-path [CoinSuperieurGauche]  x=-30 y=30 pointx=0 pointy=-10 offsetx=10 offsety=-35  --></transition>
   </state>
   <state id="CoinSuperieurDroit"><!--   node-size-and-position x=520 y=70 w=140 h=100  --><!-- t[Direction!=90]/touner -->
-   <transition cond="!(RI.heading()eq 90)" event="t">
+   <transition cond="!RI.heading(90.0d)" event="t">
     <my:RA expression="RA.direction(90.0d)"></my:RA>
 <!--   edge-path [CoinSuperieurDroit]  x=110 y=-20 pointx=0 pointy=10 offsetx=0 offsety=0  --></transition>
 <!-- t[!destination]/Avancer -->
-   <transition cond="(RI.heading()eq 90)  &amp;&amp; GI.battleFieldWidth()  -RI.height()/2 != RI.x()" event="t" target="CoinSuperieurDroit">
+   <transition cond="RI.heading(90.0d)  &amp;&amp; GI.battleFieldWidth()  -RI.height()/2 != RI.x()" event="t" target="CoinSuperieurDroit">
     <my:RA expression="RA.ahead(GI.battleFieldWidth()- RI.x()- RI.height()/2)"></my:RA>
 <!--   edge-path [CoinSuperieurDroit]  x=170 y=80 pointx=0 pointy=40 offsetx=0 offsety=60  --></transition>
 <!-- t[AuCoinSuperieurDroit] -->
-   <transition cond="RI.heading() eq 90 &amp;&amp;  GI.battleFieldWidth()  -RI.height()/2 == RI.x()" event="t" target="coinInferieurDroit"></transition>
+   <transition cond="RI.heading(90.0d)  &amp;&amp;  GI.battleFieldWidth()  -RI.height()/2 == RI.x()" event="t" target="coinInferieurDroit"></transition>
   </state>
   <state id="coinInferieurDroit"><!--   node-size-and-position x=510 y=330 w=160 h=110  --><!-- t[!destination]/Avancer -->
-   <transition cond="RI.heading() eq 180 &amp;&amp;  RI.y() != RI.height()/2" event="t">
+   <transition cond="RI.heading(180.0d)  &amp;&amp;  RI.y() != RI.height()/2" event="t">
     <my:RA expression="RA.ahead( RI.y()-RI.height()/2)"></my:RA>
-<!--   edge-path [coinInferieurDroit]  x=700 y=450 pointx=0 pointy=40 offsetx=0 offsety=5  --></transition>
+<!--   edge-path [coinInferieurDroit]  x=210 y=100 pointx=0 pointy=40 offsetx=0 offsety=5  --></transition>
 <!-- t[Direction!=180]/touner -->
-   <transition cond="(RI.heading()!=180)" event="t">
+   <transition cond="!RI.heading(180.0d)" event="t">
     <my:RA expression="RA.direction(180.0d)"></my:RA>
 <!--   edge-path [coinInferieurDroit]  x=50 y=130 pointx=0 pointy=-20 offsetx=0 offsety=0  --></transition>
 <!-- t[AuCoinInferieurDroit] -->
-   <transition cond="RI.heading() == 180 &amp;&amp; RI.y() ==  RI.height()/2" event="t" target="CoinInferieurGauche"><!--   edge-path [CoinInferieurGauche]  pointx=0 pointy=-17 offsetx=5 offsety=-1  --></transition>
+   <transition cond="RI.heading(180.0d)  &amp;&amp; RI.y() ==  RI.height()/2" event="t" target="CoinInferieurGauche"><!--   edge-path [CoinInferieurGauche]  pointx=0 pointy=-17 offsetx=5 offsety=-1  --></transition>
   </state>
   <state id="CoinInferieurGauche"><!--   node-size-and-position x=120 y=330 w=160 h=120  --><!-- t[AuCoinInferieurGAuche] -->
-   <transition cond="RI.heading() eq 270 &amp;&amp;   RI.x() ==  RI.height()/2" event="t" target="CoinSuperieurGauche"></transition>
+   <transition cond="RI.heading(270.0d)  &amp;&amp;   RI.x() ==  RI.height()/2" event="t" target="CoinSuperieurGauche"></transition>
 <!-- t[Direction!=270]/touner -->
-   <transition cond="!(RI.heading()eq 270)" event="t">
+   <transition cond="!RI.heading(270.0d)" event="t">
     <my:RA expression="RA.direction(270.0d)"></my:RA>
 <!--   edge-path [CoinInferieurGauche]  x=-50 y=20 pointx=0 pointy=-29 offsetx=29 offsety=-70  --></transition>
 <!-- t[!destination]/Avancer -->
-   <transition cond="(RI.heading()eq 270 )  &amp;&amp; RI.height()/2 != RI.x()" event="t">
+   <transition cond="RI.heading(270.0d) &amp;&amp; RI.height()/2 != RI.x()" event="t">
     <my:RA expression="RA.ahead(RI.x()- RI.height()/2)"></my:RA>
 <!--   edge-path [CoinInferieurGauche]  x=40 y=140 pointx=0 pointy=-20 offsetx=0 offsety=0  --></transition>
   </state>

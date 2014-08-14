@@ -1,0 +1,32 @@
+<scxml initial="fire" name="Fire" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=610 h=360  -->
+ <datamodel>
+  <data expr="0" id="count"></data>
+  <data expr="null" id="trackName"></data>
+ </datamodel>
+ <state id="fire"><!--   node-size-and-position x=260 y=110 w=75 h=75  --><!-- onHitByBullet/reculer;tourner -->
+  <transition event="onHitByBullet">
+   <my:RA expression="RA.ahead(50.0d)"></my:RA>
+   <my:RA expression="RA.turnRight(90.0d)"></my:RA>
+   <my:RA expression="RGA.scan()"></my:RA>
+<!--   edge-path [fire]  x=30 y=100 pointx=0 pointy=-20 offsetx=3 offsety=0  --></transition>
+<!-- onScannedRobot[ 30 lt RI.energy() and
+(trackName == null or trackName == _event.data.getName())]/smartFire -->
+  <transition cond="30 &lt; RI.energy() &amp;&amp; (trackName == null or trackName == _event.data.getName())" event="onScannedRobot">
+   <my:RA expression="RGA.smartFire(_event.data.getDistance())"></my:RA>
+   <my:RA expression="RGA.scan()"></my:RA>
+   <assign expr="_event.data.getName()" name="trackName"></assign>
+   <assign expr="0" name="count"></assign>
+<!--   edge-path [fire]  x=20 y=-20 pointx=0 pointy=20 offsetx=3 offsety=0  --></transition>
+<!-- t[ 30 lt RI.energy()]/TournerGun -->
+  <transition cond="30 &lt; RI.energy()" event="t">
+   <my:RA expression="RGA.turnGunRight(5.0d)"></my:RA>
+   <assign expr="count+1" name="count"></assign>
+<!--   edge-path [fire]  pointx=0 pointy=75 offsetx=0 offsety=33  --></transition>
+<!-- t[count>10]/
+count=0;trackName=null -->
+  <transition cond="count&gt;10" event="t">
+   <assign expr="0" name="count"></assign>
+   <assign expr="null" name="trackName"></assign>
+<!--   edge-path [fire]  x=-20 y=30 pointx=0 pointy=-70 offsetx=0 offsety=22  --></transition>
+ </state>
+</scxml>

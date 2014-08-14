@@ -3,14 +3,14 @@
   <data expr="0" id="count"></data>
   <data expr="null" id="trackName"></data>
  </datamodel>
- <state id="Tracker" initial="STracker"><!--   node-size-and-position x=290 y=160 w=300 h=230  --><!-- onScannedRobot[SiPas de cible;ou deja ma cible]
+ <state id="Tracker" initial="STracker"><!--   node-size-and-position x=50 y=100 w=300 h=230  --><!-- onScannedRobot[SiPas de cible;ou deja ma cible]
 /Tire; recupere nom; initalise count -->
   <transition cond="trackName == null or trackName == _event.data.getName()" event="onScannedRobot" target="Tracker">
    <assign expr="_event.data.getName()" name="trackName"></assign>
    <assign expr="0" name="count"></assign>
    <my:RA expression="RGA.fire(3.0d)"></my:RA>
    <my:RA expression="RGA.scan()"></my:RA>
-<!--   edge-path [Tracker]  x=380 y=410 pointx=0 pointy=-17 offsetx=-35 offsety=13  --></transition>
+<!--   edge-path [Tracker]  x=400 y=220 pointx=0 pointy=30 offsetx=0 offsety=145  --></transition>
 <!-- onHitRobot/recuperNom -->
   <transition event="onHitRobot" target="Tracker">
    <assign expr="_event.data.getName()" name="trackName"></assign>

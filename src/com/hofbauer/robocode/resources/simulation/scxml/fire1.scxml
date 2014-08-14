@@ -1,0 +1,11 @@
+<scxml initial="fire" name="Fire" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=550 h=240  -->
+ <state id="fire"><!--   node-size-and-position x=200 y=70 w=75 h=75  --><!-- onScannedRobot/fire -->
+  <transition event="onScannedRobot">
+   <my:RA expression="RGA.fire(3.0d)"></my:RA>
+<!--   edge-path [fire]  x=20 y=-20 pointx=0 pointy=20 offsetx=3 offsety=0  --></transition>
+<!-- t/TournerGun -->
+  <transition event="t">
+   <my:RA expression="RGA.turnGunRight(5.0d)"></my:RA>
+<!--   edge-path [fire]  pointx=0 pointy=55 offsetx=0 offsety=3  --></transition>
+ </state>
+</scxml>

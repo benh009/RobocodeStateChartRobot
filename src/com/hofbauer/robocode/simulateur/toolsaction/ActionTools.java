@@ -127,7 +127,7 @@ public class ActionTools {
 
 	}
 
-	public Boolean equalsPrec(double val1,double val2, float precision) {
+	public static Boolean equalsPrec(double val1,double val2, float precision) {
 		return Math.abs(val1-val2) < precision;
 	}
 
