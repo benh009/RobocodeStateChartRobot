@@ -8,8 +8,8 @@ import org.apache.commons.scxml2.model.TransitionTarget;
 import com.hofbauer.robocode.simulateur.MyAbstractStateMachine;
 
 /**
- * A SCXMLListener that is only concerned about &quot;onentry&quot;
- * notifications.
+ * Permet d'appliquer une methode lorsqu on rentre dans un état 
+ * (n'est pas utiliser dans le projet)
  */
 public class EntryListener implements SCXMLListener {
 	MyAbstractStateMachine stateMachine;

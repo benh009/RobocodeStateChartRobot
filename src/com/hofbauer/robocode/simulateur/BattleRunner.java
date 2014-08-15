@@ -11,12 +11,12 @@ import org.apache.commons.scxml2.model.ModelException;
 import robocode.control.*;
 import robocode.control.events.*;
 
-//
-// Application that demonstrates how to run two sample robots in Robocode using the
-// RobocodeEngine from the robocode.control package.
-//
-// @author Flemming N. Larsen
-//
+/**
+ * Cette classe permet de lancer un combat avec les robots spécifier dans l'appelle de methode
+ * engine.getLocalRepository
+ * @author hofbauer
+ *
+ */
 public class BattleRunner {
 
     public static void main(String[] args) {

@@ -16,7 +16,11 @@ import org.apache.commons.scxml2.model.Transition;
 import org.apache.commons.scxml2.model.TransitionTarget;
 
 
-
+/**
+ * listener permettant de d'afficher l etat courant dans scxmlGUI
+ * @author hofbauer
+ *
+ */
 public class RobotToGuiListener extends Thread implements SCXMLListener {
 
     HashMap<TransitionTarget, HashSet<Transition>> activeTransitions = new HashMap<TransitionTarget, HashSet<Transition>>();

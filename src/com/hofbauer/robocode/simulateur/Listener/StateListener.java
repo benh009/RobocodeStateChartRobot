@@ -5,6 +5,11 @@ import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.Transition;
 import org.apache.commons.scxml2.model.TransitionTarget;
 
+/**
+ * listener permettant de printer les états courant et les transitions
+ * @author hofbauer
+ *
+ */
 public class StateListener implements SCXMLListener {
 
 	@Override

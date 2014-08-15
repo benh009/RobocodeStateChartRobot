@@ -9,7 +9,12 @@ import org.apache.commons.scxml2.model.Action;
 import org.apache.commons.scxml2.model.EnterableState;
 import org.apache.commons.scxml2.model.ModelException;
 
-
+/**
+ * Custom actions permettant d'interpreter les expressions jexl 
+ * de nos balise <my:RA>, cette action permet d'appeler les actions des proxy de robocode 
+ * @author hofbauer
+ *
+ */
 public class RobotAction extends Action {
 	
     /**

@@ -6,7 +6,6 @@
 package com.hofbauer.robocode.robots;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
@@ -16,7 +15,7 @@ import org.apache.commons.scxml2.model.ModelException;
 
 
 import com.hofbauer.robocode.simulateur.RobotStateMachine;
-import com.hofbauer.robocode.simulateur.Listener.ActionListener;
+
 import com.hofbauer.robocode.simulateur.Listener.RobotToGuiListener;
 import com.hofbauer.robocode.simulateur.proxy.GameInfoProxy;
 import com.hofbauer.robocode.simulateur.proxy.Message;
@@ -24,17 +23,12 @@ import com.hofbauer.robocode.simulateur.proxy.RobotActionProxy;
 import com.hofbauer.robocode.simulateur.proxy.RobotGunActionProxy;
 import com.hofbauer.robocode.simulateur.proxy.RobotGunInfoProxy;
 import com.hofbauer.robocode.simulateur.proxy.RobotInfoProxy;
-import com.hofbauer.robocode.simulateur.toolsaction.ActionTools;
-
-import robocode.AdvancedRobot;
-
 import robocode.BattleEndedEvent;
 import robocode.DeathEvent;
 import robocode.HitByBulletEvent;
 import robocode.HitRobotEvent;
 import robocode.HitWallEvent;
 import robocode.MessageEvent;
-import robocode.RobotDeathEvent;
 import robocode.RoundEndedEvent;
 import robocode.TeamRobot;
 import robocode.WinEvent;
@@ -48,7 +42,9 @@ import robocode.ScannedRobotEvent;
 import robocode.TurnCompleteCondition;
 
 /**
- * 
+ * classe abstraire utilisée par RobotModele1 et RobotModele2
+ * Cette technique permet d'initaliser dans une meme partie des robots avec des
+ * modèle xml différent
  * @author hofbauer
  */
 public abstract class RobotSimWithAction extends TeamRobot {

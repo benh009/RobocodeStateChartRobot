@@ -1,10 +1,16 @@
 package com.hofbauer.robocode.simulateur.toolsaction;
 
 import robocode.AdvancedRobot;
-
+/**
+ * outils utile pour les proxy
+ *  
+ * @author hofbauer
+ *
+ */
 public class ActionTools {
 
 	private AdvancedRobot robot;
+
 
 	public ActionTools(AdvancedRobot robot) {
 		this.robot = robot;
