@@ -146,6 +146,7 @@ public abstract class RobotSimWithAction extends TeamRobot {
 		while (true) {
 			// mettre a jour a chaque tour
 			// position du robot
+			System.out.println("run");
 			if (!endRound) {
 				robotModel.fireEvent("t");
 			}
@@ -161,16 +162,16 @@ public abstract class RobotSimWithAction extends TeamRobot {
 		if (!endRound) {
 			robotModel.fireEvent("onHitWall", e);
 		}
+		
 	}
 	@Override
 	public void onScannedRobot(ScannedRobotEvent e) {
-		
-		
 		if (!endRound) {
 			robotModel.fireEvent("onScannedRobot", e);
 			mscan();
 
 		}
+		
 
 	}
 	@Override
@@ -178,6 +179,7 @@ public abstract class RobotSimWithAction extends TeamRobot {
 		if (!endRound) {
 			robotModel.fireEvent("MouseEvent", e);
 		}
+		
 	}
 	@Override
 	public void onKeyPressed(KeyEvent e) {
@@ -206,6 +208,7 @@ public abstract class RobotSimWithAction extends TeamRobot {
 			robotModel.fireEvent("onHitByBullet", e);
 			mscan();
 		}
+		
 	}
 	 @Override
 	 public void onMessageReceived(MessageEvent event)

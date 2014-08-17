@@ -14,7 +14,9 @@ public class StateListener implements SCXMLListener {
 
 	@Override
 	public void onEntry(EnterableState arg0) {
-		System.out.println("state : "+arg0.getId());
+		System.out.println("New state : ");
+		System.out.println("\t Id  : "+arg0.getId());
+		
 	}
 
 	@Override
@@ -26,7 +28,10 @@ public class StateListener implements SCXMLListener {
 	@Override
 	public void onTransition(TransitionTarget arg0, TransitionTarget arg1,
 			Transition arg2, String arg3) {
-		System.out.println("trans : "+arg2.getCond());
+		
+		System.out.println("trans : ");
+		System.out.println("\t event : "+arg2.getEvent());
+		System.out.println("\t cond : "+arg2.getCond());
 		
 
 

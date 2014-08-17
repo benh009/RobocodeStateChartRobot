@@ -7,7 +7,7 @@ import robocode.AdvancedRobot;
 import robocode.TeamRobot;
 
 public class RobotInfoProxy {
-	private double precisionheading=0.1;
+	private double precisionheading=0.5;
 	private RobotSimWithAction robot;
 	public RobotInfoProxy(RobotSimWithAction robot)
 	{
@@ -31,7 +31,25 @@ public class RobotInfoProxy {
 	}
 	public boolean heading(Double deg)
 	{
-		return (Math.abs((this.robot.getHeading()+0.00001)%360-deg)<precisionheading);
+		deg= deg%360;
+		if(deg<0)
+		{
+			deg=360+deg;
+		}
+		
+		System.out.println(deg +"  "+robot.getHeading());
+		double heading= robot.getHeading();
+		//attention 359.9 est proche de 0
+		if(deg>360-precisionheading )
+		{
+			deg=0-precisionheading;
+		}
+		if(robot.getHeading()>359-precisionheading)
+		{
+			heading= 0-robot.getHeading();
+		}
+		
+		return (Math.abs(heading-deg)<precisionheading);
 	}
 	
 	public double height()

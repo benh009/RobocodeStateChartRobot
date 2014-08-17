@@ -1,7 +1,7 @@
 <scxml initial="FaceAuMur" name="corner" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1000 h=790  -->
  <state id="FaceAuMur"><!--   node-size-and-position x=360 y=100 w=75 h=75  --><!-- onScannedRobot/fire(pas de scan) -->
   <transition event="onScannedRobot">
-   <my:RA expression="RGA.Fire(1)"></my:RA>
+   <my:RA expression="RGA.Fire(1.0d)"></my:RA>
 <!--   edge-path [FaceAuMur]  x=-30 y=70 pointx=1 pointy=-57 offsetx=12 offsety=-5  --></transition>
 <!-- t[direction==0] -->
   <transition cond="RI.heading(0.0d)" event="t" target="Corner"><!--   edge-path [Corner]  pointx=0 pointy=24 offsetx=-26 offsety=-4  --></transition>

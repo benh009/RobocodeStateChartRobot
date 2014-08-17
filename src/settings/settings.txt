@@ -6,9 +6,19 @@ Activer le server pour envoyer état courant à scxmlgui(doit être défini à f
 false
 
 
-
-
+Liste des robots implémentés
+/com/hofbauer/robocode/resources/simulation/scxml/corner.scxml
 /com/hofbauer/robocode/resources/simulation/scxml/crazy.scxml
 /com/hofbauer/robocode/resources/simulation/scxml/fire.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/fire1.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/fire2.scxml
 /com/hofbauer/robocode/resources/simulation/scxml/fireTeam.scxml
-/com/hofbauer/robocode/resources/simulation/scxml/corner.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/interactive.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/ramFire.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/ramFireAndFire.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/spinBot.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/target.scxml
+/com/hofbauer/robocode/resources/simulation/scxml/tracker.scxml 
+/com/hofbauer/robocode/resources/simulation/scxml/trackFire.scxml  
+/com/hofbauer/robocode/resources/simulation/scxml/velociRobot.scxml  
+/com/hofbauer/robocode/resources/simulation/scxml/walls.scxml

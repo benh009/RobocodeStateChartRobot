@@ -1,4 +1,4 @@
-<scxml initial="crazy" name="Crazy" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1113 h=723  -->
+<scxml initial="crazy" name="Crazy" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=770 h=440  -->
  <datamodel>
   <data expr="1" id="directionRobot"></data>
   <data expr="0" id="turnCounter"></data>
@@ -14,7 +14,7 @@
   <transition cond="_event.data.isMyFault()" event="onHitRobot">
    <assign expr="directionRobot*(-1)" name="directionRobot"></assign>
    <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
-<!--   edge-path [crazy]  x=520 y=280 pointx=0 pointy=100 offsetx=0 offsety=-5  --></transition>
+<!--   edge-path [crazy]  x=380 y=250 pointx=0 pointy=100 offsetx=0 offsety=-5  --></transition>
 <!-- onScannedRobot/fire -->
   <transition event="onScannedRobot">
    <my:RA expression="RGA.fire(1.0d)"></my:RA>
@@ -32,7 +32,7 @@
     <my:RA expression="RA.ahead(1000*directionRobot)"></my:RA>
     <my:RA expression="RA.turnLeft(180)"></my:RA>
     <assign expr="turnCounter+1" name="turnCounter"></assign>
-<!--   edge-path [zigzague]  x=150 y=150 pointx=0 pointy=4 offsetx=71 offsety=-27  --></transition>
+<!--   edge-path [zigzague]  x=10 y=-20 pointx=0 pointy=4 offsetx=71 offsety=-27  --></transition>
 <!-- t[turn%3==2]
 /Avancer;Tourner a Droite De 180 -->
    <transition cond="turnCounter%3==2" event="t">

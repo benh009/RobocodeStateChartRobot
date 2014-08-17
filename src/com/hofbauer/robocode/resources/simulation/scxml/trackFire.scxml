@@ -1,18 +1,20 @@
 <scxml initial="recherche" name="TrackFire" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1113 h=723  -->
- <datamodel>xmlns=&quot;http://www.w3.org/2005/07/scxml&quot;
-xmlns:my=&quot;http://my.custom-actions.domain/CUSTOM&quot;</datamodel>
+ <datamodel>
+  <data expr="0" id="count"></data>
+ </datamodel>
  <state id="recherche"><!--   node-size-and-position x=130 y=100 w=75 h=75  --><!-- onWin/Petite Danse -->
   <transition event="onWin">
    <my:RA expression="RA.turnRight(36000)"></my:RA>
 <!--   edge-path [recherche]  pointx=0 pointy=-2 offsetx=57 offsety=-17  --></transition>
 <!-- t/tourner -->
   <transition event="t">
-   <my:RA expression="RA.turnRight(10)"></my:RA>
+   <my:RA expression="RGA.turnGunRight(4)"></my:RA>
 <!--   edge-path [recherche]  x=-30 y=40 pointx=0 pointy=-16 offsetx=6 offsety=-27  --></transition>
 <!-- onScannedRobot/smartFire -->
   <transition event="onScannedRobot">
-   <my:RA expression="RGA.smartFire(_event.data.getDistance())"></my:RA>
+   <my:RA expression="RGA.smartFireGunPosition(_event.data.getBearing())"></my:RA>
+   <my:RA expression="RGA.fire(3.0d)"></my:RA>
    <my:RA expression="RGA.scan()"></my:RA>
-<!--   edge-path [recherche]  x=40 y=100 pointx=0 pointy=-20 offsetx=3 offsety=0  --></transition>
+<!--   edge-path [recherche]  x=60 y=110 pointx=0 pointy=-10 offsetx=12 offsety=0  --></transition>
  </state>
 </scxml>

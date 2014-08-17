@@ -34,10 +34,11 @@ public class RobotActionProxy {
 	}
 	public void direction(Double directionVoulue)
 	{
+		
 		directionVoulue= directionVoulue%360;
 		if(directionVoulue<0)
 		{
-			directionVoulue=360-directionVoulue;
+			directionVoulue=360+directionVoulue;
 		}
 		robot.setTurnRight(ActionTools.directionG(robot.getHeading(),directionVoulue));
 

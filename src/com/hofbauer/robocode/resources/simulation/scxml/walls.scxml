@@ -1,8 +1,12 @@
-<scxml initial="LongeMurs" name="Walls" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1000 h=660  -->
+<scxml initial="LongeMurs" name="Walls" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=1000 h=742  -->
  <state id="LongeMurs" initial="CoinSuperieurGauche"><!--   node-size-and-position x=20 y=50 w=800 h=570  --><!-- onScannedRobot/fire -->
   <transition event="onScannedRobot">
    <my:RA expression="RGA.fire(3.0d)"></my:RA>
 <!--   edge-path [LongeMurs]  x=590 y=360 pointx=0 pointy=70 offsetx=0 offsety=7  --></transition>
+<!-- onHitRobot/recule -->
+  <transition event="onHitRobot">
+   <my:RA expression="RA.back(100.0d)"></my:RA>
+<!--   edge-path [LongeMurs]  x=610 y=600 pointx=0 pointy=-10 offsetx=0 offsety=0  --></transition>
   <state id="CoinSuperieurGauche"><!--   node-size-and-position x=130 y=60 w=140 h=110  --><!-- t[AuCoinSuperieurGAuhe] -->
    <transition cond="RI.heading(0.0d)  &amp;&amp;   RI.y() ==  GI.battleFieldHeight() - RI.height()/2 &amp;&amp;  RGI.heading(90.0d)" event="t" target="CoinSuperieurDroit"><!--   edge-path [CoinSuperieurDroit]  pointx=0 pointy=-13 offsetx=-5 offsety=0  --></transition>
 <!-- t[Direction!=0]/touner -->

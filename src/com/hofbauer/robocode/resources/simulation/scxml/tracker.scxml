@@ -1,40 +1,84 @@
-<scxml initial="Tracker" name="Tracker" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=664 h=591  -->
+<scxml initial="new_node28" name="Tracker" version="1.0" xmlns="http://www.w3.org/2005/07/scxml" xmlns:my="http://my.custom-actions.domain/CUSTOM"><!--   node-size-and-position x=0 y=0 w=920 h=700  -->
  <datamodel>
   <data expr="0" id="count"></data>
   <data expr="null" id="trackName"></data>
+  <data id="directionRobotScanned"></data>
+  <data id="distanceRobotScanned"></data>
+  <data id="lastX"></data>
+  <data id="lastY"></data>
  </datamodel>
- <state id="Tracker" initial="STracker"><!--   node-size-and-position x=50 y=100 w=300 h=230  --><!-- onScannedRobot[SiPas de cible;ou deja ma cible]
-/Tire; recupere nom; initalise count -->
-  <transition cond="trackName == null or trackName == _event.data.getName()" event="onScannedRobot" target="Tracker">
+ <state id="new_node28" initial="Tracker"><!--   node-size-and-position x=20 y=30 w=880 h=620  --><!-- onHitRobot/recuperNom -->
+  <transition event="onHitRobot">
    <assign expr="_event.data.getName()" name="trackName"></assign>
-   <assign expr="0" name="count"></assign>
-   <my:RA expression="RGA.fire(3.0d)"></my:RA>
-   <my:RA expression="RGA.scan()"></my:RA>
-<!--   edge-path [Tracker]  x=400 y=220 pointx=0 pointy=30 offsetx=0 offsety=145  --></transition>
-<!-- onHitRobot/recuperNom -->
-  <transition event="onHitRobot" target="Tracker">
-   <assign expr="_event.data.getName()" name="trackName"></assign>
-<!--   edge-path [Tracker]  x=70 y=-20 pointx=0 pointy=20 offsetx=-5 offsety=0  --></transition>
-  <state id="STracker"><!--   node-size-and-position x=60 y=80 w=75 h=75  --><!-- t[count>11]/tournerGun a droite -->
-   <transition cond="count&gt;11" event="t">
-    <my:RA expression="RGA.turnGunRight(10.0d)"></my:RA>
+   <my:RA expression="RA.back(40.0d)"></my:RA>
+   <my:RA expression="RGA.smartFireGunPosition(_event.data.getBearing())"></my:RA>
+<!--   edge-path [new_node28]  x=480 y=640 pointx=0 pointy=-20 offsetx=0 offsety=0  --></transition>
+  <state id="jonction"><!--   node-size-and-position x=210 y=440 w=75 h=75  --><!-- t[distanceRobotScanned>150] -->
+   <transition cond="distanceRobotScanned&gt;150" target="Poursuite">
+    <assign expr="distanceRobotScanned-140" name="distanceRobotScanned"></assign>
+<!--   edge-path [Poursuite]  pointx=0 pointy=-65 offsetx=65 offsety=-46  --></transition>
+<!-- [distanceRobotScanned<150 and  distanceRobotScanned>100 ]
+/fire;Scan -->
+   <transition cond="distanceRobotScanned&lt;150 and  distanceRobotScanned&gt;100" target="Tracker">
+    <my:RA expression="RGA.smartFireGunPosition(directionRobotScanned)"></my:RA>
+    <my:RA expression="RGA.fire(3.0d)"></my:RA>
     <my:RA expression="RGA.scan()"></my:RA>
-    <assign expr="count+1" name="count"></assign>
-    <assign expr="null" name="trackName"></assign>
+<!--   edge-path [Tracker]  x=50 y=490 pointx=-1 pointy=52 offsetx=-31 offsety=0  --></transition>
+<!-- distanceRobotScanned<100 /back;scan -->
+   <transition cond="distanceRobotScanned&lt;100" target="Tracker">
+    <my:RA expression="RA.back(40.0d)"></my:RA>
+    <my:RA expression="RGA.scan()"></my:RA>
+<!--   edge-path [Tracker]  x=520 y=500 pointx=0 pointy=-20 offsetx=-10 offsety=55  --></transition>
+  </state>
+<!-- node-size-and-position x=0 y=0 w=207,49 h=263   node-size-and-position x=0 y=0 w=291,5 h=263 -->
+  <state id="Poursuite"><!--   node-size-and-position x=650 y=130 w=75 h=75  --><!-- t[!DirectionVersRobotScanne]/
+Tourner vers RobotScanne -->
+   <transition cond="!RI.heading(directionRobotScanned)" event="t">
+    <my:RA expression="RA.direction(directionRobotScanned)"></my:RA>
+<!--                       edge-path [OnScannedState]  x=140 y=37,5                      --><!--                      edge-path [OnScannedState]  x=140 y=37,5                     --><!--                     edge-path [OnScannedState]  x=140 y=37,5                    --><!--                   edge-path [Poursuite]  x=95 y=37,5                  --><!--                  edge-path [Poursuite]  x=95 y=37,5                 --><!--   edge-path [Poursuite]  x=70 y=100 pointx=1 pointy=-20 offsetx=15 offsety=54  --></transition>
+<!-- t[directionOk et PositionRobotScanneok] 
+ /scan -->
+   <transition cond="RI.heading(directionRobotScanned) &amp;&amp;   RI.e(distanceRobotScanned,RI.distance(RI.x(),lastX,RI.y(),lastY))" event="t" target="Tracker">
+    <my:RA expression="RGA.scan()"></my:RA>
+<!--                       edge-path [new_node22]  x=165,5 y=143                      --><!--                     edge-path [new_node22]  x=73,49 y=143                    --><!--                    edge-path [RechercheFire]  x=120,49 y=143 pointx=0 pointy=10 offsetx=0 offsety=-3                   --><!--   edge-path [Tracker]  pointx=0 pointy=-20 offsetx=20 offsety=0  --></transition>
+<!-- t[directionOk et NonPositionRobotScanne]
+ /Avancer -->
+   <transition cond="RI.heading(directionRobotScanned) &amp;&amp;    !RI.e(distanceRobotScanned,RI.distance(RI.x(),lastX,RI.y(),lastY))" event="t">
+    <my:RA expression="RA.ahead(distanceRobotScanned-RI.distance(RI.x(),lastX,RI.y(),lastY))"></my:RA>
+<!--                       edge-path [OnScannedState]  x=120 y=37,5                      --><!--                      edge-path [OnScannedState]  x=120 y=37,5                     --><!--                     edge-path [OnScannedState]  x=120 y=37,5                    --><!--                    edge-path [Poursuite]  x=120 y=37,5 pointx=0 pointy=10 offsetx=0 offsety=5                   --><!--                  edge-path [Poursuite]  x=115 y=37,5                 --><!--   edge-path [Poursuite]  x=130 y=60 pointx=0 pointy=27 offsetx=3 offsety=-57  --></transition>
+  </state>
+  <state id="Tracker" initial="STracker"><!--   node-size-and-position x=30 y=60 w=300 h=230  --><!-- onScannedRobot[SiPas de cible;ou deja ma cible]
+/Tire; recupere nom; initalise count -->
+   <transition cond="(trackName == null or trackName == _event.data.getName())" event="onScannedRobot" target="jonction">
+    <log expr="trackName" label="&#039;trackname&#039;"></log>
+    <assign expr="_event.data.getName()" name="trackName"></assign>
+    <assign expr="0" name="count"></assign>
+    <assign expr="RI.heading()+_event.data.getBearing()" name="directionRobotScanned"></assign>
+    <assign expr="_event.data.getDistance()" name="distanceRobotScanned"></assign>
+    <assign expr="RI.x()" name="lastX"></assign>
+    <assign expr="RI.y()" name="lastY"></assign>
+<!--   edge-path [jonction]  pointx=0 pointy=24 offsetx=0 offsety=-2  --></transition>
+   <state id="STracker"><!--   node-size-and-position x=60 y=80 w=75 h=75  --><!-- t[count>11]/tournerGun a droite -->
+    <transition cond="count&gt;20" event="t">
+     <assign expr="count+1" name="count"></assign>
+     <my:RA expression="RGA.turnGunRight(10.0d)"></my:RA>
+     <my:RA expression="RGA.scan()"></my:RA>
+     <assign expr="null" name="trackName"></assign>
 <!--   edge-path [STracker]  x=40 y=-20 pointx=0 pointy=10 offsetx=13 offsety=0  --></transition>
 <!-- t[count gt 5  count lt 2]
 /tourner gun a droite de 10 -->
-   <transition cond="count&gt;5 or count&lt;2" event="t">
-    <my:RA expression="RGA.turnGunRight(10.0d)"></my:RA>
-    <my:RA expression="RGA.scan()"></my:RA>
-    <assign expr="count+1" name="count"></assign>
+    <transition cond="count&gt;5 or count&lt;2" event="t">
+     <assign expr="count+1" name="count"></assign>
+     <my:RA expression="RGA.turnGunRight(10.0d)"></my:RA>
+     <my:RA expression="RGA.scan()"></my:RA>
 <!--   edge-path [STracker]  pointx=0 pointy=-5 offsetx=80 offsety=-17  --></transition>
 <!-- t[count>=2]/tourne le gun de 7 -->
-   <transition cond="count&gt;=2" event="t">
-    <my:RA expression="RGA.turnGunLeft(7.0d)"></my:RA>
-    <my:RA expression="RGA.scan()"></my:RA>
-    <assign expr="count+1" name="count"></assign>
+    <transition cond="count&gt;=2" event="t">
+     <assign expr="count+1" name="count"></assign>
+     <my:RA expression="RGA.turnGunLeft(7.0d)"></my:RA>
+     <my:RA expression="RGA.scan()"></my:RA>
 <!--   edge-path [STracker]  x=30 y=110 pointx=0 pointy=-20 offsetx=3 offsety=0  --></transition>
+   </state>
   </state>
  </state>
 </scxml>

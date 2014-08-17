@@ -35,11 +35,9 @@ public class ActionTools {
 	
 	public static double directionG(double directionActuelle,double directionVoulue)
 	{
-
+		System.out.println(directionActuelle+"   "+directionVoulue);
 		//pour la precision
-		if (Math.abs(directionVoulue - directionActuelle) < 1) {
-
-		} else if (directionVoulue > directionActuelle) {
+	     if (directionVoulue > directionActuelle) {
 			//pour deciser du plus court 
 			if ((360 - directionVoulue + directionActuelle) < (directionVoulue - directionActuelle)) {
 				return -(360 - directionVoulue + directionActuelle);

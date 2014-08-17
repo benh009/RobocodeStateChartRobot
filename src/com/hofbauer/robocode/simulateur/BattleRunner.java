@@ -51,7 +51,7 @@ public class BattleRunner {
         }**/
         engine.printRunningThreads();
         
-        RobotSpecification[] selectedRobots = engine.getLocalRepository("sample.Target,com.hofbauer.robocode.robots.RobotModele1*");
+        RobotSpecification[] selectedRobots = engine.getLocalRepository("sample.Corners,sample.Target,com.hofbauer.robocode.robots.RobotModele1*");
 
         //RobotSpecification[] selectedRobots = engine.getLocalRepository("sample.Target,sample.Walls,com.hofbauer.robocode.robots.RobotModele1*,com.hofbauer.robocode.robots.RobotModele2*");
 

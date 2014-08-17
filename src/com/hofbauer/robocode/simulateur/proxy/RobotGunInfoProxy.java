@@ -7,7 +7,7 @@ import robocode.TeamRobot;
 
 public class RobotGunInfoProxy {
 
-	private double precisionheading=0.1;
+	private double precisionheading=0.5;
 	private RobotSimWithAction robot;
 	public RobotGunInfoProxy(RobotSimWithAction robot)
 	{
@@ -19,6 +19,22 @@ public class RobotGunInfoProxy {
 	}
 	public boolean heading(double deg)
 	{
-		return (Math.abs(this.robot.getGunHeading()-deg)<precisionheading);
+		deg= deg%360;
+		if(deg<0)
+		{
+			deg=360+deg;
+		}
+		double heading= robot.getGunHeading();
+		if(deg>360-precisionheading )
+		{
+			deg=0-precisionheading;
+		}
+		if(robot.getGunHeading()>359-precisionheading)
+		{
+			heading= 0-robot.getGunHeading();
+		}
+		
+		return (Math.abs(heading-deg)<precisionheading);
+		
 	}
 }

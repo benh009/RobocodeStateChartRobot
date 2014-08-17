@@ -22,10 +22,10 @@ public class SimulateurALaMain {
 		}
 		//robotModel.getEngine().getRootContext().set("Double1", new Double(2));
 		//robotModel.getEngine().getRootContext().set("Ob", new ObjectTestNewSCXML() );
-
+		robotModel.fireEvent("b");
 		robotModel.fireEvent("a");
 		System.out.println("etat "+robotModel.getEngine().getCurrentStatus().getStates());
-		robotModel.fireEvent("b");
+		
 
 	}
 
